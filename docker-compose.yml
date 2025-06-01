@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+  # API Gateway
+  api-gateway:
+    build: ./api-gateway
+    ports:
+      - "8000:8000"
+    networks:
+      - vms_internal_net     
+
+  # Auth Service
+  auth-service:
+    build: ./auth-service
+    ports:
+      - "8001:8001"
+    depends_on:
+      - mysql
+    networks:
+      - vms_internal_net  
+
+  # Keycloak (Authentication System)
+  keycloak:
+    image: quay.io/keycloak/keycloak:24.0
+    container_name: keycloak
+    command: start-dev
+    environment:
+      KC_DB: postgres
+      KC_DB_URL_HOST: postgres
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: secret
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin123
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - vms_internal_net
+
+  # RabbitMQ (Message Broker)
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ./volumes/rabbitmq:/var/lib/rabbitmq
+    networks:
+      - vms_internal_net
+
+  # MySQL (For Laravel or PHP Microservices)
+  mysql:
+    image: mysql:8
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_DATABASE: ecommerce
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./volumes/mysql:/var/lib/mysql
+    networks:
+      - vms_internal_net
+
+  # PostgreSQL (Used by Keycloak)
+  postgres:
+    image: postgres:13
+    container_name: keycloak_postgres
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: secret
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./volumes/postgres:/var/lib/postgresql/data
+    networks:
+      - vms_internal_net
+
+networks:
+  vms_internal_net:
+    driver: bridge
