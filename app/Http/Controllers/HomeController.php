@@ -32,19 +32,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $orgCode = GlobalHelper::getOrganizationCode();
+        $orgCode = 0;
 
         $data = [
-            'total_vehicle' => VehicleSetup::where('org_code', $orgCode)->whereNull('deleted_at')->count(),
-            'useless_total_vehicle' => VehicleSetup::where('org_code', $orgCode)->whereNull('deleted_at')->where('status', 0)->count(),
-            'total_employee' => Employee::where('org_code', $orgCode)->whereNull('deleted_at')->count(),
-            'total_driver' => DriverInfo::where('org_code', $orgCode)->whereNull('deleted_at')->count(),
-            'repairs_total_cost' => Repairs::where('org_code', $orgCode)->whereNull('deleted_at')->sum('total_cost'),
-            'lubricant_total_cost' => FuelOil::where('org_code', $orgCode)->whereNull('deleted_at')->sum('payment'),
-            'total_org'    => OrganizationInfo::whereNull('deleted_at')->count(),
-            'grand_total_vehicle' => VehicleSetup::whereNull('deleted_at')->count(),
-            'grand_useless_total_vehicle' => VehicleSetup::whereNull('deleted_at')->where('status', 0)->count(),
-            'grand_total_driver' => DriverInfo::whereNull('deleted_at')->count(),
+            'total_vehicle' => 0,
+            'useless_total_vehicle' => 0,
+            'total_employee' => 0,
+            'total_driver' => 0,
+            'repairs_total_cost' => 0,
+            'lubricant_total_cost' => 0,
+            'total_org'    => 0,
+            'grand_total_vehicle' => 0,
+            'grand_useless_total_vehicle' => 0,
+            'grand_total_driver' => 0,
             'bnConverter' => new NumberToBangla()
         ];
 

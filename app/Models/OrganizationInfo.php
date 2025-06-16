@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class OrganizationInfo extends Model
 {
 
-    protected $table = 'organization_info';
+    protected $table = 'organizations';
     public $timestamps = true;
 
     use SoftDeletes;

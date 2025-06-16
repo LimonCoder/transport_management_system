@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+
+class OperatorsTableSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        DB::table('operators')->insert([
+            [
+                'id' => 1,
+                'user_id' => 2, // operator1
+                'name' => 'John Smith',
+                'designation' => 'Senior Transport Operator',
+                'date_of_joining' => '2023-01-15',
+                'mobile_number' => '01712345678',
+                'address' => '123 Main Street, Dhaka, Bangladesh',
+                'version' => 1,
+                'created_by' => 1,
+                'updated_by' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'id' => 2,
+                'user_id' => 3, // operator2
+                'name' => 'Sarah Johnson',
+                'designation' => 'Transport Operator',
+                'date_of_joining' => '2023-03-20',
+                'mobile_number' => '01812345679',
+                'address' => '456 Oak Avenue, Chittagong, Bangladesh',
+                'version' => 1,
+                'created_by' => 1,
+                'updated_by' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+        ]);
+    }
+} 

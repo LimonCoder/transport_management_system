@@ -15,7 +15,7 @@ class GlobalHelper
 
         $org_code = is_null($code) ? Auth::user()->org_code : $code;
 
-        $info = DB::table((new OrganizationInfo())->getTable())->where('org_code',$org_code)->first();
+        $info = DB::table('organizations')->where('org_code','1001')->first();
 
         return $info;
     }
