@@ -1,0 +1,4 @@
+[20-Oct-2022 18:03:35 UTC] PHP Fatal error:  Uncaught Error: Call to undefined function env() in /home/comillalggov/public_html/vehicleapps/vehicle_apps/config/app.php:16
+Stack trace:
+#0 {main}
+  thrown in /home/comillalggov/public_html/vehicleapps/vehicle_apps/config/app.php on line 16

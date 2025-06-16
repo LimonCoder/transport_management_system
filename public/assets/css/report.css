@@ -1,0 +1,105 @@
+body{
+    font-family: 'SiyamRupali', sans-serif;
+}
+font{
+    font-size:12px;
+    font-style:normal;
+    font-weight:normal;
+}
+span{
+    font-size: 16px;
+}
+b{
+    font-size:14px;
+    font-weight:bold;
+    font-style:normal;
+}
+input[type="text"]{font-family:SolaimanLipi;}
+h3,h5{ margin:0px;padding:0px;}
+* {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+.wrapper{
+    width: 21cm;
+    height: 26.8cm;
+    padding:1em;
+    margin: 0 auto;
+    border: 1px #D3D3D3 solid;
+    border-radius: 5px;
+    background: white;
+}
+.watermark{
+    background-image: url("../../assets/images/logo/paid.png");
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 300px 250px;
+
+    /*background-size: cover;*/
+}
+table.tbl_style{
+    width:100%;
+    border-collapse: collapse;
+}
+table.tbl_style tr th, table.tbl_style tr td{
+    border: 1px solid #686e73;
+    padding: 5px;
+    font-size: 12px;
+}
+
+@wrapper{
+    size: A4;
+    margin: 0;
+}
+@media print {
+    body{
+        font-family:SolaimanLipi;
+    }
+    .wrapper{
+        margin:0em;
+        border: initial;
+        border-radius: initial;
+        width: initial;
+        height: initial;
+        box-shadow: initial;
+        background: initial;
+        page-break-after: none;
+        -webkit-print-color-adjust: exact;
+        marks:bleed;
+    }
+}
+
+@media screen and projection {
+    a {
+        display:inline;
+    }
+    img.logo{
+        height:20px;
+    }
+}
+
+@media print {
+    a{display: none;}
+    head{display: none;}
+    footer{display: none;}
+    #bar{display:none;}
+    table{ margin:1px; padding:0px; line-height:13px;height: 40%;}
+    img#hide{display:none;}
+
+}
+td h3{
+    font-size:13px;
+}
+.input_style4{
+    border:none;
+    background:none;
+
+}
+td img.logo {
+    height: 90px;
+    width: 100px;
+    position: relative;
+    margin-left: 36px;
+}
+
