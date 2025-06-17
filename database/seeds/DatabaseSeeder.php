@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
             OperatorsTableSeeder::class,
             DriversTableSeeder::class,
             OrganizationsTableSeeder::class,
+            FuelTypeTableSeeder::class,
+            VehiclesTableSeeder::class,
+            VehiclesAuditLogTableSeeder::class,
+            TripsTableSeeder::class,
+            TripsAuditLogTableSeeder::class,
         ]);
     }
 }
