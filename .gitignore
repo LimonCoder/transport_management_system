@@ -20,3 +20,6 @@ yarn-error.log
 *.png
 *.jpg
 *.webp
+
+!public/assets/images/*.jpg
+!public/assets/images/*.png
