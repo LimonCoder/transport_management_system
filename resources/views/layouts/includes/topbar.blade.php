@@ -63,9 +63,16 @@
         </li>
 
         <li>
-            <h4 class="page-title-main" style="text-align: center">{{ (\Illuminate\Support\Facades\Auth::user()->type
-            != 1)?\App\helpers\GlobalHelper::getOrganizationInfo()
-            ->name : ''  }}</h4>
+            @php
+                $user = \Illuminate\Support\Facades\Auth::user();
+            @endphp
+
+            @if ($user && $user->type != 1)
+                @php
+                    $organizationName = \App\Helpers\GlobalHelper::getOrganizationInfo()->name ?? '';
+                @endphp
+                <h4 class="page-title-main" style="text-align: center">{{ $organizationName }}</h4>
+            @endif
         </li>
 
     </ul>
