@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\V1\OrganizationInfo;
 use Illuminate\Database\Seeder;
-use App\Models\OrganizationInfo;
 
 class OrganizationInfoTableSeeder extends Seeder {
 

@@ -15,22 +15,18 @@ class CreateOperatorsTable extends Migration
     public function up()
     {
         Schema::create('operators', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->bigIncrements('id');
             $table->bigInteger('user_id')->unique();
             $table->string('name', 200);
-            $table->string('designation', 150)->unique()->nullable();
+            $table->string('designation', 150);
             $table->date('date_of_joining')->nullable();
             $table->string('mobile_number', 15)->unique();
             $table->string('address', 200)->nullable();
-            $table->integer('version')->default(1);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by')->nullable();
             $table->timestamps();
-            
-            $table->index('designation');
+            $table->softDeletes();
             $table->index('mobile_number');
-            
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

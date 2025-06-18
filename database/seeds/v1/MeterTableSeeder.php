@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\V1\Meter;
 use Illuminate\Database\Seeder;
-use App\Models\Meter;
 
 class MeterTableSeeder extends Seeder {
 

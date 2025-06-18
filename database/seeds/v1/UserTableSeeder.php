@@ -1,8 +1,8 @@
 <?php
 
+use App\Models\V1\User;
 use Illuminate\Database\Seeder;
-use App\Models\User;
-use \Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
 {

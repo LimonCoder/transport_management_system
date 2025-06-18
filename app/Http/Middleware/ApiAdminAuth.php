@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\OrganizationInfo;
+use App\Models\V1\OrganizationInfo;
 use Closure;
 
 class ApiAdminAuth

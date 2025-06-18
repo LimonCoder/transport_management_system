@@ -16,7 +16,7 @@ use \Illuminate\Support\Facades\Route;
 
 Route::post('/login', 'Api\UserController@login');
 
-Route::middleware('Api.Admin.Auth')->group(function () {
+Route::middleware('Api.Admin.Auth')->namespace('V1')->group(function () {
 
     // employee
     Route::prefix('/employee')->group(function () {

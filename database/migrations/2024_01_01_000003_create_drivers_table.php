@@ -14,22 +14,20 @@ class CreateDriversTable extends Migration
     public function up()
     {
         Schema::create('drivers', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
+            $table->bigIncrements('id');
             $table->bigInteger('user_id')->unique();
+            $table->mediumInteger('org_code')->unsigned();
             $table->string('name', 200);
             $table->string('license_number', 150)->unique()->nullable();
             $table->date('date_of_joining')->nullable();
             $table->string('mobile_number', 15)->unique();
             $table->string('address', 200)->nullable();
-            $table->integer('version')->default(1);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by')->nullable();
             $table->timestamps();
-            
+            $table->softDeletes();
             $table->index('license_number');
             $table->index('mobile_number');
-            
-            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 

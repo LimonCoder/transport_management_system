@@ -12,7 +12,6 @@ class GlobalHelper
 
     public static function getOrganizationInfo($code = null){
 
-        // dd(Auth::user());
         $org_code = is_null($code) ? Auth::user()->org_code : $code;
 
         $info = DB::table('organizations')->where('org_code',$org_code)->first();

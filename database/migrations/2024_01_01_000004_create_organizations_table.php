@@ -14,15 +14,13 @@ class CreateOrganizationsTable extends Migration
     public function up()
     {
         Schema::create('organizations', function (Blueprint $table) {
-            $table->bigIncrements('id'); // Auto-incrementing unsigned big integer ID
-            $table->mediumInteger('org_code')->unique(); // Unique organization code
-            $table->string('name', 50); // Organization name
-            $table->string('address', 60)->nullable(); // Organization address
+            $table->bigIncrements('id');
+            $table->mediumInteger('org_code')->unique(); 
+            $table->string('name', 100); 
+            $table->string('address', 200)->nullable(); 
             $table->enum('org_type', ['university', 'college'])->default('university'); 
-            $table->timestamps(); // created_at and updated_at
-            $table->softDeletes(); // deleted_at for soft deletes
-            
-            // Add indexes for better performance
+            $table->timestamps(); 
+            $table->softDeletes(); 
             $table->index('org_code');
             $table->index('org_type');
         });

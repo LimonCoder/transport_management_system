@@ -22,7 +22,7 @@ Auth::routes(['register' => false]);
 
 
 // all admin route
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth', 'namespace' => 'V1'], function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
 
