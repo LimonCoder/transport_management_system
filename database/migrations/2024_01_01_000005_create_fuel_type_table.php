@@ -18,8 +18,8 @@ class CreateFuelTypeTable extends Migration
             $table->increments('id');
             $table->mediumInteger('org_code')->unsigned();
             $table->string('name', 20);
-            $table->enum('status', ['active', 'inactive']);
-            $table->bigInteger('created_by');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->bigInteger('created_by')->unsigned();
             $table->bigInteger('updated_by')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->timestamp('updated_at')->nullable();

@@ -23,7 +23,7 @@ class CreateVehiclesAuditLogTable extends Migration
             $table->mediumInteger('capacity')->unsigned()->nullable();
             $table->mediumInteger('fuel_type_id')->unsigned();
             $table->text('images')->nullable();
-            $table->string('status', 15);
+            $table->enum('status', ['active', 'inactive','maintenance'])->default('active');
             $table->enum('action', ['create', 'modify']);
             $table->bigInteger('created_by');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

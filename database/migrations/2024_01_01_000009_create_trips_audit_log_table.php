@@ -18,10 +18,11 @@ class CreateTripsAuditLogTable extends Migration
             $table->increments('id');
             $table->integer('primary_id')->unsigned();
             $table->mediumInteger('org_code')->unsigned();
-            $table->string('driver_id', 36);
+            $table->integer('route_id')->unsigned();
+            $table->integer('driver_id')->unsigned();
             $table->string('driver_name', 100);
-            $table->string('vehicle_id', 36);
-            $table->string('vehicle_registration_number', 20);
+            $table->integer('vehicle_id')->unsigned();
+            $table->string('vehicle_registration_number', 50);
             $table->string('start_location', 255);
             $table->string('destination', 255);
             $table->dateTime('start_time');
@@ -30,13 +31,11 @@ class CreateTripsAuditLogTable extends Migration
             $table->string('purpose', 100)->nullable();
             $table->decimal('fuel_cost', 10, 2)->default(0.00);
             $table->decimal('total_cost', 10, 2)->default(0.00);
-            $table->tinyInteger('is_locked')->unsigned()->nullable()->default(0);
+            $table->tinyInteger('is_locked')->unsigned()->default(0);
             $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
             $table->enum('action', ['create', 'modify']);
             $table->bigInteger('created_by');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            
-            // Index
             $table->index('primary_id', 'idx_primary_id');
         });
     }

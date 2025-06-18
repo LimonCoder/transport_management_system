@@ -17,10 +17,11 @@ class CreateTripsTable extends Migration
         Schema::create('trips', function (Blueprint $table) {
             $table->increments('id');
             $table->mediumInteger('org_code')->unsigned();
-            $table->string('driver_id', 36);
+            $table->integer('route_id')->unsigned();
+            $table->integer('driver_id')->unsigned();
             $table->string('driver_name', 100);
-            $table->string('vehicle_id', 36);
-            $table->string('vehicle_registration_number', 20);
+            $table->integer('vehicle_id')->unsigned();
+            $table->string('vehicle_registration_number', 50);
             $table->string('start_location', 255);
             $table->string('destination', 255);
             $table->dateTime('start_time');
@@ -37,8 +38,9 @@ class CreateTripsTable extends Migration
             $table->bigInteger('updated_by')->nullable();
             
             // Indexes
-            $table->index('driver_id', 'idx_driver_id');
+            $table->index('route_id', 'idx_route_id');
             $table->index('vehicle_id', 'idx_vehicle_id');
+            $table->index('driver_id', 'idx_driver_id');
         });
     }
 

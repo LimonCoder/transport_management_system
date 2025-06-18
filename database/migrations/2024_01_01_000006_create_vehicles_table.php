@@ -22,7 +22,7 @@ class CreateVehiclesTable extends Migration
             $table->mediumInteger('capacity')->unsigned()->nullable();
             $table->mediumInteger('fuel_type_id')->unsigned();
             $table->text('images')->nullable();
-            $table->string('status', 15);
+            $table->enum('status', ['active', 'inactive','maintenance'])->default('active');
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by')->nullable();
             $table->bigInteger('deleted_by')->nullable();
