@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\V1\LogBook;
 use Illuminate\Database\Seeder;
-use App\Models\LogBook;
 
 class LogBookTableSeeder extends Seeder {
 

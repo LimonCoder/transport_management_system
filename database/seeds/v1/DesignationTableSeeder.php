@@ -1,8 +1,7 @@
 <?php
 
+use App\Models\V1\Designation;
 use Illuminate\Database\Seeder;
-
-use App\Models\Designation;
 
 class DesignationTableSeeder extends Seeder
 {

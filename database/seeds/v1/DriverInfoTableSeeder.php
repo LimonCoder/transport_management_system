@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\V1\DriverInfo;
 use Illuminate\Database\Seeder;
-use App\Models\DriverInfo;
 
 class DriverInfoTableSeeder extends Seeder {
 
