@@ -10,16 +10,17 @@
                 <li class="nav-item ">
 
                     <a class="nav-link" href="{{ route('home') }}"><i class="fas
-                    fa-home"></i>ড্যাশবোর্ড </a>
+                    fa-home"></i> @lang('message.dashboard') </a>
 
                 </li>
 
-                @if(\Illuminate\Support\Facades\Auth::user()->type == 1)
+                @if(\Illuminate\Support\Facades\Auth::user()->user_type == "system-admin")
 
                     <li class="nav-item ">
 
-                        <a class="nav-link" href="{{ route('organization.index')  }}"><i class="fas fa-user-plus"></i>অফিসের
-                            তালিকা
+                        <a class="nav-link" href="{{ route('organization.index')  }}">
+                            <i class="fas fa-user-plus"></i>
+                            @lang('message.operator-list')
                         </a>
 
                     </li>
@@ -29,7 +30,9 @@
 
                     </li> -->
                     <li class="nav-item ">
-                        <a class="nav-link" href="javascript:void(0)"><i class="fas fa-key"></i>পাসওয়ার্ড পরির্বতন
+                        <a class="nav-link" href="javascript:void(0)">
+                            <i class="fas fa-key"></i>
+                            @lang('message.change-password')
                         </a>
 
                     </li>

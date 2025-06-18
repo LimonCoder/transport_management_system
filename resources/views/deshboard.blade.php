@@ -10,7 +10,7 @@
         <div class="container-fluid">
 
             <div class="row">
-                @if(Auth::user()->type == 2)
+                @if(Auth::user()->user_type == 2)
                     <div class="col-xl-3 col-md-6">
                         <div class="card-box">
                             <div class="dropdown float-right">

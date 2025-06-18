@@ -11,8 +11,10 @@
 |
 */
 
+use Illuminate\Support\Facades\App;
 use \Illuminate\Support\Facades\Route;
 use \Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,6 +25,14 @@ Auth::routes(['register' => false]);
 
 // all admin route
 Route::group(['middleware' => 'auth', 'namespace' => 'V1'], function () {
+
+    Route::get('lang/{locale}', function ($locale) {
+        if (!in_array($locale, ['en', 'bn'])) {
+            abort(400);
+        }
+        session(['locale' => $locale]);
+        return redirect()->back();
+    });
 
     Route::get('/home', 'HomeController@index')->name('home');
 
