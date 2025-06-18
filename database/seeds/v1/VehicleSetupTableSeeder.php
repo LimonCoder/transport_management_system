@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\V1\VehicleSetup;
 use Illuminate\Database\Seeder;
-use App\Models\VehicleSetup;
 
 class VehicleSetupTableSeeder extends Seeder {
 

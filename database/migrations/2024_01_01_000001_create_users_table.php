@@ -15,16 +15,17 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->bigInteger('id')->primary();
-            $table->integer('role_id');
+            $table->bigIncrements('id');
+            $table->tinyInteger('role_id')->unsigned();
+            $table->mediumInteger('org_code')->unsigned()->nullable(); 
             $table->string('username', 15)->unique();
             $table->string('password', 255);
-            $table->enum('user_type', ['SYSTEM-ADMIN', 'OPERATOR', 'DRIVER']);
+            $table->enum('user_type', ['system-admin', 'operator', 'driver']);
             $table->integer('version')->default(1);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by')->nullable();
             $table->timestamps();
-            $table->softDeletes(); // Adds deleted_at column for soft deletes
+            $table->softDeletes();
             $table->index('username');
             $table->index('user_type');
         });

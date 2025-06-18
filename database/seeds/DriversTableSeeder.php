@@ -16,12 +16,12 @@ class DriversTableSeeder extends Seeder
             [
                 'id' => 1,
                 'user_id' => 4, // driver1
+                'org_code' => 1001,
                 'name' => 'Ahmed Hassan',
                 'license_number' => 'DL-001-2023-456789',
                 'date_of_joining' => '2023-02-10',
                 'mobile_number' => '01912345680',
                 'address' => '789 Transport Road, Sylhet, Bangladesh',
-                'version' => 1,
                 'created_by' => 1,
                 'updated_by' => null,
                 'created_at' => now(),
@@ -30,12 +30,12 @@ class DriversTableSeeder extends Seeder
             [
                 'id' => 2,
                 'user_id' => 5, // driver2
+                'org_code' => 1001,
                 'name' => 'Mohammad Rahman',
                 'license_number' => 'DL-002-2023-789012',
                 'date_of_joining' => '2023-04-15',
                 'mobile_number' => '01612345681',
                 'address' => '321 Highway Street, Rajshahi, Bangladesh',
-                'version' => 1,
                 'created_by' => 1,
                 'updated_by' => null,
                 'created_at' => now(),
@@ -44,12 +44,12 @@ class DriversTableSeeder extends Seeder
             [
                 'id' => 3,
                 'user_id' => 6, // driver3
-                'name' => 'Karim Abdullah',
+                'org_code' => 1001,
+                'name' => 'Karim Abdullah'  ,
                 'license_number' => 'DL-003-2023-345678',
                 'date_of_joining' => '2023-06-01',
                 'mobile_number' => '01512345682',
                 'address' => '654 Fleet Avenue, Khulna, Bangladesh',
-                'version' => 1,
                 'created_by' => 1,
                 'updated_by' => null,
                 'created_at' => now(),

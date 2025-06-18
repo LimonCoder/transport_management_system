@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\V1\Repairs;
 use Illuminate\Database\Seeder;
-use App\Models\Repairs;
 
 class RepairsTableSeeder extends Seeder {
 

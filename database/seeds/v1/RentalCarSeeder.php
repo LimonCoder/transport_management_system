@@ -1,7 +1,7 @@
 <?php
 
+use App\Models\V1\RentalCar;
 use Illuminate\Database\Seeder;
-use App\Models\RentalCar;
 
 class RentalCarSeeder extends Seeder
 {
