@@ -5,5 +5,30 @@ return [
     'profile' => 'প্রোফাইল',
     'logout' => 'লগআউট',
     'operator-list' => "অপারেটর তালিকা",
-    'change-password' => "পাসওয়ার্ড পরির্বতন"
+    'change-password' => "পাসওয়ার্ড পরির্বতন",
+
+    //operator
+    'no' => 'নং',
+    'title' => 'অপারেটর',
+    'list_title' => 'অপারেটরের তালিকা',
+    'add' => 'যোগ করুন',
+    'add_new' => 'অপারেটর যোগ করুন',
+    'name' => 'নাম',
+    'designation' => 'পদবী',
+    'mobile' => 'মোবাইল',
+    'email' => 'ইমেইল',
+    'user' => 'ইউজার',
+    'picture' => 'ছবি',
+    'action' => 'একশন',
+    'edit' => 'এডিট',
+    'delete' => 'ডিলিট',
+    'confirm_delete' => 'আপনি কি নিশ্চিত?',
+    'no_data' => 'কোন অপারেটর পাওয়া যায়নি',
+    'close' => 'বন্ধ করুন',
+    'save' => 'সংরক্ষণ করুন',
+    'date_of_joining' => 'যোগদানের তারিখ',
+    'address' => 'ঠিকানা',
+    'username' => 'ইউজারনেম',
+    'password' => 'পাসওয়ার্ড',
+    'add_operator' => "নতুন অপারেটর যোগ করুন"
 ];

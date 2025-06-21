@@ -38,6 +38,15 @@
                     </li>
                 @else
 
+                    <li class="menu-title">ইউজার</li>
+
+                    <li class="nav-item ">
+
+                        <a class="nav-link" href="{{ route('operator.index') }}">
+                            <i class="fas fa-user-cog"></i> @lang('message.title')
+                        </a>
+
+                    </li>
 
 
                     <li class="menu-title">গাড়ি</li>
