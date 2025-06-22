@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+  transport-management-mysql:
+    restart: unless-stopped
+    image: mysql:8.0.30
+    environment:
+      MYSQL_ROOT_PASSWORD: hL5TO9FfCuzmTMD
+      MYSQL_DATABASE: transport_management_db
+      MYSQL_USER: transport_management_user
+      MYSQL_PASSWORD: OMF7JObOnSeFLwz
+    volumes:
+      - transport_management_mysql_data:/var/lib/mysql
+    networks:
+      - transport_management_network
+
+  transport-management-system:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile-php
+    depends_on:
+      - transport-management-mysql
+    networks:
+      - transport_management_network
+    ports:
+      - 8005:8000
+
+  transport-management-phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: transport-management-mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: unless-stopped
+    ports:
+      - "9005:80"
+    networks:
+      - transport_management_network
+
+networks:
+  transport_management_network:
+    driver: bridge
+
+volumes:
+  transport_management_mysql_data:

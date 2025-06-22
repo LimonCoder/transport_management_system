@@ -46,9 +46,31 @@ class OperatorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name'            => 'required|string|max:255',
+            'username'        => 'required|string|max:255|unique:users,username',
+            'designation'     => 'required|string|max:255',
+            'date_of_joining' => 'required|date',
+            'mobile'          => 'required|string|max:20',
+            'password'        => 'required|string|min:6',
+            'address'         => 'required|string',
+        ]);
+    
+        try {
+            $this->operatorRepo->createWithUser($validated);
+    
+            return response()->json([
+                'success' => true,
+                'message' => 'Operator and user created successfully.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Something went wrong: ' . $e->getMessage()
+            ], 500);
+        }
     }
-
+    
     /**
      * Display the specified resource.
      *

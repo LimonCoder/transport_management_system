@@ -9,8 +9,10 @@
 
                 <li class="nav-item ">
 
-                    <a class="nav-link" href="{{ route('home') }}"><i class="fas
-                    fa-home"></i> @lang('message.dashboard') </a>
+                    <a class="nav-link" href="{{ route('home') }}">
+                        <i class="fas fa-home"></i>
+                        @lang('message.dashboard') 
+                    </a>
 
                 </li>
 
@@ -38,12 +40,12 @@
                     </li>
                 @else
 
-                    <li class="menu-title">ইউজার</li>
+                    <li class="menu-title">@lang('message.user')</li>
 
-                    <li class="nav-item ">
+                    <li class="nav-item">
 
                         <a class="nav-link" href="{{ route('operator.index') }}">
-                            <i class="fas fa-user-cog"></i> @lang('message.title')
+                            <i class="fas fa-user-cog"></i>@lang('message.title')
                         </a>
 
                     </li>
@@ -53,8 +55,9 @@
 
                     <li class="nav-item ">
 
-                        <a class="nav-link" href="{{ route('vehicle.index') }}"><i class="fas fa-car-side"></i>গাড়ি
-                            রেজিস্ট্রেশন
+                        <a class="nav-link" href="{{ route('vehicle.index') }}">
+                            <i class="fas fa-car-side"></i>
+                            গাড়ি রেজিস্ট্রেশন
                         </a>
 
                     </li>

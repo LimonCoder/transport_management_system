@@ -9,5 +9,6 @@ interface OperatorRepositoryInterface
     public function update($id, array $data);
     public function delete($id);
     public function listDataForDataTable();
+    public function createWithUser(array $data);
 
 }

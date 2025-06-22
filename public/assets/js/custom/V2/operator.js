@@ -42,6 +42,7 @@ function add_operator() {
 }
 
 function operator_save() {
+
     let operator_data = new FormData($("#operator_form")[0]);
 
     if (parslyValid("operator_form")) {
