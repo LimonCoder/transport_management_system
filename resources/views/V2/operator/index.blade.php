@@ -46,8 +46,7 @@
              aria-labelledby="operatorModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
-                    <form id="operator_form" method="post" enctype="multipart/form-data" onsubmit="operator_save()">
-                        @csrf
+                    <form id="operator_form" method="post" enctype="multipart/form-data">
                         <div class="modal-header">
                             <h5 class="modal-title" id="operatorModalLabel">@lang('message.add_operator')</h5>
                             <button type="button" class="close" data-dismiss="modal">
@@ -65,10 +64,10 @@
                             </div>
 
                             <!-- Username (auto-generated slug, readonly) -->
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" id="userName">
                                 <div class="form-group">
-                                    <label for="slug">@lang('message.username')</label>
-                                    <input type="text" name="slug" id="slug" class="form-control form-control-sm" readonly>
+                                    <label for="username">@lang('message.username')</label>
+                                    <input type="text" name="username" id="username" class="form-control form-control-sm" readonly>
                                 </div>
                             </div>
 
@@ -92,12 +91,12 @@
                             <!-- Mobile -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="phone">@lang('message.mobile')</label>
-                                    <input type="text" name="phone" id="phone" class="form-control form-control-sm">
+                                    <label for="mobile">@lang('message.mobile')</label>
+                                    <input type="text" name="mobile" id="mobile" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <!-- Password with show/hide -->
-                            <div class="col-sm-6">
+                            <div class="col-sm-6" id="passwordHide">
                                 <div class="form-group">
                                     <label for="password">@lang('message.password')</label>
                                     <div class="input-group">
@@ -139,11 +138,14 @@
     <script>
         const message_edit = "{{ __('message.edit') }}";
         const message_delete = "{{ __('message.delete') }}";
+
         operator_list();
+
         function togglePassword() {
             const pwd = document.getElementById('password');
             pwd.type = pwd.type === 'password' ? 'text' : 'password';
         }
+
         document.getElementById('name').addEventListener('input', function () {
             const name = this.value;
             const slug = name
@@ -152,7 +154,12 @@
                 .replace(/\s+/g, '-')                 // spaces to dashes
                 .replace(/-+/g, '-')                  // collapse multiple dashes
                 .trim();
-            document.getElementById('slug').value = slug;
+            document.getElementById('username').value = slug;
+        });
+
+        $(document).on('submit', '#operator_form', function (e) {
+            e.preventDefault();
+            operator_save();
         });
 
     </script>

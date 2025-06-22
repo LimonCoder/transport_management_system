@@ -1,7 +1,11 @@
 <?php
 namespace App\Repositories;
 
+use App\Models\V1\User;
 use App\Models\V2\Operator;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class OperatorRepository implements OperatorRepositoryInterface
@@ -27,19 +31,21 @@ class OperatorRepository implements OperatorRepositoryInterface
             return DB::transaction(function () use ($data) {
                 $user = User::create([
                     'username'  => $data['username'],
-                    'password'  => bcrypt($data['password']),
+                    'password'  =>  Hash::make($data['password']),
+                    'org_code'  => Auth::user()->org_code,
                     'user_type' => 'operator',
+                    'role_id' => 2,
+                    'created_by' => Auth::user()->id
                 ]);
 
                 return Operator::create([
                     'name'             => $data['name'],
-                    'username'         => $data['username'], // optional: if needed in operator table
                     'designation'      => $data['designation'] ?? null,
                     'date_of_joining'  => $data['date_of_joining'] ?? null,
-                    'mobile'           => $data['mobile'] ?? null,
-                    'password'         => bcrypt($data['password']),
+                    'mobile_number'    => $data['mobile'] ?? null,
                     'address'          => $data['address'] ?? null,
                     'user_id'          => $user->id,
+                    'created_by'       => Auth::user()->id
                 ]);
             });
         } catch (Exception $e) {

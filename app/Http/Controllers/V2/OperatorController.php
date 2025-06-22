@@ -21,7 +21,7 @@ class OperatorController extends Controller
      */
     public function index()
     {
-        return view('operator.index');
+        return view('V2.operator.index');
     }
 
     public function listData(){
@@ -51,7 +51,7 @@ class OperatorController extends Controller
             'username'        => 'required|string|max:255|unique:users,username',
             'designation'     => 'required|string|max:255',
             'date_of_joining' => 'required|date',
-            'mobile'          => 'required|string|max:20',
+            'mobile'          => 'required|string|regex:/^(?:\+88)?01[0-9]{9}$/',
             'password'        => 'required|string|min:6',
             'address'         => 'required|string',
         ]);
@@ -60,13 +60,16 @@ class OperatorController extends Controller
             $this->operatorRepo->createWithUser($validated);
     
             return response()->json([
-                'success' => true,
-                'message' => 'Operator and user created successfully.'
+                'status' => 'success',
+                "title" => "Success",
+                'message' => 'Operator created successfully.'
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'success' => false,
-                'message' => 'Something went wrong: ' . $e->getMessage()
+                'status' => 'error',
+                'title' => 'Error',
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage()
             ], 500);
         }
     }

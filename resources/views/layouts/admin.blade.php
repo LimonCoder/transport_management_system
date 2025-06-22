@@ -6,6 +6,7 @@
     <title> Vehicle | @yield('title')</title>
     <meta name="path" content="{{ url('/') }}">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
     <meta content="Vehicle managment software" name="Vehicle managment softwar software is easy to keep track of the vehicles of government establishments." />
     <meta name="author" content="innovation it">

@@ -54,7 +54,7 @@ function operator_save() {
             contentType: false,
             dataType: 'JSON',
             success: function (response) {
-                if (response.status === "success") {
+                if (response.status == "success") {
                     $("#operator_modal").modal('toggle');
                 }
 
@@ -86,11 +86,12 @@ function operator_edit(row_index) {
 
     $("#name").val(operator_data.name);
     $("#designation").val(operator_data.designation);
-    $("#phone").val(operator_data.mobile_number);
-    $("#email").val(operator_data.email);
+    $("#mobile").val(operator_data.mobile_number);
     $("#operator_id").val(operator_data.id);
-    $("#user_id").val(operator_data.user_id);
-    $("#preview_image").attr('src', url + '/storage/app/public/operators/' + operator_data.picture);
+    $("#date_of_joining").val(operator_data.date_of_joining);
+    $("#address").val(operator_data.address);
+    $("#userName").hide(),
+    $("#passwordHide").hide(),
     $("#operator_modal").modal('toggle');
 }
 
