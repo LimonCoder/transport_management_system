@@ -51,14 +51,14 @@ class OperatorController extends Controller
             'username'        => 'required|string|max:255|unique:users,username',
             'designation'     => 'required|string|max:255',
             'date_of_joining' => 'required|date',
-            'mobile'          => 'required|string|regex:/^(?:\+88)?01[0-9]{9}$/',
+            'mobile_number'   => 'required|string|regex:/^(?:\+88)?01[0-9]{9}$/',
             'password'        => 'required|string|min:6',
             'address'         => 'required|string',
         ]);
-    
+
         try {
             $this->operatorRepo->createWithUser($validated);
-    
+
             return response()->json([
                 'status' => 'success',
                 "title" => "Success",
@@ -73,7 +73,7 @@ class OperatorController extends Controller
             ], 500);
         }
     }
-    
+
     /**
      * Display the specified resource.
      *
@@ -103,10 +103,33 @@ class OperatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'name'            => 'required|string|max:255',
+            'designation'     => 'nullable|string|max:255',
+            'date_of_joining' => 'nullable|date',
+            'mobile_number'   => 'required|string|regex:/^(?:\+88)?01[0-9]{9}$/',
+            'address'         => 'nullable|string',
+        ]);
+
+        try {
+            $this->operatorRepo->update($request->operator_id, $validated);
+
+            return response()->json([
+                'status' => 'success',
+                'title' => 'Updated!',
+                'message' => 'Operator updated successfully.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Update Failed!',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -114,8 +137,22 @@ class OperatorController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        try {
+            $this->operatorRepo->delete($request->operator_id);
+
+            return response()->json([
+                'status' => 'success',
+                'title' => 'Deleted!',
+                'message' => 'Operator deleted successfully.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Delete Failed!',
+                'message' => $e->getMessage()
+            ], 500);
+        }
     }
 }

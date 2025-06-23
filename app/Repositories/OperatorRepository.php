@@ -62,7 +62,20 @@ class OperatorRepository implements OperatorRepositoryInterface
 
     public function delete($id)
     {
-        return Operator::destroy($id);
+        return DB::transaction(function () use ($id) {
+            $operator = Operator::findOrFail($id);
+
+            // Delete associated user if exists
+            if ($operator->user_id) {
+                $user = User::find($operator->user_id);
+                if ($user) {
+                    $user->delete(); // soft delete, or forceDelete() if needed
+                }
+            }
+
+            // Delete the operator
+            return $operator->delete(); // soft delete
+        });
     }
 
     public function listDataForDataTable(){

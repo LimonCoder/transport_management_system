@@ -91,8 +91,8 @@
                             <!-- Mobile -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="mobile">@lang('message.mobile')</label>
-                                    <input type="text" name="mobile" id="mobile" class="form-control form-control-sm">
+                                    <label for="mobile_number">@lang('message.mobile')</label>
+                                    <input type="text" name="mobile_number" id="mobile_number" class="form-control form-control-sm">
                                 </div>
                             </div>
                             <!-- Password with show/hide -->
