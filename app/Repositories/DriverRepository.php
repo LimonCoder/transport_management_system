@@ -42,7 +42,7 @@ class DriverRepository implements DriverRepositoryInterface
 
                 return Driver::create([
                     'user_id'         => $user->id,
-                    'org_code'        => $data['org_code'],
+                    'org_code'        => Auth::user()->org_code,
                     'name'            => $data['name'],
                     'license_number'  => $data['license_number'] ?? null,
                     'date_of_joining' => $data['date_of_joining'] ?? null,

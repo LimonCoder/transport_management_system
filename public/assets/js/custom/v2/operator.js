@@ -46,8 +46,10 @@ function add_operator() {
 }
 
 function operator_save() {
-
     let operator_data = new FormData($("#operator_form")[0]);
+
+    // Clear previous validation errors
+    $(".text-danger").text("");
 
     if (parslyValid("operator_form")) {
         $.ajax({
@@ -58,25 +60,35 @@ function operator_save() {
             contentType: false,
             dataType: 'JSON',
             success: function (response) {
-                if (response.status == "success") {
+                if (response.status === "success") {
                     $("#operator_modal").modal('toggle');
+                    $("#operator_form")[0].reset();
+                    $("#operator_table").DataTable().draw(true);
+
+                    Swal.fire({
+                        title: response.title,
+                        text: response.message,
+                        icon: 'success'
+                    });
+                    
+                } else {
+                    // Optional: handle unexpected non-422 errors
+                    Swal.fire({
+                        title: response.title || "Error",
+                        text: response.message || "Something went wrong.",
+                        icon: "error",
+                    });
                 }
-
-                Swal.fire({
-                    title: response.title,
-                    text: response.message,
-                    icon: response.status,
-                    buttons: false
-                });
-
-                if (typeof response.errors !== "undefined") {
-                    if (response.errors.username) {
-                        let error_msg = response.errors.username[0];
-                        $("#username_error").text(error_msg);
+            },
+            error: function (xhr) {
+                if (xhr.status === 422) {
+                    let errors = xhr.responseJSON.errors;
+                    for (let field in errors) {
+                        $(`#${field}_error`).text(errors[field][0]);
                     }
+                } else {
+                    Swal.fire("Error", xhr.responseJSON?.message || "Something went wrong", "error");
                 }
-
-                $("#operator_table").DataTable().draw(true);
             }
         });
     }

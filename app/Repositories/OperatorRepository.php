@@ -42,7 +42,7 @@ class OperatorRepository implements OperatorRepositoryInterface
                     'name'             => $data['name'],
                     'designation'      => $data['designation'] ?? null,
                     'date_of_joining'  => $data['date_of_joining'] ?? null,
-                    'mobile_number'    => $data['mobile'] ?? null,
+                    'mobile_number'    => $data['mobile_number'] ?? null,
                     'address'          => $data['address'] ?? null,
                     'user_id'          => $user->id,
                     'created_by'       => Auth::user()->id

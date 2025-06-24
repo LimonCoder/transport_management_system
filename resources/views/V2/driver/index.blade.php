@@ -46,7 +46,7 @@
          aria-labelledby="driverModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
-                <form id="driver_form" method="post">
+                <form id="driver_form" method="post" enctype="multipart/form-data">
                     <div class="modal-header">
                         <h5 class="modal-title" id="driverModalLabel">@lang('message.add_driver')</h5>
                         <button type="button" class="close" data-dismiss="modal">
@@ -60,6 +60,7 @@
                             <div class="form-group">
                                 <label for="name">@lang('message.name') <span class="text-danger">*</span></label>
                                 <input type="text" name="name" id="name" class="form-control form-control-sm" required>
+                                <small id="name_error" class="text-danger"></small>
                             </div>
                         </div>
 
@@ -68,6 +69,7 @@
                             <div class="form-group">
                                 <label for="username">@lang('message.username') <span class="text-danger">*</span></label>
                                 <input type="text" name="username" id="username" class="form-control form-control-sm" required readonly>
+                                <small id="username_error" class="text-danger"></small>
                             </div>
                         </div>
 
@@ -83,6 +85,7 @@
                                         </button>
                                     </div>
                                 </div>
+                                <small id="password_error" class="text-danger"></small>
                             </div>
                         </div>
 
@@ -91,14 +94,7 @@
                             <div class="form-group">
                                 <label for="license_number">@lang('message.license_number')</label>
                                 <input type="text" name="license_number" id="license_number" class="form-control form-control-sm">
-                            </div>
-                        </div>
-
-                        <!-- Date of Joining -->
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                                <label for="date_of_joining">@lang('message.date_of_joining')</label>
-                                <input type="date" name="date_of_joining" id="date_of_joining" class="form-control form-control-sm">
+                                <small id="license_number_error" class="text-danger"></small>
                             </div>
                         </div>
 
@@ -107,6 +103,16 @@
                             <div class="form-group">
                                 <label for="mobile_number">@lang('message.mobile')</label>
                                 <input type="text" name="mobile_number" id="mobile_number" class="form-control form-control-sm">
+                                <small id="mobile_number_error" class="text-danger"></small>
+                            </div>
+                        </div>
+
+
+                        <!-- Date of Joining -->
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="date_of_joining">@lang('message.date_of_joining')</label>
+                                <input type="date" name="date_of_joining" id="date_of_joining" class="form-control form-control-sm">
                             </div>
                         </div>
 
@@ -156,10 +162,10 @@
             document.getElementById('username').value = slug;
         });
 
-    $(document).on('submit', '#driver_form', function (e) {
-        e.preventDefault();
-        driver_save();
-    });
+        $(document).on('submit', '#driver_form', function (e) {
+            e.preventDefault();
+            driver_save();
+        });
 
 </script>
 @endsection

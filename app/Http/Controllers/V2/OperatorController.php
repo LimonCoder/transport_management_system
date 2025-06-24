@@ -51,8 +51,7 @@ class OperatorController extends Controller
             'username'        => 'required|string|max:255|unique:users,username',
             'designation'     => 'required|string|max:255',
             'date_of_joining' => 'required|date',
-            'mobile_number'   => 'required|string|regex:/^(?:\+88)?01[0-9]{9}$/',
-            'password'        => 'required|string|min:6',
+            'mobile_number'   => 'required|unique:operators,mobile_number|string|regex:/^(?:\+88)?01[0-9]{9}$/',            'password'        => 'required|string|min:6',
             'address'         => 'required|string',
         ]);
 

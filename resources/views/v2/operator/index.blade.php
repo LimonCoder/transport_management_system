@@ -60,6 +60,7 @@
                                 <div class="form-group">
                                     <label for="name">@lang('message.name') <span class="text-danger">*</span></label>
                                     <input type="text" name="name" id="name" class="form-control form-control-sm" required>
+                                    <small id="name_error" class="text-danger"></small>
                                 </div>
                             </div>
 
@@ -68,6 +69,7 @@
                                 <div class="form-group">
                                     <label for="username">@lang('message.username')</label>
                                     <input type="text" name="username" id="username" class="form-control form-control-sm" readonly>
+                                    <small id="username_error" class="text-danger"></small>
                                 </div>
                             </div>
 
@@ -77,6 +79,7 @@
                                 <div class="form-group">
                                     <label for="designation">@lang('message.designation')</label>
                                     <input type="text" name="designation" id="designation" class="form-control form-control-sm">
+                                    <small id="designation_error" class="text-danger"></small>
                                 </div>
                             </div>
 
@@ -93,6 +96,7 @@
                                 <div class="form-group">
                                     <label for="mobile_number">@lang('message.mobile')</label>
                                     <input type="text" name="mobile_number" id="mobile_number" class="form-control form-control-sm">
+                                    <small id="mobile_number_error" class="text-danger"></small>
                                 </div>
                             </div>
                             <!-- Password with show/hide -->
@@ -156,11 +160,9 @@
                 .trim();
             document.getElementById('username').value = slug;
         });
-
         $(document).on('submit', '#operator_form', function (e) {
             e.preventDefault();
             operator_save();
         });
-
     </script>
 @endsection

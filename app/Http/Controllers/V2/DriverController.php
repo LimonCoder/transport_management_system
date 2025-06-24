@@ -38,25 +38,16 @@ class DriverController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
+        $validated = $request->validate([
             'name'            => 'required|string|max:200',
             'username'        => 'required|string|unique:users,username',
             'password'        => 'required|string|min:6',
-            'mobile_number'   => 'required|unique:drivers,mobile_number',
+            'mobile_number'   => 'required|unique:drivers,mobile_number|string|regex:/^(?:\+88)?01[0-9]{9}$/',
             'license_number'  => 'nullable|unique:drivers,license_number',
         ]);
 
-        if ($validator->fails()) {
-            return response()->json([
-                'status' => 'error',
-                'title' => 'Validation Error',
-                'message' => 'Please fix the errors below.',
-                'errors' => $validator->errors(),
-            ]);
-        }
-
         try {
-            $this->driverRepo->createWithUser($request->all());
+            $this->driverRepo->createWithUser($validated);
 
             return response()->json([
                 'status' => 'success',

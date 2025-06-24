@@ -49,6 +49,9 @@ function add_driver() {
 function driver_save() {
     let driver_data = new FormData($("#driver_form")[0]);
 
+    // Clear previous error messages
+    $('.text-danger').text('');
+
     if (parslyValid("driver_form")) {
         $.ajax({
             url: url + '/driver/store',
@@ -60,26 +63,29 @@ function driver_save() {
             success: function (response) {
                 if (response.status === "success") {
                     $("#driver_modal").modal('toggle');
+                    $("#driver_form")[0].reset();
+                    $("#driver_table").DataTable().draw(true);
+                    Swal.fire({
+                        title: response.title,
+                        text: response.message,
+                        icon: 'success'
+                    });
                 }
-
-                Swal.fire({
-                    title: response.title,
-                    text: response.message,
-                    icon: response.status,
-                    buttons: false
-                });
-
-                if (typeof response.errors !== "undefined") {
-                    if (response.errors.username) {
-                        $("#username_error").text(response.errors.username[0]);
+            },
+            error: function (xhr) {
+                if (xhr.status === 422) {
+                    let errors = xhr.responseJSON.errors;
+                    for (let field in errors) {
+                        $(`#${field}_error`).text(errors[field][0]);
                     }
+                } else {
+                    Swal.fire("Error", xhr.responseJSON?.message || "Something went wrong", "error");
                 }
-
-                $("#driver_table").DataTable().draw(true);
             }
         });
     }
 }
+
 
 function driver_edit(row_index) {
     $("#driver_form").attr('onsubmit', 'driver_update()');
