@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\TripRepository;
+use App\Repositories\TripRepositoryInterface;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
@@ -22,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(OperatorRepositoryInterface::class, OperatorRepository::class);
         $this->app->bind(DriverRepositoryInterface::class, DriverRepository::class);
+        $this->app->bind(TripRepositoryInterface::class, TripRepository::class);
     }
 
     /**

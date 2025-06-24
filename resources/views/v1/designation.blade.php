@@ -97,7 +97,7 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('/assets/js/custom/designation.js') }}"></script>
+    <script src="{{ asset('/assets/js/custom/v1/designation.js') }}"></script>
     <script>
         designation_list();
     </script>

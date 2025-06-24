@@ -137,7 +137,7 @@
 
 
 <!-- Custom js -->
-<script src="{{ asset('/assets/js/custom/custom.js') }}"></script>
+<script src="{{ asset('/assets/js/custom/v1/custom.js') }}"></script>
 
 
 @yield('js')
