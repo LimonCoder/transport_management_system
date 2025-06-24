@@ -62,42 +62,12 @@
 
                     </li>
 
-                    <li class="nav-item ">
-
-                        <a class="nav-link" href="{{ route('logbook.index') }}"><i class="ti-book"></i>লগ বই</a>
-
-                    </li>
 
                     <li class="nav-item ">
 
                         <a class="nav-link" href="{{ route('vehicle.useless') }}"><i class="fas fa-car-crash"></i>অকেজো গাড়ি</a>
 
                     </li>
-
-                    <li class="nav-item ">
-
-                        <a class="nav-link" href="{{ route('rentalcar.index') }}"><i class="fas
-                        fa-luggage-cart"></i>ভাড়ায়
-                            গাড়ি</a>
-
-                    </li>
-
-                    <li class="menu-title">মেরামত</li>
-
-                    <li class="nav-item ">
-
-                        <a class="nav-link" href="{{ route('lobriant.index')  }}"><i class="fas
-                    fa-landmark"></i>লুব্রিক্যান্ট</a>
-
-                    </li>
-
-                    <li class="nav-item ">
-
-                        <a class="nav-link" href="{{ route('repairs.index') }}"><i class="fas
-                    fa-eject"></i>যন্ত্রাংশ</a>
-
-                    </li>
-
                     <li class="menu-title">কর্মকর্তা এবং ডাইভার</li>
 
                     <li class="nav-item ">
@@ -173,7 +143,14 @@
                     </li>
                 @endif
 
+                <li class="nav-item ">
 
+                    <a class="nav-link" href="{{ route('trip.index') }}">
+                        <i class="fas fa-car-side"></i>
+                        Trip
+                    </a>
+
+                </li>
             </ul>
 
         </div>

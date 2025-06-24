@@ -32,7 +32,8 @@ class CreateTripsAuditLogTable extends Migration
             $table->decimal('fuel_cost', 10, 2)->default(0.00);
             $table->decimal('total_cost', 10, 2)->default(0.00);
             $table->tinyInteger('is_locked')->unsigned()->default(0);
-            $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
+            $table->enum('status', ['initiate', 'completed', 'reject'])->default('initiate');
+            $table->text('reject_reason')->nullable();
             $table->enum('action', ['create', 'modify']);
             $table->bigInteger('created_by');
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

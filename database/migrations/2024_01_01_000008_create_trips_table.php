@@ -31,7 +31,8 @@ class CreateTripsTable extends Migration
             $table->decimal('fuel_cost', 10, 2)->default(0.00);
             $table->decimal('total_cost', 10, 2)->default(0.00);
             $table->tinyInteger('is_locked')->unsigned()->default(0);
-            $table->enum('status', ['pending', 'completed', 'cancelled'])->default('pending');
+            $table->enum('status', ['initiate', 'completed', 'reject'])->default('initiate');
+            $table->text('reject_reason')->nullable();
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->bigInteger('created_by');
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));

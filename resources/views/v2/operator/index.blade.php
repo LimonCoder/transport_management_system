@@ -134,7 +134,7 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('/assets/js/custom/V2/operator.js') }}"></script>
+    <script src="{{ asset('/assets/js/custom/v2/operator.js') }}"></script>
     <script>
         const message_edit = "{{ __('message.edit') }}";
         const message_delete = "{{ __('message.delete') }}";
