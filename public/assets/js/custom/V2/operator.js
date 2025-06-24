@@ -140,13 +140,13 @@ function operator_delete(row_index) {
 
     Swal.fire({
         title: "Response",
-        text: "আপনি কি ডিলিট করতে চান ?",
+        text: "Do you want to delete the Operator?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
-        confirmButtonText: "হ্যা",
-        cancelButtonText: "না",
+        confirmButtonText: "Yes",
+        cancelButtonText: "No",
     }).then(function (result) {
         if (result.value) {
             $.ajax({

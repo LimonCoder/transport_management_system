@@ -141,6 +141,14 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::post('/update', 'OperatorController@update')->name('update');
         Route::post('/destroy', 'OperatorController@destroy')->name('destroy');
     });
+
+    Route::prefix('/driver')->name('driver.')->group(function () {
+        Route::get('/', 'DriverController@index')->name('index');
+        Route::get('/list_data', 'DriverController@listData')->name('list_data');
+        Route::post('/store', 'DriverController@store')->name('store');
+        Route::post('/update', 'DriverController@update')->name('update');
+        Route::post('/destroy', 'DriverController@destroy')->name('destroy');
+    });
 });
 
 //========================== reports================================

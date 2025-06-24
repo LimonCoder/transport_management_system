@@ -31,4 +31,10 @@ return [
     'password' => 'Password',
     'add_operator' => 'Add New Operator',
 
+    //driver
+    'driver_title' => 'Driver Management',
+    'add_driver' => 'Add Driver',
+    'license_number' => 'License Number',
+    'driver_list_title' => 'Driver List',
+
 ];

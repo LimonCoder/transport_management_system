@@ -30,5 +30,11 @@ return [
     'address' => 'ঠিকানা',
     'username' => 'ইউজারনেম',
     'password' => 'পাসওয়ার্ড',
-    'add_operator' => "নতুন অপারেটর যোগ করুন"
+    'add_operator' => "নতুন অপারেটর যোগ করুন",
+
+    //driver
+    'driver_title' => 'ড্রাইভার ব্যবস্থাপনা',
+    'add_driver' => 'ড্রাইভার যোগ করুন',
+    'license_number' => 'লাইসেন্স নম্বর',
+    'driver_list_title' => 'ড্রাইভারের তালিকা',
 ];

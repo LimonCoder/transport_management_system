@@ -2,12 +2,14 @@
 
 namespace App\Providers;
 
-use App\Repositories\OperatorRepository;
-use App\Repositories\OperatorRepositoryInterface;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\DriverRepository;
+use App\Repositories\DriverRepositoryInterface;
+use App\Repositories\OperatorRepository;
+use App\Repositories\OperatorRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(OperatorRepositoryInterface::class, OperatorRepository::class);
+        $this->app->bind(DriverRepositoryInterface::class, DriverRepository::class);
     }
 
     /**

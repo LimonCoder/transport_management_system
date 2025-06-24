@@ -50,6 +50,14 @@
 
                     </li>
 
+                    <li class="nav-item">
+
+                        <a class="nav-link" href="{{ route('driver.index') }}">
+                            <i class="fas fa-user-cog"></i>@lang('message.driver_title')
+                        </a>
+
+                    </li>
+
 
                     <li class="menu-title">গাড়ি</li>
 
