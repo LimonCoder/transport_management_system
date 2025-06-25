@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\V1;
+namespace App\Models\V2;
 
 use App\helpers\GlobalHelper;
 use Illuminate\Database\Eloquent\Model;
@@ -28,5 +28,10 @@ class VehicleSetup extends Model
         'created_by',
         'updated_by'
     ];
+
+    public function fuelType()
+    {
+        return $this->belongsTo(FuelType::class, 'fuel_type_id');
+    }
 
 }
