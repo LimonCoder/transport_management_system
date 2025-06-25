@@ -82,15 +82,15 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V1'], function () {
 
     // vehicle
     Route::prefix('/vehicle')->name('vehicle.')->group(function () {
-        Route::get('/', 'VehicleSetupController@index')->name('index');
-        Route::post('/store', 'VehicleSetupController@store')->name('store');
-        Route::get('/list_data', 'VehicleSetupController@list_data')->name('list_data');
-        Route::post('/update', 'VehicleSetupController@update')->name('update');
-        Route::post('/delete', 'VehicleSetupController@destroy')->name('delete');
+        Route::get('/', 'VehicleController@index')->name('index');
+        Route::post('/store', 'VehicleController@store')->name('store');
+        Route::get('/list_data', 'VehicleController@list_data')->name('list_data');
+        Route::post('/update', 'VehicleController@update')->name('update');
+        Route::post('/delete', 'VehicleController@destroy')->name('delete');
         // useless vehicle module
-        Route::get('/useless', 'VehicleSetupController@uselessVehicle')->name('useless');
-        Route::post('/uselessVehicleStore', 'VehicleSetupController@uselessVehicleStore')->name('uselessVehicle.store');
-        Route::get('/uselessVehicleList', 'VehicleSetupController@uselessVehicleList')->name('useless.list_data');
+        Route::get('/useless', 'VehicleController@uselessVehicle')->name('useless');
+        Route::post('/uselessVehicleStore', 'VehicleController@uselessVehicleStore')->name('uselessVehicle.store');
+        Route::get('/uselessVehicleList', 'VehicleController@uselessVehicleList')->name('useless.list_data');
     });
 
 

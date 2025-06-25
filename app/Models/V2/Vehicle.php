@@ -6,9 +6,10 @@ use App\Models\V1\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Trip extends Model
+class Vehicle extends Model
 {
     public $timestamps = true;
+    protected $table = 'vehicles';
 
     use SoftDeletes;
 
@@ -16,20 +17,19 @@ class Trip extends Model
 
     protected $fillable = [
         'org_code',
-        'route_id',
-        'driver_id',
-        'driver_name',
-        'vehicle_id',
-        'vehicle_registration_number',
-        'trip_initiate_date',
-        'is_locked',
+        'registration_number',
+        'model',
+        'capacity',
+        'fuel_type_id',
+        'images',
+        'status',
         'created_by',
         'updated_by'
     ];
 
     protected $casts = [
-        'trip_initiate_date' => 'date',
-        'is_locked' => 'boolean',
+        'capacity' => 'integer',
+        'fuel_type_id' => 'integer',
     ];
 
     // Relationships
@@ -43,18 +43,9 @@ class Trip extends Model
         return $this->belongsTo(User::class, 'updated_by');
     }
 
-    public function route()
+    // Relationships to trips
+    public function trips()
     {
-        return $this->belongsTo(Route::class, 'route_id');
-    }
-
-    public function driver()
-    {
-        return $this->belongsTo(Driver::class, 'driver_id');
-    }
-
-    public function vehicle()
-    {
-        return $this->belongsTo(Vehicle::class, 'vehicle_id');
+        return $this->hasMany(Trip::class, 'vehicle_id');
     }
 } 

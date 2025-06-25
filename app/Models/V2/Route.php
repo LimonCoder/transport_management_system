@@ -4,30 +4,24 @@ namespace App\Models\V2;
 
 use App\Models\V1\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Driver extends Model
+class Route extends Model
 {
     public $timestamps = true;
 
-    use SoftDeletes;
+    protected $table = 'routes';
 
-    protected $table = 'drivers';
 
     protected $guarded = ["id", "created_at", "updated_at"];
 
     protected $fillable = [
         'org_code',
-        'name',
-        'mobile_no',
-        'image'
+        'title',
+        'details',
+        'status',
+        'created_by',
+        'updated_by'
     ];
-
-    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
     // Relationships
     public function creator(): \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -43,6 +37,6 @@ class Driver extends Model
     // Relationships to trips
     public function trips(): \Illuminate\Database\Eloquent\Relations\HasMany
     {
-        return $this->hasMany(Trip::class, 'driver_id');
+        return $this->hasMany(Trip::class, 'route_id');
     }
-}
+} 

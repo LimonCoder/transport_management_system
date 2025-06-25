@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers\V2;
 
-use App\helpers\GlobalHelper;
 use App\Http\Controllers\Controller;
+use App\Libraries\ApiResponse;
 use App\Models\V2\VehicleSetup;
-use Carbon\Carbon;
+use App\Services\VehicleService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
-use Illuminate\Validation\ValidationException;
-use Illuminate\Support\Facades\Storage;
 
 
-class VehicleSetupController extends Controller
+class VehicleController extends Controller
 {
+    protected $vehicleService;
+    public function __construct(VehicleService $vehicleService)
+    {
+        $this->vehicleService = $vehicleService;
+    }
 
     // Show the vehicle management page
     public function index()
@@ -28,6 +33,18 @@ class VehicleSetupController extends Controller
         return DataTables::of($vehicles)
             ->addIndexColumn()
             ->make(true);
+    }
+
+    public function list(): JsonResponse
+    {
+        try {
+            $result = $this->vehicleService->getActiveVehiclesForDropdown();
+
+            return ApiResponse::customResponse($result);
+        } catch (\Throwable $throwable) {
+            Log::error("VehicleController@list", ['error' => $throwable]);
+            return ApiResponse::errorResponse('An unexpected error occurred while retrieving vehicles', 500);
+        }
     }
 
     // Store a new vehicle (single image)

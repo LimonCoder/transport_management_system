@@ -1,3 +1,6 @@
+// Get base URL from meta tag
+var url = $('meta[name="path"]').attr('content');
+
 var trip_table;
 function trip_list() {
     trip_table = $("#trip_table").DataTable({
@@ -7,20 +10,49 @@ function trip_list() {
         processing: true,
         serverSide: true,
         ajax: {
-            url: url + "/trip/list_data"
+            url: url + "/trip/list_data",
+            type: "GET",
+            dataType: "JSON",
+            error: function(xhr, error, thrown) {
+                console.error('DataTables AJAX error:', error, thrown);
+                console.error('Response:', xhr.responseText);
+                console.error('Status:', xhr.status);
+                
+                // Try to parse response for better error message
+                let errorMessage = 'Unable to load trip data. Please refresh the page and try again.';
+                try {
+                    let response = JSON.parse(xhr.responseText);
+                    if (response.error) {
+                        errorMessage = response.error;
+                    }
+                } catch (e) {
+                    // Use default message
+                }
+                
+                // Show user-friendly error message
+                Swal.fire({
+                    title: 'Error Loading Data',
+                    text: errorMessage,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
         },
         columns: [
             { data: 'DT_RowIndex', name: 'DT_RowIndex', orderable: false, searchable: false },
+            { 
+                data: 'route_name', 
+                name: 'route_name'
+            },
             { data: 'driver_name', name: 'driver_name' },
             { data: 'vehicle_registration_number', name: 'vehicle_registration_number' },
-            { data: 'start_location', name: 'start_location' },
-            { data: 'destination', name: 'destination' },
-            { data: 'start_time', name: 'start_time' },
-            { data: 'status', name: 'status' },
+            { data: 'trip_initiate_date', name: 'trip_initiate_date' },
             { data: 'is_locked', name: 'is_locked' },
             {
                 data: 'id',
                 name: 'id',
+                orderable: false,
+                searchable: false,
                 render: function (data, type, row, meta) {
                     let html = '';
                     html =
@@ -36,10 +68,78 @@ function trip_list() {
     });
 }
 
+// Load routes data for dropdown
+function loadRoutes() {
+    $.ajax({
+        url: url + '/routes/list',
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(response) {
+            let options = '<option value="">Select Route</option>';
+            if(response.data && response.data.length > 0) {
+                response.data.forEach(function(route) {
+                    options += `<option value="${route.id}">${route.name || 'Route #' + route.id}</option>`;
+                });
+            }
+            $('#route_id').html(options);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error loading routes:', error);
+        }
+    });
+}
+
+// Load drivers data for dropdown
+function loadDrivers() {
+    $.ajax({
+        url: url + '/drivers/list',
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(response) {
+            let options = '<option value="">Select Driver</option>';
+            if(response.data && response.data.length > 0) {
+                response.data.forEach(function(driver) {
+                    options += `<option value="${driver.id}">${driver.name || driver.first_name + ' ' + driver.last_name}</option>`;
+                });
+            }
+            $('#driver_id').html(options);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error loading drivers:', error);
+        }
+    });
+}
+
+// Load vehicles data for dropdown
+function loadVehicles() {
+    $.ajax({
+        url: url + '/vehicles/list',
+        type: 'GET',
+        dataType: 'JSON',
+        success: function(response) {
+            let options = '<option value="">Select Vehicle</option>';
+            if(response.data && response.data.length > 0) {
+                response.data.forEach(function(vehicle) {
+                    options += `<option value="${vehicle.id}">${vehicle.registration_number || vehicle.model}</option>`;
+                });
+            }
+            $('#vehicle_id').html(options);
+        },
+        error: function(xhr, status, error) {
+            console.error('Error loading vehicles:', error);
+        }
+    });
+}
+
 function add_trip() {
-    $("#trip_form").attr('onsubmit', 'trip_save()');
     $("#trip_form")[0].reset();
+    $("#trip_id").val(''); // Clear trip_id for new trip
     parslyInit("trip_form");
+
+    // Load dropdown data
+    loadRoutes();
+    loadDrivers();
+    loadVehicles();
 
     $("#tripModalLabel").text("Add Trip");
     $("#trip_modal").modal('show');
@@ -58,7 +158,7 @@ function trip_save() {
             contentType: false,
             dataType: 'JSON',
             success: function (response) {
-                if (response.status == "success") {
+                if (response.status === "success") {
                     $("#trip_modal").modal('toggle');
                 }
 
@@ -85,26 +185,23 @@ function trip_save() {
 }
 
 function trip_edit(row_index) {
-    $("#trip_form").attr('onsubmit', 'trip_update()');
     $("#trip_form")[0].reset();
+
+    // Load dropdown data
+    loadRoutes();
+    loadDrivers();
+    loadVehicles();
 
     let trip_data = trip_table.row(row_index).data();
 
-    $("#route_id").val(trip_data.route_id);
-    $("#driver_id").val(trip_data.driver_id);
-    $("#driver_name").val(trip_data.driver_name);
-    $("#vehicle_id").val(trip_data.vehicle_id);
-    $("#vehicle_registration_number").val(trip_data.vehicle_registration_number);
-    $("#start_location").val(trip_data.start_location);
-    $("#destination").val(trip_data.destination);
-    $("#start_time").val(formatDateTimeForInput(trip_data.start_time));
-    $("#end_time").val(formatDateTimeForInput(trip_data.end_time));
-    $("#distance_km").val(trip_data.distance_km);
-    $("#purpose").val(trip_data.purpose);
-    $("#fuel_cost").val(trip_data.fuel_cost);
-    $("#total_cost").val(trip_data.total_cost);
-    $("#status").val(trip_data.status);
-    $("#trip_id").val(trip_data.id);
+    // Set timeout to ensure dropdowns are loaded before setting values
+    setTimeout(function() {
+        $("#route_id").val(trip_data.route_id);
+        $("#driver_id").val(trip_data.driver_id);
+        $("#vehicle_id").val(trip_data.vehicle_id);
+        $("#trip_initiate_date").val(trip_data.trip_initiate_date);
+        $("#trip_id").val(trip_data.id);
+    }, 500);
     
     $("#tripModalLabel").text("Edit Trip");
     $("#trip_modal").modal('show');

@@ -1,20 +1,26 @@
 <?php
 
-namespace App\Http\Controllers\V2;
+namespace App\Http\Controllers\v2;
 
 use App\Http\Controllers\Controller;
+use App\Libraries\ApiResponse;
+use App\Services\DriverService;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use App\Repositories\DriverRepositoryInterface;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Exception;
 
 class DriverController extends Controller
 {
     protected $driverRepo;
+    protected $driverService;
 
-    public function __construct(DriverRepositoryInterface $driverRepo)
+    public function __construct(DriverRepositoryInterface $driverRepo, DriverService $driverService)
     {
         $this->driverRepo = $driverRepo;
+        $this->driverService = $driverService;
     }
 
     /**
@@ -22,7 +28,7 @@ class DriverController extends Controller
      */
     public function index()
     {
-        return view('V2.driver.index');
+        return view('v2.driver.index');
     }
 
     /**
@@ -31,6 +37,18 @@ class DriverController extends Controller
     public function listData()
     {
         return $this->driverRepo->listDataForDataTable();
+    }
+
+    public function list(): JsonResponse
+    {
+        try {
+            $result = $this->driverService->getActiveDriversForDropdown();
+
+            return ApiResponse::customResponse($result);
+        } catch (\Throwable $throwable) {
+            Log::error("DriverController@list", ['error' => $throwable]);
+            return ApiResponse::errorResponse('An unexpected error occurred while retrieving drivers', 500);
+        }
     }
 
     /**
@@ -104,11 +122,10 @@ class DriverController extends Controller
     /**
      * Delete a driver.
      */
-    public function destroy(Request $request)
+    public function destroy(Request $request): JsonResponse
     {
         try {
             $this->driverRepo->delete($request->driver_id);
-
             return response()->json([
                 'status' => 'success',
                 'title' => 'Deleted',
@@ -123,3 +140,4 @@ class DriverController extends Controller
         }
     }
 }
+

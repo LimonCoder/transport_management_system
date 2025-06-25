@@ -32,7 +32,7 @@ return [
     'add_operator' => 'Add New Operator',
 
     //driver
-    'driver_title' => 'Driver Management',
+    'driver_title' => 'Driver',
     'add_driver' => 'Add Driver',
     'license_number' => 'License Number',
     'driver_list_title' => 'Driver List',

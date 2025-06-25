@@ -22,12 +22,10 @@
                                     <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Driver</th>
-                                        <th>Vehicle</th>
-                                        <th>Start Location</th>
-                                        <th>Destination</th>
-                                        <th>Start Time</th>
-                                        <th>Status</th>
+                                        <th>Route Name</th>
+                                        <th>Driver Name</th>
+                                        <th>Vehicle Number</th>
+                                        <th>Trip Initiate Date</th>
                                         <th>Is Locked</th>
                                         <th>Action</th>
                                     </tr>
@@ -61,116 +59,38 @@
                             <!-- Route ID -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="route_id">Route ID <span class="text-danger">*</span></label>
-                                    <input type="number" name="route_id" id="route_id" class="form-control form-control-sm" required>
+                                    <label for="route_id">Route <span class="text-danger">*</span></label>
+                                    <select name="route_id" id="route_id" class="form-control form-control-sm" required>
+                                        <option value="">Select Route</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <!-- Driver ID -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="driver_id">Driver ID <span class="text-danger">*</span></label>
-                                    <input type="number" name="driver_id" id="driver_id" class="form-control form-control-sm" required>
-                                </div>
-                            </div>
-
-                            <!-- Driver Name -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="driver_name">Driver Name <span class="text-danger">*</span></label>
-                                    <input type="text" name="driver_name" id="driver_name" class="form-control form-control-sm" required>
+                                    <label for="driver_id">Driver <span class="text-danger">*</span></label>
+                                    <select name="driver_id" id="driver_id" class="form-control form-control-sm" required>
+                                        <option value="">Select Driver</option>
+                                    </select>
                                 </div>
                             </div>
 
                             <!-- Vehicle ID -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="vehicle_id">Vehicle ID <span class="text-danger">*</span></label>
-                                    <input type="number" name="vehicle_id" id="vehicle_id" class="form-control form-control-sm" required>
-                                </div>
-                            </div>
-
-                            <!-- Vehicle Registration Number -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="vehicle_registration_number">Vehicle Registration <span class="text-danger">*</span></label>
-                                    <input type="text" name="vehicle_registration_number" id="vehicle_registration_number" class="form-control form-control-sm" required>
-                                </div>
-                            </div>
-
-                            <!-- Start Location -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="start_location">Start Location <span class="text-danger">*</span></label>
-                                    <input type="text" name="start_location" id="start_location" class="form-control form-control-sm" required>
-                                </div>
-                            </div>
-
-                            <!-- Destination -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="destination">Destination <span class="text-danger">*</span></label>
-                                    <input type="text" name="destination" id="destination" class="form-control form-control-sm" required>
-                                </div>
-                            </div>
-
-                            <!-- Start Time -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="start_time">Start Time <span class="text-danger">*</span></label>
-                                    <input type="datetime-local" name="start_time" id="start_time" class="form-control form-control-sm" required>
-                                </div>
-                            </div>
-
-                            <!-- End Time -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="end_time">End Time</label>
-                                    <input type="datetime-local" name="end_time" id="end_time" class="form-control form-control-sm">
-                                </div>
-                            </div>
-
-                            <!-- Distance KM -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="distance_km">Distance (KM)</label>
-                                    <input type="number" step="0.01" name="distance_km" id="distance_km" class="form-control form-control-sm">
-                                </div>
-                            </div>
-
-                            <!-- Purpose -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="purpose">Purpose</label>
-                                    <input type="text" name="purpose" id="purpose" class="form-control form-control-sm">
-                                </div>
-                            </div>
-
-                            <!-- Fuel Cost -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="fuel_cost">Fuel Cost</label>
-                                    <input type="number" step="0.01" name="fuel_cost" id="fuel_cost" class="form-control form-control-sm">
-                                </div>
-                            </div>
-
-                            <!-- Total Cost -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="total_cost">Total Cost</label>
-                                    <input type="number" step="0.01" name="total_cost" id="total_cost" class="form-control form-control-sm">
-                                </div>
-                            </div>
-
-                            <!-- Status -->
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label for="status">Status</label>
-                                    <select name="status" id="status" class="form-control form-control-sm">
-                                        <option value="pending">Pending</option>
-                                        <option value="completed">Completed</option>
-                                        <option value="cancelled">Cancelled</option>
+                                    <label for="vehicle_id">Vehicle <span class="text-danger">*</span></label>
+                                    <select name="vehicle_id" id="vehicle_id" class="form-control form-control-sm" required>
+                                        <option value="">Select Vehicle</option>
                                     </select>
+                                </div>
+                            </div>
+
+                            <!-- Trip Initiate Date -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label for="trip_initiate_date">Trip Initiate Date <span class="text-danger">*</span></label>
+                                    <input type="date" name="trip_initiate_date" id="trip_initiate_date" class="form-control form-control-sm" required>
                                 </div>
                             </div>
 
@@ -190,16 +110,32 @@
 @endsection
 
 @section('js')
+    <script src="{{ asset('/assets/js/custom/v1/custom.js') }}"></script>
     <script src="{{ asset('/assets/js/custom/v2/trip.js') }}"></script>
     <script>
         const message_edit = "Edit";
         const message_delete = "Delete";
 
-        trip_list();
+        // Initialize DataTable when document is ready
+        $(document).ready(function() {
+            console.log('Initializing trip DataTable...');
+            console.log('Base URL:', url);
+            trip_list();
+        });
 
         $(document).on('submit', '#trip_form', function (e) {
             e.preventDefault();
-            trip_save();
+            
+            // Check if trip_id has a value to determine if it's an edit or add operation
+            let trip_id = $('#trip_id').val();
+            
+            if (trip_id && trip_id !== '') {
+                // Edit operation
+                trip_update();
+            } else {
+                // Add operation
+                trip_save();
+            }
         });
 
     </script>

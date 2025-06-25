@@ -138,7 +138,7 @@
 </div>
 @endsection
 @section('js')
-<script src="{{ asset('/assets/js/custom/V2/driver.js') }}"></script>
+<script src="{{ asset('/assets/js/custom/v2/driver.js') }}"></script>
 
 <script>
     const message_edit = "{{ __('message.edit') }}";

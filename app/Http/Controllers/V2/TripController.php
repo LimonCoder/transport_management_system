@@ -14,7 +14,6 @@ class TripController extends Controller
     {
         $this->tripRepo = $tripRepo;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -25,8 +24,7 @@ class TripController extends Controller
         return view('v2.trip.index');
     }
 
-    public function listData()
-    {
+    public function listData(){
         return $this->tripRepo->listDataForDataTable();
     }
 
@@ -49,20 +47,10 @@ class TripController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'route_id'                     => 'required|integer',
-            'driver_id'                    => 'required|integer',
-            'driver_name'                  => 'required|string|max:100',
-            'vehicle_id'                   => 'required|integer',
-            'vehicle_registration_number'  => 'required|string|max:50',
-            'start_location'               => 'required|string|max:255',
-            'destination'                  => 'required|string|max:255',
-            'start_time'                   => 'required|date',
-            'end_time'                     => 'nullable|date|after:start_time',
-            'distance_km'                  => 'nullable|numeric|min:0',
-            'purpose'                      => 'nullable|string|max:100',
-            'fuel_cost'                    => 'nullable|numeric|min:0',
-            'total_cost'                   => 'nullable|numeric|min:0',
-            'status'                       => 'nullable|in:pending,completed,cancelled',
+            'route_id'           => 'required|integer|exists:routes,id',
+            'driver_id'          => 'required|integer|exists:drivers,id',
+            'vehicle_id'         => 'required|integer|exists:vehicles,id',
+            'trip_initiate_date' => 'required|date',
         ]);
 
         try {
@@ -115,20 +103,10 @@ class TripController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'route_id'                     => 'required|integer',
-            'driver_id'                    => 'required|integer',
-            'driver_name'                  => 'required|string|max:100',
-            'vehicle_id'                   => 'required|integer',
-            'vehicle_registration_number'  => 'required|string|max:50',
-            'start_location'               => 'required|string|max:255',
-            'destination'                  => 'required|string|max:255',
-            'start_time'                   => 'required|date',
-            'end_time'                     => 'nullable|date|after:start_time',
-            'distance_km'                  => 'nullable|numeric|min:0',
-            'purpose'                      => 'nullable|string|max:100',
-            'fuel_cost'                    => 'nullable|numeric|min:0',
-            'total_cost'                   => 'nullable|numeric|min:0',
-            'status'                       => 'nullable|in:pending,completed,cancelled',
+            'route_id'           => 'required|integer|exists:routes,id',
+            'driver_id'          => 'required|integer|exists:drivers,id',
+            'vehicle_id'         => 'required|integer|exists:vehicles,id',
+            'trip_initiate_date' => 'required|date',
         ]);
 
         try {
@@ -147,6 +125,7 @@ class TripController extends Controller
             ], 500);
         }
     }
+
 
     /**
      * Remove the specified resource from storage.

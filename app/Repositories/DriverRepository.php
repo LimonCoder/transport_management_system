@@ -4,51 +4,52 @@ namespace App\Repositories;
 
 use App\Models\V1\User;
 use App\Models\V2\Driver;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class DriverRepository implements DriverRepositoryInterface
 {
     public function all()
     {
-        return Driver::latest()->get();
+        return Driver::where('org_code', Auth::user()->org_code)
+            ->latest()
+            ->get();
     }
 
     public function find($id)
     {
-        return Driver::findOrFail($id);
+        return Driver::where('org_code', Auth::user()->org_code)
+            ->findOrFail($id);
     }
 
-    public function create(array $data)
-    {
-        return Driver::create($data);
-    }
-
+    /**
+     * @throws Exception
+     */
     public function createWithUser(array $data)
     {
         try {
             return DB::transaction(function () use ($data) {
                 $user = User::create([
-                    'username'    => $data['username'],
-                    'password'    => Hash::make($data['password']),
-                    'org_code'    => Auth::user()->org_code,
-                    'user_type'   => 'driver',
-                    'role_id'     => 3, // assume role_id for driver
-                    'created_by'  => Auth::id()
+                    'username' => $data['username'],
+                    'password' => Hash::make($data['password']),
+                    'org_code' => Auth::user()->org_code,
+                    'user_type' => 'driver',
+                    'role_id' => 3, // assume role_id for driver
+                    'created_by' => Auth::id()
                 ]);
 
                 return Driver::create([
-                    'user_id'         => $user->id,
-                    'org_code'        => Auth::user()->org_code,
-                    'name'            => $data['name'],
-                    'license_number'  => $data['license_number'] ?? null,
+                    'user_id' => $user->id,
+                    'org_code' => Auth::user()->org_code,
+                    'name' => $data['name'],
+                    'license_number' => $data['license_number'] ?? null,
                     'date_of_joining' => $data['date_of_joining'] ?? null,
-                    'mobile_number'   => $data['mobile_number'],
-                    'address'         => $data['address'] ?? null,
-                    'created_by'      => Auth::id()
+                    'mobile_number' => $data['mobile_number'],
+                    'address' => $data['address'] ?? null,
+                    'created_by' => Auth::id()
                 ]);
             });
         } catch (Exception $e) {
@@ -56,9 +57,10 @@ class DriverRepository implements DriverRepositoryInterface
         }
     }
 
+
     public function update($id, array $data)
     {
-        $driver = Driver::findOrFail($id);
+        $driver = $this->find($id);
         $driver->update($data);
         return $driver;
     }
@@ -85,5 +87,12 @@ class DriverRepository implements DriverRepositoryInterface
         return DataTables::of($data)
             ->addIndexColumn()
             ->make(true);
+    }
+
+    public function getActiveDrivers()
+    {
+        return Driver::where('org_code', Auth::user()->org_code)
+            ->select('id', 'name')
+            ->get();
     }
 }

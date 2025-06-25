@@ -23,9 +23,9 @@ class CreateTripsAuditLogTable extends Migration
             $table->string('driver_name', 100);
             $table->integer('vehicle_id')->unsigned();
             $table->string('vehicle_registration_number', 50);
-            $table->string('start_location', 255);
-            $table->string('destination', 255);
-            $table->dateTime('start_time');
+            $table->string('start_location', 255)->nullable();
+            $table->string('destination', 255)->nullable();
+            $table->dateTime('start_time')->nullable();
             $table->dateTime('end_time')->nullable();
             $table->decimal('distance_km', 10, 2)->nullable();
             $table->string('purpose', 100)->nullable();
