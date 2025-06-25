@@ -32,10 +32,7 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::get('/list_data', 'VehicleSetupController@list_data')->name('list_data');
         Route::post('/update', 'VehicleSetupController@update')->name('update');
         Route::post('/delete', 'VehicleSetupController@destroy')->name('delete');
-        // useless vehicle module
-        Route::get('/useless', 'VehicleSetupController@uselessVehicle')->name('useless');
-        Route::post('/uselessVehicleStore', 'VehicleSetupController@uselessVehicleStore')->name('uselessVehicle.store');
-        Route::get('/uselessVehicleList', 'VehicleSetupController@uselessVehicleList')->name('useless.list_data');
+
     });
 });
 
