@@ -26,5 +26,13 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::post('/update', 'TripController@update')->name('update');
         Route::post('/destroy', 'TripController@destroy')->name('destroy');
     });
+        Route::prefix('/vehicle')->name('vehicle.')->group(function () {
+        Route::get('/', 'VehicleSetupController@index')->name('index');
+        Route::post('/store', 'VehicleSetupController@store')->name('store');
+        Route::get('/list_data', 'VehicleSetupController@list_data')->name('list_data');
+        Route::post('/update', 'VehicleSetupController@update')->name('update');
+        Route::post('/delete', 'VehicleSetupController@destroy')->name('delete');
+
+    });
 });
 
