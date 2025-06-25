@@ -162,7 +162,7 @@
 
                 <li class="nav-item ">
 
-                    <a class="nav-link" href="{{ route('vehicle .index') }}">
+                    <a class="nav-link" href="{{ route('vehicle.index') }}">
                         <i class="fas fa-car-side"></i>
                         Vehicle 
                     </a>
