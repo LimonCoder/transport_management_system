@@ -25,6 +25,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::post('/store', 'TripController@store')->name('store');
         Route::post('/update', 'TripController@update')->name('update');
         Route::post('/destroy', 'TripController@destroy')->name('destroy');
+        Route::get('/report', 'TripController@report')->name('report');
+        Route::post('/report/print','TripController@reportPrint')->name('report.print');
     });
     Route::prefix('/vehicle')->name('vehicle.')->group(function () {
         Route::get('/', 'VehicleController@index')->name('index');

@@ -185,5 +185,37 @@ class TripRepository implements TripRepositoryInterface
         }
     }
 
+    /**
+     * Get trips for report based on filters
+     */
+    public function getTripsForReport($filters)
+    {
+        $query = Trip::query()
+            ->leftJoin('routes', 'trips.route_id', '=', 'routes.id')
+            ->leftJoin('drivers', 'trips.driver_id', '=', 'drivers.id')
+            ->leftJoin('vehicles', 'trips.vehicle_id', '=', 'vehicles.id')
+            ->where('trips.org_code', Auth::user()->org_code)
+            ->select(
+                'trips.*',
+                'routes.title as route_name',
+                'drivers.name as driver_name',
+                'vehicles.registration_number as vehicle_registration_number'
+            );
 
+        if (!empty($filters['report_type'])) {
+            if ($filters['report_type'] === 'month' && !empty($filters['month'])) {
+                $query->whereMonth('trips.trip_initiate_date', date('m', strtotime($filters['month'])))
+                      ->whereYear('trips.trip_initiate_date', date('Y', strtotime($filters['month'])));
+            } elseif ($filters['report_type'] === 'date' && !empty($filters['start_date']) && !empty($filters['end_date'])) {
+                $query->whereBetween('trips.trip_initiate_date', [$filters['start_date'], $filters['end_date']]);
+            }
+        }
+        if (!empty($filters['driver_id'])) {
+            $query->where('trips.driver_id', $filters['driver_id']);
+        }
+        if (!empty($filters['route_id'])) {
+            $query->where('trips.route_id', $filters['route_id']);
+        }
+        return $query->orderBy('trips.trip_initiate_date', 'desc')->get();
+    }
 } 

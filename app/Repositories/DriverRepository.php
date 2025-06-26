@@ -83,7 +83,11 @@ class DriverRepository implements DriverRepositoryInterface
 
     public function listDataForDataTable()
     {
-        $data = Driver::with('user')->select('drivers.*');
+        $data = Driver::with('user')
+            ->whereHas('user', function ($query) {
+                $query->where('org_code', Auth::user()->org_code);
+            })
+            ->select('drivers.*');
         return DataTables::of($data)
             ->addIndexColumn()
             ->make(true);

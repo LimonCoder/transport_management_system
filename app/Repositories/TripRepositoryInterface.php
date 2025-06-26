@@ -11,4 +11,5 @@ interface TripRepositoryInterface
     public function listDataForDataTable();
     public function createTripWithAuditLog(array $data);
     public function updateTripWithAuditLog($id, array $data);
+    public function getTripsForReport(array $data);
 } 
