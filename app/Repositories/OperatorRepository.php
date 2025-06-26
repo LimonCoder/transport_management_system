@@ -86,6 +86,7 @@ class OperatorRepository implements OperatorRepositoryInterface
             ->whereHas('user', function($query) use ($orgCode) {
                 $query->where('org_code', $orgCode);
             })
+            ->where('created_by', Auth::id())
             ->select('operators.*');
         return DataTables::of($data)
             ->addIndexColumn()

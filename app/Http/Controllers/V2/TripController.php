@@ -162,8 +162,6 @@ class TripController extends Controller
 
     public function reportPrint(Request $request)
     {
-        // Unlimited execution time
-        set_time_limit(0);
 
         // Validate input
         $validated = $request->validate([
@@ -186,14 +184,22 @@ class TripController extends Controller
         ];
 
         try {
-            // Get filtered trips (you can limit to test performance)
             $trips = $this->tripRepo->getTripsForReport($filters);
-            // $trips = $trips->take(300); // Optional: limit for testing performance
+
+            // Calculate totals
+            $total_distance_km = $trips->sum(function($trip) {
+                return (float) ($trip->distance_km ?? 0);
+            });
+            $total_cost = $trips->sum(function($trip) {
+                return (float) ($trip->total_cost ?? 0);
+            });
 
             // Load optimized view for PDF
             $pdf = PDF::loadView('v2.report.trip-report-pdf', [
                 'trips'   => $trips,
                 'filters' => $filters,
+                'total_distance_km' => $total_distance_km,
+                'total_cost' => $total_cost,
             ]);
 
             // Return as download

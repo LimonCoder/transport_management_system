@@ -1,80 +1,128 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ __('message.trip_report_title') }}</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: DejaVu Sans, sans-serif;
+            font-family: Helvetica, sans-serif;
+            /* DomPDF compatible font */
             font-size: 12px;
             line-height: 1.4;
+            color: #000;
         }
+
+        @page {
+            margin: 5px;
+            size: A4;
+        }
+
         h2 {
             text-align: center;
-            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
         }
+
         .info {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 12px;
+            font-weight: 500;
+            font-size: 13px;
         }
-        table {
-            width: 100%;
+
+        .report-table {
+            width: 98%;
+            margin: auto;
             border-collapse: collapse;
-            font-size: 11px;
         }
-        th, td {
+
+        .report-table th,
+        .report-table td {
             border: 1px solid #000;
-            padding: 5px;
-            text-align: left;
+            padding: 3px;
+            font-size: 12px;
+            text-align: center;
+            vertical-align: middle;
         }
-        thead {
-            background-color: #f0f0f0;
+
+        .report-table thead th {
+            background-color: #f2f2f2;
+        }
+
+        .footer-total {
+            font-weight: bold;
+        }
+
+        @media print {
+            body {
+                -webkit-print-color-adjust: exact;
+            }
         }
     </style>
 </head>
+
 <body>
 
     <h2>{{ __('message.trip_report_title') }}</h2>
 
     <div class="info">
+        @if($filters['route_id'])
+        <div><strong>Route:</strong> {{ $trips->first()->route_name ?? '-' }}</div>
+        @endif
+
+        @if($filters['driver_id'])
+        <div><strong>Driver:</strong> {{ $trips->first()->driver_name ?? '-' }}</div>
+        @endif
+
         @if($filters['month'])
-            <p><strong>Month:</strong> {{ $filters['month'] }}</p>
+        <div><strong>Month:</strong> {{ $filters['month'] }}</div>
         @endif
         @if($filters['start_date'] && $filters['end_date'])
-            <p><strong>Date Range:</strong> {{ $filters['start_date'] }} - {{ $filters['end_date'] }}</p>
+        <div><strong>Date Range:</strong> {{ $filters['start_date'] }} To {{ $filters['end_date'] }}</div>
         @endif
-        @if($filters['driver_id'])
-            <p><strong>Driver:</strong> {{ $trips->first()->driver_name ?? '-' }}</p>
-        @endif
-        @if($filters['route_id'])
-            <p><strong>Route:</strong> {{ $trips->first()->route_name ?? '-' }}</p>
-        @endif
+        <div><strong>Generated on:</strong> {{ now()->format('d-m-Y h:i:s A') }}</div>
     </div>
 
-    <table>
+    <table class="report-table">
         <thead>
             <tr>
-                <th>#</th>
+                <th>Sl</th>
                 <th>Trip Date</th>
                 <th>Route</th>
                 <th>Driver</th>
                 <th>Vehicle</th>
+                <th>Distance (km)</th>
+                <th>Total Cost</th>
                 <th>Status</th>
             </tr>
         </thead>
         <tbody>
             @foreach($trips as $i => $trip)
-                <tr>
-                    <td>{{ $i + 1 }}</td>
-                    <td>{{ $trip->trip_initiate_date }}</td>
-                    <td>{{ $trip->route_name }}</td>
-                    <td>{{ $trip->driver_name }}</td>
-                    <td>{{ $trip->vehicle_registration_number }}</td>
-                    <td>{{ $trip->status ?? '' }}</td>
-                </tr>
+            <tr>
+                <td>{{ $i + 1 }}</td>
+                <td>{{ \Carbon\Carbon::parse($trip->trip_initiate_date)->format('d-m-Y') }}</td>
+                <td>{{ $trip->route_name }}</td>
+                <td>{{ $trip->driver_name }}</td>
+                <td>{{ $trip->vehicle_registration_number }}</td>
+                <td>{{ $trip->distance_km ?? '-' }}</td>
+                <td>{{ number_format($trip->total_cost ?? 0, 2) }}</td>
+                <td>{{ ucfirst($trip->status ?? '-') }}</td>
+            </tr>
             @endforeach
         </tbody>
+        <tfoot>
+            <tr class="footer-total">
+                <td colspan="5" class="text-right"><strong>Total</strong></td>
+                <td><strong>{{ number_format($total_distance_km, 2) }}</strong></td>
+                <td><strong>{{ number_format($total_cost, 2) }}</strong></td>
+                <td></td>
+            </tr>
+        </tfoot>
     </table>
 
 </body>
+
 </html>
