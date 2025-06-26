@@ -17,6 +17,7 @@ class CreateOperatorsTable extends Migration
         Schema::create('operators', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unique();
+            $table->mediumInteger('org_code')->unsigned();
             $table->string('name', 200);
             $table->string('designation', 150);
             $table->date('date_of_joining')->nullable();

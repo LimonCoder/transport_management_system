@@ -40,6 +40,7 @@ class OperatorRepository implements OperatorRepositoryInterface
                 ]);
 
                 return Operator::create([
+                    'org_code'         => Auth::user()->org_code,
                     'name'             => $data['name'],
                     'designation'      => $data['designation'] ?? null,
                     'date_of_joining'  => $data['date_of_joining'] ?? null,
@@ -83,9 +84,7 @@ class OperatorRepository implements OperatorRepositoryInterface
     {
         $orgCode = Auth::user()->org_code;
         $data = Operator::with('user')
-            ->whereHas('user', function($query) use ($orgCode) {
-                $query->where('org_code', $orgCode);
-            })
+            ->where('org_code', $orgCode)
             ->where('created_by', Auth::id())
             ->select('operators.*');
         return DataTables::of($data)

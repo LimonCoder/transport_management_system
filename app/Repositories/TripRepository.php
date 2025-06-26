@@ -192,14 +192,10 @@ class TripRepository implements TripRepositoryInterface
     {
         $query = Trip::query()
             ->leftJoin('routes', 'trips.route_id', '=', 'routes.id')
-            ->leftJoin('drivers', 'trips.driver_id', '=', 'drivers.id')
-            ->leftJoin('vehicles', 'trips.vehicle_id', '=', 'vehicles.id')
             ->where('trips.org_code', Auth::user()->org_code)
             ->select(
                 'trips.*',
-                'routes.title as route_name',
-                'drivers.name as driver_name',
-                'vehicles.registration_number as vehicle_registration_number'
+                'routes.title as route_name'
             );
 
         if (!empty($filters['report_type'])) {
