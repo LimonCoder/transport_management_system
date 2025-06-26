@@ -37,4 +37,21 @@ return [
     'add_driver' => 'ড্রাইভার যোগ করুন',
     'license_number' => 'লাইসেন্স নম্বর',
     'driver_list_title' => 'ড্রাইভারের তালিকা',
+
+    //trip report
+    'report_type' => 'রিপোর্টের ধরণ',
+    'trip_report_title' => 'ট্রিপ রিপোর্ট',
+    'monthly_report' => 'মাসিক রিপোর্ট',
+    'date_to_date_report' => 'তারিখ থেকে তারিখ রিপোর্ট',
+    'select_month' => 'মাস নির্বাচন করুন',
+    'select_start_date' => 'শুরুর তারিখ নির্বাচন করুন',
+    'select_end_date' => 'শেষ তারিখ নির্বাচন করুন',
+    'filter_driver' => 'ড্রাইভার অনুযায়ী',
+    'filter_route' => 'রুট অনুযায়ী',
+    'select_driver' => 'ড্রাইভার নির্বাচন করুন',
+    'select_route' => 'রুট নির্বাচন করুন',
+    'search' => 'অনুসন্ধান',
+    'reset' => 'রিসেট',
+    'no_trip_data' => 'কোনো ট্রিপ পাওয়া যায়নি',
+    'print' => 'প্রিন্ট',
 ];

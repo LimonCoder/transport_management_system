@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories;
 
 use App\Models\V1\User;
@@ -78,11 +79,17 @@ class OperatorRepository implements OperatorRepositoryInterface
         });
     }
 
-    public function listDataForDataTable(){
-        $data = Operator::with('user')->select('operators.*');
+    public function listDataForDataTable()
+    {
+        $orgCode = Auth::user()->org_code;
+        $data = Operator::with('user')
+            ->whereHas('user', function($query) use ($orgCode) {
+                $query->where('org_code', $orgCode);
+            })
+            ->where('created_by', Auth::id())
+            ->select('operators.*');
         return DataTables::of($data)
             ->addIndexColumn()
             ->make(true);
     }
-
 }

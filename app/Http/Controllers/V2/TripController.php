@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V2;
 use App\Http\Controllers\Controller;
 use App\Repositories\TripRepositoryInterface;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class TripController extends Controller
 {
@@ -151,4 +152,68 @@ class TripController extends Controller
             ], 500);
         }
     }
+
+    public function report()
+    {
+        $drivers = app(\App\Repositories\DriverRepository::class)->all();
+        $routes = app(\App\Repositories\RouteRepository::class)->all();
+        return view('v2.report.trip-repport', compact('drivers', 'routes'));
+    }
+
+    public function reportPrint(Request $request)
+    {
+
+        // Validate input
+        $validated = $request->validate([
+            'report_type' => 'required|in:month,date',
+            'month'       => 'required_if:report_type,month',
+            'start_date'  => 'required_if:report_type,date|date',
+            'end_date'    => 'required_if:report_type,date|date|after_or_equal:start_date',
+            'driver_id'   => 'nullable|integer|exists:drivers,id',
+            'route_id'    => 'nullable|integer|exists:routes,id',
+        ]);
+
+        // Collect filters
+        $filters = [
+            'report_type' => $request->report_type,
+            'month'       => $request->month,
+            'start_date'  => $request->start_date,
+            'end_date'    => $request->end_date,
+            'driver_id'   => $request->driver_id,
+            'route_id'    => $request->route_id,
+        ];
+
+        try {
+            $trips = $this->tripRepo->getTripsForReport($filters);
+
+            // Calculate totals
+            $total_distance_km = $trips->sum(function($trip) {
+                return (float) ($trip->distance_km ?? 0);
+            });
+            $total_cost = $trips->sum(function($trip) {
+                return (float) ($trip->total_cost ?? 0);
+            });
+
+            // Load optimized view for PDF
+            $pdf = PDF::loadView('v2.report.trip-report-pdf', [
+                'trips'   => $trips,
+                'filters' => $filters,
+                'total_distance_km' => $total_distance_km,
+                'total_cost' => $total_cost,
+            ]);
+
+            // Return as download
+            // return $pdf->download('trip-report.pdf');
+
+            // OR for testing in browser:
+            return $pdf->stream('trip-report.pdf');
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'  => 'error',
+                'message' => $e->getMessage(),
+            ], 500);
+        }
+    }
+
 } 

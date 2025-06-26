@@ -37,4 +37,20 @@ return [
     'license_number' => 'License Number',
     'driver_list_title' => 'Driver List',
 
+    //trip report
+    'report_type' => 'Report Type',
+    'trip_report_title' => 'Trip Report',
+    'monthly_report' => 'Monthly Report',
+    'date_to_date_report' => 'Date to Date Report',
+    'select_month' => 'Select Month',
+    'select_start_date' => 'Select Start Date',
+    'select_end_date' => 'Select End Date',
+    'filter_driver' => 'Filter Driver',
+    'filter_route' => 'Filter Route',
+    'select_driver' => 'Select Driver',
+    'select_route' => 'Select Route',
+    'search' => 'Search',
+    'reset' => 'Reset',
+    'no_trip_data' => 'No Trip Data',
+    'print' => 'Print',
 ];

@@ -76,6 +76,16 @@
                     </a>
 
                 </li>
+
+                <li class="nav-item ">
+
+                    <a class="nav-link" href="{{ route('trip.report') }}">
+                        <i class="fas fa-car-side"></i>
+                        Trip Report
+                    </a>
+
+                </li>
+            
             </ul>
 
         </div>
