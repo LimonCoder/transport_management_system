@@ -216,4 +216,63 @@ class TripController extends Controller
         }
     }
 
+    /**
+     * Display trip details management page
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function details()
+    {
+        return view('v2.trip.details');
+    }
+
+    /**
+     * Get trip details list for DataTable
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detailsListData()
+    {
+        return $this->tripRepo->detailsListDataForDataTable();
+    }
+
+    /**
+     * Update trip details
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function updateDetails(Request $request)
+    {
+        $validated = $request->validate([
+            'trip_id'         => 'required|integer|exists:trips,id',
+            'start_location'  => 'nullable|string|max:255',
+            'destination'     => 'nullable|string|max:255',
+            'start_time'      => 'nullable|date',
+            'end_time'        => 'nullable|date|after_or_equal:start_time',
+            'distance_km'     => 'nullable|numeric|min:0',
+            'purpose'         => 'nullable|string|max:100',
+            'fuel_cost'       => 'nullable|numeric|min:0',
+            'total_cost'      => 'nullable|numeric|min:0',
+            'status'          => 'required|in:initiate,completed,reject',
+            'reject_reason'   => 'required_if:status,reject|nullable|string',
+        ]);
+
+        try {
+            $this->tripRepo->updateTripDetails($validated['trip_id'], $validated);
+
+            return response()->json([
+                'status' => 'success',
+                'title' => 'Updated!',
+                'message' => 'Trip details updated successfully.'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Update Failed!',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
 } 

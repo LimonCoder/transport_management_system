@@ -27,6 +27,11 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::post('/destroy', 'TripController@destroy')->name('destroy');
         Route::get('/report', 'TripController@report')->name('report');
         Route::post('/report/print','TripController@reportPrint')->name('report.print');
+        
+        // Trip Details Management
+        Route::get('/details', 'TripController@details')->name('details');
+        Route::get('/details/list_data', 'TripController@detailsListData')->name('details.list_data');
+        Route::post('/details/update', 'TripController@updateDetails')->name('details.update');
     });
     Route::prefix('/vehicle')->name('vehicle.')->group(function () {
         Route::get('/', 'VehicleController@index')->name('index');
@@ -38,6 +43,11 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
 
     // Routes API endpoints
     Route::prefix('/routes')->name('routes.')->group(function () {
+        Route::get('/', 'RouteController@index')->name('index');
+        Route::post('/store', 'RouteController@store')->name('store');
+        Route::get('/list_data', 'RouteController@listData')->name('list_data');
+        Route::post('/update', 'RouteController@update')->name('update');
+        Route::post('/delete', 'RouteController@destroy')->name('delete');
         Route::get('/list', 'RouteController@list')->name('list');
         Route::get('/{id}', 'RouteController@show')->name('show');
     });

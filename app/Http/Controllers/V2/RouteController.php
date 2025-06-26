@@ -5,8 +5,13 @@ namespace App\Http\Controllers\V2;
 use App\Http\Controllers\Controller;
 use App\Libraries\ApiResponse;
 use App\Services\RouteService;
+use App\Http\Requests\V2\Route\StoreRouteRequest;
+use App\Http\Requests\V2\Route\UpdateRouteRequest;
+use App\Repositories\RouteRepositoryInterface;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
 
 class RouteController extends Controller
 {
@@ -15,6 +20,33 @@ class RouteController extends Controller
     public function __construct(RouteService $routeService)
     {
         $this->routeService = $routeService;
+    }
+
+    /**
+     * Display the route management page
+     *
+     * @return View
+     */
+    public function index()
+    {
+        return view('v2.route.index');
+    }
+
+    /**
+     * Get routes data for DataTable
+     *
+     * @return JsonResponse
+     */
+    public function listData(): JsonResponse
+    {
+        try {
+            return $this->routeService->listDataForDataTable();
+        } catch (\Throwable $throwable) {
+            Log::error("RouteController@listData", ['error' => $throwable]);
+            return response()->json([
+                'error' => 'An unexpected error occurred while retrieving routes data'
+            ], 500);
+        }
     }
 
     /**
@@ -39,6 +71,26 @@ class RouteController extends Controller
     }
 
     /**
+     * Store a newly created route in storage.
+     *
+     * @param StoreRouteRequest $request
+     * @return JsonResponse
+     */
+    public function store(StoreRouteRequest $request): JsonResponse
+    {
+        try {
+            $validated = $request->validated();
+            
+            $result = $this->routeService->createRoute($validated);
+            
+            return ApiResponse::customResponse($result);
+        } catch (\Throwable $throwable) {
+            Log::error("RouteController@store", ['error' => $throwable]);
+            return ApiResponse::errorResponse('An unexpected error occurred while creating route', 500);
+        }
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -53,6 +105,70 @@ class RouteController extends Controller
         } catch (\Throwable $throwable) {
             Log::error("RouteController@show", ['error' => $throwable]);
             return ApiResponse::errorResponse('An unexpected error occurred while retrieving route', 500);
+        }
+    }
+
+    /**
+     * Update the specified route in storage.
+     *
+     * @param UpdateRouteRequest $request
+     * @return JsonResponse
+     */
+    public function update(UpdateRouteRequest $request): JsonResponse
+    {
+        try {
+            $validated = $request->validated();
+            $routeId = $validated['route_id'];
+            
+            // Remove route_id from validated data as it's not needed for the update
+            unset($validated['route_id']);
+            
+            $result = $this->routeService->updateRoute($routeId, $validated);
+            
+            if (!$result->isSuccess) {
+                return ApiResponse::customResponse($result);
+            }
+
+            return ApiResponse::customResponse($result);
+        } catch (\Throwable $throwable) {
+            Log::error("RouteController@update", ['error' => $throwable]);
+            return ApiResponse::errorResponse('An unexpected error occurred while updating route', 500);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function destroy(Request $request): JsonResponse
+    {
+        try {
+            $routeId = $request->route_id;
+            
+            if (!$routeId) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'Error',
+                    'message' => 'Route ID is required'
+                ], 400);
+            }
+
+            $this->routeRepo->delete($routeId);
+
+            return response()->json([
+                'status' => 'success',
+                'title' => 'Deleted!',
+                'message' => 'Route deleted successfully.'
+            ]);
+        } catch (\Exception $e) {
+            Log::error("RouteController@destroy", ['error' => $e]);
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Delete Failed!',
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 } 

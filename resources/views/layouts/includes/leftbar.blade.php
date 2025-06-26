@@ -70,6 +70,15 @@
 
                 <li class="nav-item ">
 
+                    <a class="nav-link" href="{{ route('trip.details') }}">
+                        <i class="fas fa-clipboard-list"></i>
+                        Trip Details
+                    </a>
+
+                </li>
+
+                <li class="nav-item ">
+
                     <a class="nav-link" href="{{ route('vehicle.index') }}">
                         <i class="fas fa-car-side"></i>
                         Vehicle 
@@ -82,6 +91,15 @@
                     <a class="nav-link" href="{{ route('trip.report') }}">
                         <i class="fas fa-car-side"></i>
                         Trip Report
+                    </a>
+
+                </li>
+
+                <li class="nav-item ">
+
+                    <a class="nav-link" href="{{ route('routes.index') }}">
+                        <i class="fas fa-car-side"></i>
+                        Route
                     </a>
 
                 </li>
