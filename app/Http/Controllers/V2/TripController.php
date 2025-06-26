@@ -162,20 +162,29 @@ class TripController extends Controller
 
     public function reportPrint(Request $request)
     {
+        $reportType = $request->input('report_type');
 
-        // Validate input
-        $validated = $request->validate([
+        // Base validation rules
+        $rules = [
             'report_type' => 'required|in:month,date',
-            'month'       => 'required_if:report_type,month',
-            'start_date'  => 'required_if:report_type,date|date',
-            'end_date'    => 'required_if:report_type,date|date|after_or_equal:start_date',
             'driver_id'   => 'nullable|integer|exists:drivers,id',
             'route_id'    => 'nullable|integer|exists:routes,id',
-        ]);
+        ];
+
+        // Add conditional validation
+        if ($reportType === 'month') {
+            $rules['month'] = 'required';
+        } elseif ($reportType === 'date') {
+            $rules['start_date'] = 'required|date';
+            $rules['end_date'] = 'required|date|after_or_equal:start_date';
+        }
+
+        // Validate the request
+        $validated = $request->validate($rules);
 
         // Collect filters
         $filters = [
-            'report_type' => $request->report_type,
+            'report_type' => $reportType,
             'month'       => $request->month,
             'start_date'  => $request->start_date,
             'end_date'    => $request->end_date,
@@ -186,31 +195,33 @@ class TripController extends Controller
         try {
             $trips = $this->tripRepo->getTripsForReport($filters);
 
-            // Calculate totals
-            $total_distance_km = $trips->sum(function($trip) {
-                return (float) ($trip->distance_km ?? 0);
-            });
-            $total_cost = $trips->sum(function($trip) {
-                return (float) ($trip->total_cost ?? 0);
-            });
+            if (!empty($filters['route_id'])) {
+                $route = app(\App\Repositories\RouteRepository::class)->find($filters['route_id']);
+                $routeName = $route->title; // Or use your actual route name column
+            }
 
-            // Load optimized view for PDF
+            if (!empty($filters['driver_id'])) {
+                $driver = app(\App\Repositories\DriverRepository::class)->find($filters['driver_id']);
+                $driverName = $driver->name; // Or whatever column holds the name
+            }
+
+            $total_distance_km = $trips->sum(fn($trip) => (float) ($trip->distance_km ?? 0));
+            $total_cost = $trips->sum(fn($trip) => (float) ($trip->total_cost ?? 0));
+
             $pdf = PDF::loadView('v2.report.trip-report-pdf', [
-                'trips'   => $trips,
+                'trips' => $trips,
                 'filters' => $filters,
                 'total_distance_km' => $total_distance_km,
                 'total_cost' => $total_cost,
+                'routeName' => $routeName ?? '',
+                'driverName' => $driverName ?? ''
             ]);
 
-            // Return as download
-            // return $pdf->download('trip-report.pdf');
-
-            // OR for testing in browser:
             return $pdf->stream('trip-report.pdf');
 
         } catch (\Exception $e) {
             return response()->json([
-                'status'  => 'error',
+                'status' => 'error',
                 'message' => $e->getMessage(),
             ], 500);
         }

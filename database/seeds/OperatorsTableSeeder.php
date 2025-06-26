@@ -16,6 +16,7 @@ class OperatorsTableSeeder extends Seeder
             [
                 'id' => 1,
                 'user_id' => 2, // operator1
+                'org_code' => '1001',
                 'name' => 'John Smith',
                 'designation' => 'Senior Transport Operator',
                 'date_of_joining' => '2023-01-15',
@@ -29,6 +30,7 @@ class OperatorsTableSeeder extends Seeder
             [
                 'id' => 2,
                 'user_id' => 3, // operator2
+                'org_code' => '1001',
                 'name' => 'Sarah Johnson',
                 'designation' => 'Transport Operator',
                 'date_of_joining' => '2023-03-20',
@@ -42,6 +44,7 @@ class OperatorsTableSeeder extends Seeder
              [
                 'id' => 3,
                 'user_id' => 4, // operator1
+                'org_code' => '1002',
                 'name' => 'Sarah Johnson',
                 'designation' => 'Transport Operator',
                 'date_of_joining' => '2023-03-20',

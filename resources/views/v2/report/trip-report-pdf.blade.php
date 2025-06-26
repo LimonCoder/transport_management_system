@@ -70,16 +70,23 @@
 
     <div class="info">
         @if($filters['route_id'])
-        <div><strong>Route:</strong> {{ $trips->first()->route_name ?? '-' }}</div>
+        <div><strong>Route:</strong> {{ $routeName ?? '-' }}</div>
         @endif
 
         @if($filters['driver_id'])
-        <div><strong>Driver:</strong> {{ $trips->first()->driver_name ?? '-' }}</div>
+        <div><strong>Driver:</strong> {{ $driverName ?? '-' }}</div>
         @endif
 
         @if($filters['month'])
-        <div><strong>Month:</strong> {{ $filters['month'] }}</div>
+        @php
+        $timezone = 'Asia/Dhaka'; // You can also use config('app.timezone')
+        $monthFormatted = \Carbon\Carbon::createFromFormat('Y-m', $filters['month'], $timezone)
+        ->timezone($timezone)
+        ->format('F - Y');
+        @endphp
+        <div><strong>Month:</strong> {{ $monthFormatted }}</div>
         @endif
+
         @if($filters['start_date'] && $filters['end_date'])
         <div><strong>Date Range:</strong> {{ $filters['start_date'] }} To {{ $filters['end_date'] }}</div>
         @endif
