@@ -1,46 +1,83 @@
 version: "3.8"
 
 services:
-  transport-management-mysql:
-    restart: unless-stopped
-    image: mysql:8.0.30
-    environment:
-      MYSQL_ROOT_PASSWORD: hL5TO9FfCuzmTMD
-      MYSQL_DATABASE: transport_management_db
-      MYSQL_USER: transport_management_user
-      MYSQL_PASSWORD: OMF7JObOnSeFLwz
-    volumes:
-      - transport_management_mysql_data:/var/lib/mysql
-    networks:
-      - transport_management_network
-
-  transport-management-system:
-    restart: unless-stopped
+  # PHP Application Server with Apache
+  app:
     build:
       context: .
-      dockerfile: Dockerfile-php
-    depends_on:
-      - transport-management-mysql
-    networks:
-      - transport_management_network
-    ports:
-      - 8004:8000
-
-  transport-management-phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: transport-management-mysql
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
+      dockerfile: Dockerfile
+    container_name: transport-app
     restart: unless-stopped
     ports:
-      - "7000:80"
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html:cached
     networks:
-      - transport_management_network
+      - transport-network
+    depends_on:
+      - database
+      - redis
+    environment:
+      - DB_HOST=database
+      - DB_PORT=3306
+      - DB_DATABASE=transport_ms
+      - DB_USERNAME=transport_user
+      - DB_PASSWORD=transport_pass
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+
+  # MySQL Database Server
+  database:
+    image: mysql:8.0
+    container_name: transport-database
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=transport_ms
+      - MYSQL_USER=transport_user
+      - MYSQL_PASSWORD=transport_pass
+      - MYSQL_ROOT_PASSWORD=root_password
+    networks:
+      - transport-network
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Redis Cache Server
+  redis:
+    image: redis:7-alpine
+    container_name: transport-redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - transport-network
+    command: redis-server --appendonly yes
+
+  # PHPMyAdmin (Optional - for database management)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: transport-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      - PMA_HOST=database
+      - PMA_PORT=3306
+      - PMA_USER=root
+      - PMA_PASSWORD=root_password
+    networks:
+      - transport-network
+    depends_on:
+      - database
 
 networks:
-  transport_management_network:
+  transport-network:
     driver: bridge
 
 volumes:
-  transport_management_mysql_data:
+  mysql-data:
+  redis-data:
