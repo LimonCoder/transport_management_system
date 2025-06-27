@@ -1,11 +1,17 @@
 <?php
 
 return [
+    'admin' => 'অ্যাডমিন প্যানেল',
     'dashboard' => 'ড্যাশবোর্ড',
     'profile' => 'প্রোফাইল',
     'logout' => 'লগআউট',
     'operator-list' => "অপারেটর তালিকা",
     'change-password' => "পাসওয়ার্ড পরির্বতন",
+    'trip' => "ট্রিপ",
+    'trip-list' => "ট্রিপের তালিকা",
+    'vehicle' => "যানবাহন",
+    'trip-report' => "ট্রিপ রিপোর্ট",
+    'route' => "রুট",
 
     //operator
     'no' => 'নং',
@@ -37,6 +43,27 @@ return [
     'add_driver' => 'ড্রাইভার যোগ করুন',
     'license_number' => 'লাইসেন্স নম্বর',
     'driver_list_title' => 'ড্রাইভারের তালিকা',
+
+    //Vehicle
+    'vehicle-list' => 'যানবাহনের তালিকা',
+    'image' => 'ছবি',
+    'org-code' => 'প্রতিষ্ঠানের কোড',
+    'registration' => 'রেজিস্ট্রেশন নম্বর',
+    'model' => 'মডেল',
+    'capacity' => 'ধারণক্ষমতা',
+    'fuel' => 'জ্বালানি',
+    'status' => 'অবস্থা',
+    'vehicle-new' => 'নতুন যানবাহন',
+    'fuel-type' => 'জ্বালানির ধরণ নির্বাচন করুন',
+    'status-select' => 'স্ট্যাটাস নির্বাচন করুন',
+    'petrol' => 'পেট্রোল',
+    'diesel' => 'ডিজেল',
+    'cng' => 'সিএনজি',
+    'electric' => 'ইলেকট্রিক',
+    'active' => 'সক্রিয়',
+    'inactive' => 'নিষ্ক্রিয়',
+    'maintenance' => 'রক্ষণাবেক্ষণাধীন',
+
 
     //trip report
     'report_type' => 'রিপোর্টের ধরণ',

@@ -7,11 +7,11 @@
     <div class="container-fluid">
         <div class="row mb-3 align-items-center">
             <div class="col-md-6">
-                <h4 class="mb-0">যানবাহনের তালিকা</h4>
+                <h4 class="mb-0">@lang('message.vehicle-list')</h4>
             </div>
             <div class="col-md-6 text-md-right mt-2 mt-md-0">
                 <button onclick="add_vehicle()" class="btn btn-primary">
-                    <i class="fas fa-plus"></i> নতুন যানবাহন
+                    <i class="fas fa-plus"></i> @lang('message.add')
                 </button>
             </div>
         </div>
@@ -21,15 +21,15 @@
                     <table class="table table-hover table-bordered vehicle_table" id="vehicle_table">
                         <thead class="thead-light">
                             <tr>
-                                <th>No</th>
-                                <th>Image</th>
-                                <th>Org Code</th>
-                                <th>Registration</th>
-                                <th>Model</th>
-                                <th>Capacity</th>
-                                <th>Fuel</th>
-                                <th>Status</th>
-                                <th>Action</th>
+                                <th>@lang('message.no')</th>
+                                <th>@lang('message.image')</th>
+                                <th>@lang('message.org-code')</th>
+                                <th>@lang('message.registration')</th>
+                                <th>@lang('message.model')</th>
+                                <th>@lang('message.capacity')</th>
+                                <th>@lang('message.fuel')</th>
+                                <th>@lang('message.status')</th>
+                                <th>@lang('message.action')</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -45,7 +45,7 @@
                 <div class="modal-content">
                     <form id="vehicle_form" enctype="multipart/form-data" onsubmit="vehicle_save(); return false;">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="vehicleModalLabel">নতুন যানবাহন</h5>
+                            <h5 class="modal-title" id="vehicleModalLabel">@lang('message.vehicle-new')</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -53,39 +53,39 @@
                         <div class="modal-body">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="registration_number">Registration Number <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control" name="registration_number" id="registration_number" required placeholder="গাড়ি রেজিস্ট্রেশন নং প্রদান করুন">
+                                    <label for="registration_number">@lang('message.registration') <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="registration_number" id="registration_number" required placeholder="Enter Vehicle Registation Number">
                                     <div class="invalid-feedback" id="vehicle_reg_no_error"></div>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="model">Model</label>
+                                    <label for="model">@lang('message.model')</label>
                                     <input type="text" class="form-control" name="model" id="model" placeholder="Model">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="capacity">Capacity</label>
+                                    <label for="capacity">@lang('message.capacity')</label>
                                     <input type="text" class="form-control" name="capacity" id="capacity" placeholder="Capacity">
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="fuel_type_id">Fuel Type <span class="text-danger">*</span></label>
+                                    <label for="fuel_type_id">@lang('message.fuel')<span class="text-danger">*</span></label>
                                     <select class="form-control" name="fuel_type_id" id="fuel_type_id" required>
-                                        <option value="">Select Fuel Type</option>
-                                        <option value="1">Petrol</option>
-                                        <option value="2">Diesel</option>
-                                        <option value="3">CNG</option>
-                                        <option value="4">Electric</option>
+                                        <option value="">@lang('message.fuel-type')</option>
+                                        <option value="1">@lang('message.petrol')</option>
+                                        <option value="2">@lang('message.diesel')</option>
+                                        <option value="3">@lang('message.cng')</option>
+                                        <option value="4">@lang('message.electric')</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label for="status1">Status <span class="text-danger">*</span></label>
+                                    <label for="status1">@lang('message.status') <span class="text-danger">*</span></label>
                                     <select class="form-control" name="status" id="status1" required>
-                                        <option value="">Select Status</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Inactive">Inactive</option>
-                                        <option value="Maintenance">Maintenance</option>
+                                        <option value="">@lang('message.status-select')</option>
+                                        <option value="Active">@lang('message.active')</option>
+                                        <option value="Inactive">@lang('message.inactive')</option>
+                                        <option value="Maintenance">@lang('message.maintenance')</option>
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
-                                    <label>ছবি</label>
+                                    <label>@lang('message.image')</label>
                                     <div class="custom-file">
                                         <input type="file" class="custom-file-input" id="picture" name="images" accept="image/*" onchange="inputImageShow(this)" data-pi_no="1">
                                         <label class="custom-file-label" for="picture">Choose file</label>

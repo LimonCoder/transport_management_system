@@ -70,7 +70,7 @@
         </li>
 
         <li>
-            <h4 class="page-title-main" style="text-align: center">{{ auth()->user()->username}}</h4>
+        <h4 class="page-title-main" style="text-align: center">@lang('message.' . auth()->user()->username)</h4>
 
         </li>
 

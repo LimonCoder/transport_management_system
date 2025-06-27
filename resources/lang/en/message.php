@@ -1,11 +1,17 @@
 <?php
 
 return [
+    'admin' => 'Admin',
     'dashboard' => 'Dashboard',
     'profile' => 'Profile',
     'logout' => 'Logout',
     'operator-list' => 'Operator List',
     'change-password' => 'Change Password',
+    'trip' => "Trip",
+    'trip-list' => "Trip List",
+    'vehicle' => "Vehicle",
+    'trip-report' => "Trip Report",
+    'route' => "Route",
     // operator
     'no' => 'No',
     'title' => 'Operator',
@@ -36,6 +42,27 @@ return [
     'add_driver' => 'Add Driver',
     'license_number' => 'License Number',
     'driver_list_title' => 'Driver List',
+
+    //vehicle
+    'vehicle-list' => 'Vehicle List',
+    'image' => 'Image',
+    'org-code' => 'Org Code',
+    'registration' => 'Registration',
+    'model' => 'Model',
+    'capacity' => 'Capacity',
+    'fuel' => 'Fuel',
+    'status' => 'Status',
+    'vehicle-new' => 'New Vehicle',
+    'fuel-type' => 'Select Fuel Type',
+    'status-select' => 'Select Status',
+    'petrol' => 'Petrol',
+    'diesel' => 'Diesel',
+    'cng' => 'CNG',
+    'electric' => 'Electric',
+    'active' => 'Active',
+    'inactive' => 'Inactive',
+    'maintenance' => 'Maintenance',
+
 
     //trip report
     'report_type' => 'Report Type',
