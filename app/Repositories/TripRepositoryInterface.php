@@ -14,4 +14,5 @@ interface TripRepositoryInterface
     public function getTripsForReport(array $data);
     public function detailsListDataForDataTable();
     public function updateTripDetails($id, array $data);
+    public function checkTripExistsByDate($date, $excludeId = null);
 } 

@@ -319,4 +319,19 @@ class TripRepository implements TripRepositoryInterface
             throw new \Exception('Trip details update failed: ' . $e->getMessage());
         }
     }
+
+    /**
+     * Check if a trip already exists on the specified date
+     */
+    public function checkTripExistsByDate($date, $excludeId = null)
+    {
+        $query = Trip::where('org_code', Auth::user()->org_code)
+                    ->where('trip_initiate_date', $date);
+        
+        if ($excludeId) {
+            $query->where('id', '!=', $excludeId);
+        }
+        
+        return $query->exists();
+    }
 } 
