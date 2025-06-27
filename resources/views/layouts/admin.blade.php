@@ -26,6 +26,9 @@
 
     <!-- Sweet Alert-->
     <link href="{{ asset('/assets/libs/sweetalert2/sweetalert2.min.css')  }}" rel="stylesheet" type="text/css" />
+    
+    <!-- Toastr CSS -->
+    <link href="{{ asset('/assets/libs/toastr/toastr.min.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- Bootstrap Css -->
     <link href="{{ asset('/assets/css/bootstrap.min.css') }}" id="bootstrap-stylesheet" rel="stylesheet" type="text/css" />
@@ -112,6 +115,9 @@
 <!-- Sweet Alerts js -->
 <script src="{{ asset('/assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
 
+<!-- Toastr js -->
+<script src="{{ asset('/assets/libs/toastr/toastr.min.js') }}"></script>
+
 
 
 
@@ -139,6 +145,8 @@
 <!-- Custom js -->
 <script src="{{ asset('/assets/js/custom/v1/custom.js') }}"></script>
 
+<!-- Notifications Script (loaded after jQuery) -->
+<script src="{{ asset('/assets/js/custom/notifications.js') }}"></script>
 
 @yield('js')
 

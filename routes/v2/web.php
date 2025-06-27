@@ -67,5 +67,25 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::get('/list', 'VehicleController@list')->name('list');
         Route::get('/{id}', 'VehicleController@show')->name('show');
     });
+
+    // Organization endpoints
+    Route::prefix('/organizations')->name('organizations.')->group(function () {
+        Route::get('/', 'OrganizationController@index')->name('index');
+        Route::post('/store', 'OrganizationController@store')->name('store');
+        Route::get('/list_data', 'OrganizationController@listData')->name('list_data');
+        Route::post('/update', 'OrganizationController@update')->name('update');
+        Route::post('/delete', 'OrganizationController@destroy')->name('delete');
+        Route::get('/list', 'OrganizationController@list')->name('list');
+        Route::get('/{id}', 'OrganizationController@show')->name('show');
+        Route::post('/impersonate', 'OrganizationController@impersonate')->name('impersonate');
+        Route::post('/switch-back', 'OrganizationController@switchBack')->name('switch-back');
+    });
+
+    // Notification endpoints  
+    Route::get('/notifications', 'NotificationController@index')->name('notifications.index');
+    Route::get('/notifications/unread-count', 'NotificationController@getUnreadCount')->name('notifications.unread-count');
+    Route::get('/notifications/stream', 'NotificationController@stream')->name('notifications.stream');
+    Route::post('/notifications/mark-read', 'NotificationController@markAsRead')->name('notifications.mark-read');
+    Route::post('/notifications/mark-all-read', 'NotificationController@markAllAsRead')->name('notifications.mark-all-read');
 });
 
