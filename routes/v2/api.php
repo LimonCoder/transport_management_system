@@ -14,9 +14,14 @@ use \Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'v2', 'namespace' => 'V2'], function () {
+Route::group([
+    'prefix' => 'v2',
+    'namespace' => 'V2',
+    'middleware' => ['throttle:200,1'] // allow 200 requests per minute
+], function () {
     Route::get('/routes', 'HomeController@getRoutes');
     Route::get('/trips', 'HomeController@getTrips');
     Route::get('/organizations', 'HomeController@getOrganizations');
 });
+
 
