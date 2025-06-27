@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\V2\HomeController;
+
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
 
 Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
     Route::prefix('/operator')->name('operator.')->group(function () {

@@ -35,8 +35,8 @@ function vehicle_list() {
                 name: 'id',
                 render: function (data, type, row, meta) {
                         return `
-                            <a href='javascript:void(0)' class='btn btn-warning btn-xs  m-1' onclick='vehicle_edit(${meta.row})'><i class='fa fa-edit'></i> এডিট</a>
-                            <a href='javascript:void(0)' class='btn btn-danger btn-xs' onclick='vehicle_delete(${meta.row})'><i class='fa fa-trash'></i> ডিলিট</a>
+                            <a href='javascript:void(0)' class='btn btn-warning btn-xs  m-1' onclick='vehicle_edit(${meta.row})'><i class='fa fa-edit'></i> Edit</a>
+                            <a href='javascript:void(0)' class='btn btn-danger btn-xs' onclick='vehicle_delete(${meta.row})'><i class='fa fa-trash'></i> Delete</a>
                         `;
                 }
             },
@@ -273,82 +273,3 @@ function inputImageShow(object) {
 }
 
 // Unuseless vehicle //
-
-function add_useless_vehicle(vehicle_id) {
-
-
-    $("#useless_vehicle_form")[0].reset()
-    // parsly init
-    parslyInit("useless_vehicle_form");
-    $("#vehicle_id").val(vehicle_id);
-    $("#useless_vehicle_modal").modal('toggle');
-}
-
-function unuseless_vehicle_list() {
-    $("#unuseless_vehicle").DataTable({
-        scrollCollapse: true,
-        autoWidth: false,
-        responsive: true,
-        processing: true,
-        serverSide: true,
-        ajax: {
-            url: url + "/vehicle/uselessVehicleList"
-        },
-        columns: [
-            {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-            {
-
-                data: 'image', name: 'image', render: function (data, type, row, meta) {
-                    let picture = row.images.includes("##") ? row.images.split("##")[0] : row.images;
-                    htmlmap = '<img src="' + url + '/storage/app/public/vehicles/' + picture + '" id="image_preview"' +
-                        ' width="80" ' +
-                        '                                             height="80" >';
-                    return htmlmap;
-                }
-            },
-            {data: 'vehicle_reg_no', name: 'vehicle_reg_no'},
-            {data: 'body_type', name: 'body_type'},
-            {data: 'chassis_no', name: 'chassis_no'},
-            {data: 'engine_no', name: 'engine_no'},
-            {data: 'useless_date', name: 'useless_date'},
-
-        ]
-
-    })
-}
-
-function useless_vehicle_save() {
-    let vehicle_data = new FormData($("#useless_vehicle_form")[0]);
-
-    // check validation //
-    if (parslyValid("useless_vehicle_form")) {
-        $.ajax({
-            url: url + '/vehicle/uselessVehicleStore',
-            type: 'POST',
-            data: vehicle_data,
-            processData: false,
-            contentType: false,
-            dataType: 'JSON',
-            success: function (response) {
-
-
-                if (response.status == "success") {
-                    $("#useless_vehicle_modal").modal('toggle');
-                }
-
-                Swal.fire(
-                    {
-                        title: response.title,
-                        text: response.message,
-                        type: response.status,
-                        buttons: false
-                    }
-                )
-
-                $("#vehicle_table").DataTable().draw(true);
-
-
-            }
-        })
-    }
-}

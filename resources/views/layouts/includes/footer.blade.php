@@ -2,7 +2,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                2021 - @php echo date('Y') @endphp &copy; Develop By <a href="https://innovationit.com.bd/" target="_blank">Innovation IT</a>
             </div>
             <div class="col-md-6">
                 <div class="text-md-right footer-links d-none d-sm-block">
