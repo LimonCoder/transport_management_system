@@ -80,4 +80,17 @@ return [
     'reset' => 'Reset',
     'no_trip_data' => 'No Trip Data',
     'print' => 'Print',
+
+    // Notifications
+    'notifications' => 'Notifications',
+    'clear_all' => 'Clear All',
+    'no_notifications' => 'No notifications',
+    'view_all' => 'View All',
+    'notification' => 'Notification',
+    'new_trip_assigned' => 'New Trip Assigned',
+    'trip_assigned_message' => 'New trip assigned to you from :route_name',
+    'trip_completed' => 'Trip Completed',
+    'trip_completed_message' => 'Your trip to :route_name has been completed',
+    'trip_cancelled' => 'Trip Cancelled',
+    'trip_cancelled_message' => 'Your trip to :route_name has been cancelled',
 ];

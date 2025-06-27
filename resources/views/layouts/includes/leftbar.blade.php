@@ -20,6 +20,15 @@
 
                     <li class="nav-item ">
 
+                        <a class="nav-link" href="{{ route('organizations.index')  }}">
+                            <i class="fas fa-building"></i>
+                            Organizations
+                        </a>
+
+                    </li>
+
+                    <li class="nav-item ">
+
                         <a class="nav-link" href="{{ route('organization.index')  }}">
                             <i class="fas fa-user-plus"></i>
                             @lang('message.operator-list')
