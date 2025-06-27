@@ -4,16 +4,20 @@ namespace App\Http\Controllers\V2;
 
 use App\Http\Controllers\Controller;
 use App\Repositories\TripRepositoryInterface;
+use App\Services\NotificationService;
+use App\Events\TripCreated;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade as PDF;
 
 class TripController extends Controller
 {
     protected $tripRepo;
+    protected $notificationService;
 
-    public function __construct(TripRepositoryInterface $tripRepo)
+    public function __construct(TripRepositoryInterface $tripRepo, NotificationService $notificationService)
     {
         $this->tripRepo = $tripRepo;
+        $this->notificationService = $notificationService;
     }
     /**
      * Display a listing of the resource.
@@ -55,7 +59,22 @@ class TripController extends Controller
         ]);
 
         try {
-            $this->tripRepo->createTripWithAuditLog($validated);
+            // Check if a trip already exists on the specified date
+            if ($this->tripRepo->checkTripExistsByDate($validated['trip_initiate_date'])) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'Trip Already Exists',
+                    'message' => 'A trip has already been initiated on ' . $validated['trip_initiate_date'] . '. Please choose a different date.'
+                ], 422);
+            }
+
+            $trip = $this->tripRepo->createTripWithAuditLog($validated);
+
+            // Send notification to driver
+            $this->sendTripNotification($trip);
+
+            // Fire event for real-time notification
+            event(new TripCreated($trip));
 
             return response()->json([
                 'status' => 'success',
@@ -111,6 +130,15 @@ class TripController extends Controller
         ]);
 
         try {
+            // Check if a trip already exists on the specified date (excluding current trip)
+            if ($this->tripRepo->checkTripExistsByDate($validated['trip_initiate_date'], $request->trip_id)) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'Trip Already Exists',
+                    'message' => 'Another trip has already been initiated on ' . $validated['trip_initiate_date'] . '. Please choose a different date.'
+                ], 422);
+            }
+
             $this->tripRepo->updateTripWithAuditLog($request->trip_id, $validated);
 
             return response()->json([
@@ -283,6 +311,28 @@ class TripController extends Controller
                 'title' => 'Update Failed!',
                 'message' => $e->getMessage()
             ], 500);
+        }
+    }
+
+    /**
+     * Send notification to driver when trip is created
+     */
+    private function sendTripNotification($trip)
+    {
+        try {
+            $notificationData = [
+                'driver_id' => $trip->driver_id,
+                'trip_id' => $trip->id,
+                'route_name' => $trip->route_name,
+                'vehicle_registration' => $trip->vehicle_registration_number,
+                'trip_date' => $trip->trip_initiate_date,
+                'org_code' => $trip->org_code
+            ];
+
+            $this->notificationService->createTripNotification($notificationData);
+        } catch (\Exception $e) {
+            // Log error but don't fail the trip creation
+            \Log::error('Failed to send trip notification: ' . $e->getMessage());
         }
     }
 

@@ -116,4 +116,16 @@ return [
     'fuel-cost' => 'জ্বালানির খরচ',
     'total-cost' => 'মোট খরচ',
 
+    // Notifications
+    'notifications' => 'বিজ্ঞপ্তি',
+    'clear_all' => 'সব মুছুন',
+    'no_notifications' => 'কোনো বিজ্ঞপ্তি নেই',
+    'view_all' => 'সব দেখুন',
+    'notification' => 'বিজ্ঞপ্তি',
+    'new_trip_assigned' => 'নতুন ট্রিপ বরাদ্দ',
+    'trip_assigned_message' => ':route_name থেকে আপনার জন্য নতুন ট্রিপ বরাদ্দ করা হয়েছে',
+    'trip_completed' => 'ট্রিপ সম্পন্ন',
+    'trip_completed_message' => ':route_name এ আপনার ট্রিপ সম্পন্ন হয়েছে',
+    'trip_cancelled' => 'ট্রিপ বাতিল',
+    'trip_cancelled_message' => ':route_name এ আপনার ট্রিপ বাতিল করা হয়েছে',
 ];
