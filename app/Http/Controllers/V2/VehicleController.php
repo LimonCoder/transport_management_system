@@ -10,6 +10,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Auth;
 
 
 class VehicleController extends Controller
@@ -29,7 +30,12 @@ class VehicleController extends Controller
     // Data for DataTables
     public function list_data()
     {
-        $vehicles = VehicleSetup::whereNull('deleted_at')->get();
+        $orgCode = Auth::user()->org_code;
+        $vehicles = VehicleSetup::leftJoin('fuel_type', 'vehicles.fuel_type_id', '=', 'fuel_type.id')
+            ->select('vehicles.*', 'fuel_type.name as fuel_type_name')
+            ->where('vehicles.org_code', $orgCode)
+            ->whereNull('vehicles.deleted_at')
+            ->get();
         return DataTables::of($vehicles)
             ->addIndexColumn()
             ->make(true);
