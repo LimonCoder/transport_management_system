@@ -18,4 +18,38 @@ class HomeController extends Controller
         $orgs = DB::table('organizations')->first();
         return view('welcome', compact('routes', 'trips', 'orgs'));
     }
+
+    public function getRoutes()
+    {
+        $routes = Route::all();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'data get successfully',
+            'data'    => $routes,
+        ]);
+    }
+
+    public function getTrips()
+    {
+        $today = Carbon::now('Asia/Dhaka')->toDateString();
+        $trips = Trip::whereDate('trip_initiate_date', $today)->get();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'data get successfully',
+            'data'    => $trips,
+        ]);
+    }
+
+    public function getOrganizations()
+    {
+        $org = DB::table('organizations')->first();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'data get successfully',
+            'data'    => $org,
+        ]);
+    }
 }
