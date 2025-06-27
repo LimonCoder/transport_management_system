@@ -16,6 +16,7 @@ class Trip extends Model
 
     protected $fillable = [
         'org_code',
+        'route_name',
         'route_id',
         'driver_id',
         'driver_name',

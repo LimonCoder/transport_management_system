@@ -17,6 +17,7 @@ class TripsTableSeeder extends Seeder
             [
                 'org_code' => 1001,
                 'route_id' => 1,
+                'route_name' => "Route A",
                 'driver_id' => 1,
                 'driver_name' => 'Ahmed Hassan',
                 'vehicle_id' => 1,
@@ -41,6 +42,7 @@ class TripsTableSeeder extends Seeder
             [
                 'org_code' => 1001,
                 'route_id' => 1,
+                'route_name' => 'Route A',
                 'driver_id' => 1,
                 'driver_name' => 'Ahmed Hassan',
                 'vehicle_id' => 1,
@@ -65,6 +67,7 @@ class TripsTableSeeder extends Seeder
             [
                 'org_code' => 1002,
                 'route_id' => 1,
+                'route_name' => 'Route A',
                 'driver_id' => 1,
                 'driver_name' => 'Ahmed Hassan',
                 'vehicle_id' => 1,
@@ -89,6 +92,7 @@ class TripsTableSeeder extends Seeder
             [
                 'org_code' => 1001,
                 'route_id' => 1,
+                'route_name' => 'Route A',
                 'driver_id' => 1,
                 'driver_name' => 'Ahmed Hassan',
                 'vehicle_id' => 1,

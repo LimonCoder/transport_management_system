@@ -76,7 +76,8 @@ class DriverController extends Controller
             return response()->json([
                 'status' => 'error',
                 'title' => 'Error',
-                'message' => $e->getMessage(),
+                'message' => 'Something went wrong',
+                'error' => $e->getMessage()
             ]);
         }
     }

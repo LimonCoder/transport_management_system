@@ -34,6 +34,16 @@ class TripRepository implements TripRepositoryInterface
                 $data['created_by'] = Auth::user()->id;
 
                 // Fetch driver name from drivers table
+                $route = DB::table('routes')
+                    ->where('id', $data['route_id'])
+                    ->where('org_code', Auth::user()->org_code)
+                    ->first();
+                if (!$route) {
+                    throw new \Exception('Driver not found');
+                }
+                $data['route_name'] = $route->title;
+
+                // Fetch driver name from drivers table
                 $driver = DB::table('drivers')
                     ->where('id', $data['driver_id'])
                     ->where('org_code', Auth::user()->org_code)
@@ -89,6 +99,19 @@ class TripRepository implements TripRepositoryInterface
                 
                 // Add updated_by
                 $data['updated_by'] = Auth::user()->id;
+
+                // Fetch driver name from drivers table if driver_id is being updated
+                if (isset($data['route_id'])) {
+                    $route = DB::table('routes')
+                        ->where('id', $data['route_id'])
+                        ->where('org_code', $trip->org_code)
+                        ->first();
+                    
+                    if (!$route) {
+                        throw new \Exception('Driver not found');
+                    }
+                    $data['route_name'] = $route->title;
+                }
                 
                 // Fetch driver name from drivers table if driver_id is being updated
                 if (isset($data['driver_id'])) {
@@ -149,15 +172,9 @@ class TripRepository implements TripRepositoryInterface
         try {
             Log::info('TripRepository@listDataForDataTable called');
             
-            $data = Trip::leftJoin('routes', 'trips.route_id', '=', 'routes.id')
-                ->leftJoin('drivers', 'trips.driver_id', '=', 'drivers.id')
-                ->leftJoin('vehicles', 'trips.vehicle_id', '=', 'vehicles.id')
-                ->where('trips.org_code', Auth::user()->org_code)
+            $data = Trip::where('trips.org_code', Auth::user()->org_code)
                 ->select(
-                    'trips.*',
-                    'routes.title as route_name',
-                    'drivers.name as driver_name',
-                    'vehicles.registration_number as vehicle_registration_number'
+                    'trips.*'
                 );
 
             return DataTables::of($data)
@@ -190,12 +207,9 @@ class TripRepository implements TripRepositoryInterface
      */
     public function getTripsForReport($filters)
     {
-        $query = Trip::query()
-            ->leftJoin('routes', 'trips.route_id', '=', 'routes.id')
-            ->where('trips.org_code', Auth::user()->org_code)
+        $query = Trip::where('trips.org_code', Auth::user()->org_code)
             ->select(
-                'trips.*',
-                'routes.title as route_name'
+                'trips.*'
             );
 
         if (!empty($filters['report_type'])) {
@@ -223,15 +237,9 @@ class TripRepository implements TripRepositoryInterface
         try {
             Log::info('TripRepository@detailsListDataForDataTable called');
             
-            $data = Trip::leftJoin('routes', 'trips.route_id', '=', 'routes.id')
-                ->leftJoin('drivers', 'trips.driver_id', '=', 'drivers.id')
-                ->leftJoin('vehicles', 'trips.vehicle_id', '=', 'vehicles.id')
-                ->where('trips.org_code', Auth::user()->org_code)
+            $data = Trip::where('trips.org_code', Auth::user()->org_code)
                 ->select(
                     'trips.*',
-                    'routes.title as route_name',
-                    'drivers.name as driver_name',
-                    'vehicles.registration_number as vehicle_registration_number'
                 );
 
             return DataTables::of($data)
@@ -267,10 +275,10 @@ class TripRepository implements TripRepositoryInterface
                     return $row->distance_km ? number_format($row->distance_km, 2) . ' km' : '';
                 })
                 ->editColumn('fuel_cost', function ($row) {
-                    return $row->fuel_cost ? '$' . number_format($row->fuel_cost, 2) : '';
+                    return $row->fuel_cost ? number_format($row->fuel_cost, 2) . ' BDT' : '';
                 })
                 ->editColumn('total_cost', function ($row) {
-                    return $row->total_cost ? '$' . number_format($row->total_cost, 2) : '';
+                    return $row->total_cost ? number_format($row->total_cost, 2) . ' BDT' : '';
                 })
                 ->rawColumns(['status'])
                 ->make(true);

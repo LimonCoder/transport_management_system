@@ -18,6 +18,7 @@ class CreateTripsTable extends Migration
             $table->increments('id');
             $table->mediumInteger('org_code')->unsigned();
             $table->integer('route_id')->unsigned();
+            $table->string('route_name', 100);
             $table->integer('driver_id')->unsigned();
             $table->string('driver_name', 100);
             $table->integer('vehicle_id')->unsigned();

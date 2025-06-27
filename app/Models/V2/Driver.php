@@ -17,12 +17,13 @@ class Driver extends Model
 
     protected $guarded = ["id", "created_at", "updated_at"];
 
-    protected $fillable = [
-        'org_code',
-        'name',
-        'mobile_no',
-        'image'
-    ];
+    // protected $fillable = [
+    //     'user_id',
+    //     'org_code',
+    //     'name',
+    //     'mobile_no',
+    //     'image'
+    // ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
