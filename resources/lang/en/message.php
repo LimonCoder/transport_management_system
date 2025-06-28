@@ -130,4 +130,12 @@ return [
     'trip_completed_message' => 'Your trip to :route_name has been completed',
     'trip_cancelled' => 'Trip Cancelled',
     'trip_cancelled_message' => 'Your trip to :route_name has been cancelled',
+
+    // Organization 
+    'organisation' => 'Organizations',
+    'organisation-list' => 'Organization List',
+    'add-org' => 'Add Organization',
+    'switch-account' => 'Return to Main Account',
+    'type' => 'Type',
+    'operator' => 'Operator',
 ];

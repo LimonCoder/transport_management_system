@@ -128,4 +128,13 @@ return [
     'trip_completed_message' => ':route_name এ আপনার ট্রিপ সম্পন্ন হয়েছে',
     'trip_cancelled' => 'ট্রিপ বাতিল',
     'trip_cancelled_message' => ':route_name এ আপনার ট্রিপ বাতিল করা হয়েছে',
+
+    // Organization 
+    'organization' => 'প্রতিষ্ঠান',
+    'organization-list' => 'প্রতিষ্ঠানের তালিকা',
+    'add-org' => 'প্রতিষ্ঠান যোগ করুন',
+    'switch-account' => 'মূল অ্যাকাউন্টে ফিরে যান',
+    'type' => 'ধরণ',
+    'operator' => 'অপারেটর',
+
 ];
