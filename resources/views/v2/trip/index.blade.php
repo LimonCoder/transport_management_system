@@ -10,9 +10,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="float-left">Trip List</h4>
+                            <h4 class="float-left">@lang('message.trip-list')</h4>
                             <a href="javascript:void(0)" onclick="add_trip()" class="btn btn-primary btn-xs float-right">
-                                <i class="fas fa-plus"></i> Add Trip
+                                <i class="fas fa-plus"></i> @lang('message.add')
                             </a>
                         </div>
 
@@ -21,13 +21,13 @@
                                 <table class="table table-bordered" id="trip_table">
                                     <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Route Name</th>
-                                        <th>Driver Name</th>
-                                        <th>Vehicle Number</th>
-                                        <th>Trip Initiate Date</th>
-                                        <th>Is Locked</th>
-                                        <th>Action</th>
+                                        <th>@lang('message.no')</th>
+                                        <th>@lang('message.route-name')</th>
+                                        <th>@lang('message.driver-name')</th>
+                                        <th>@lang('message.vehicle-number')</th>
+                                        <th>@lang('message.trip-initiate-date')</th>
+                                        <th>@lang('message.is_locked')</th>
+                                        <th>@lang('message.action')</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -49,7 +49,7 @@
                 <div class="modal-content">
                     <form id="trip_form" method="post" enctype="multipart/form-data">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="tripModalLabel">Add Trip</h5>
+                            <h5 class="modal-title" id="tripModalLabel">@lang('message.add-trip')</h5>
                             <button type="button" class="close" data-dismiss="modal">
                                 <span>&times;</span>
                             </button>
@@ -59,7 +59,7 @@
                             <!-- Route ID -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="route_id">Route <span class="text-danger">*</span></label>
+                                    <label for="route_id">@lang('message.route') <span class="text-danger">*</span></label>
                                     <select name="route_id" id="route_id" class="form-control form-control-sm" required>
                                         <option value="">Select Route</option>
                                     </select>
@@ -69,9 +69,9 @@
                             <!-- Driver ID -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="driver_id">Driver <span class="text-danger">*</span></label>
+                                    <label for="driver_id">@lang('message.driver') <span class="text-danger">*</span></label>
                                     <select name="driver_id" id="driver_id" class="form-control form-control-sm" required>
-                                        <option value="">Select Driver</option>
+                                        <option value="">@lang('message.select-driver')</option>
                                     </select>
                                 </div>
                             </div>
@@ -79,9 +79,9 @@
                             <!-- Vehicle ID -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="vehicle_id">Vehicle <span class="text-danger">*</span></label>
+                                    <label for="vehicle_id">@lang('message.vehicle') <span class="text-danger">*</span></label>
                                     <select name="vehicle_id" id="vehicle_id" class="form-control form-control-sm" required>
-                                        <option value="">Select Vehicle</option>
+                                        <option value="">@lang('message.select-vehicle')</option>
                                     </select>
                                 </div>
                             </div>
@@ -89,7 +89,7 @@
                             <!-- Trip Initiate Date -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="trip_initiate_date">Trip Initiate Date <span class="text-danger">*</span></label>
+                                    <label for="trip_initiate_date">@lang('message.trip-initiate-date') <span class="text-danger">*</span></label>
                                     <input type="date" name="trip_initiate_date" id="trip_initiate_date" class="form-control form-control-sm" required>
                                 </div>
                             </div>
@@ -98,8 +98,8 @@
 
                         <div class="modal-footer">
                             <input type="hidden" name="trip_id" id="trip_id">
-                            <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success btn-xs">Save</button>
+                            <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">@lang('message.close')</button>
+                            <button type="submit" class="btn btn-success btn-xs">@lang('message.save')</button>
                         </div>
                     </form>
                 </div>
