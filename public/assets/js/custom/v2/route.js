@@ -54,14 +54,7 @@ function route_list() {
             },
             { 
                 data: 'status', 
-                name: 'status',
-                render: function(data, type, row) {
-                    if (data === 'active') {
-                        return '<span class="badge badge-success">Active</span>';
-                    } else {
-                        return '<span class="badge badge-danger">Inactive</span>';
-                    }
-                }
+                name: 'status'
             },
             { 
                 data: 'created_at', 

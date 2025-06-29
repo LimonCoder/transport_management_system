@@ -149,4 +149,5 @@ return [
     'started_trips' => 'Started Trips',
     'completed_trips' => 'Completed Trips',
     'cancelled_trips' => 'Cancelled Trips',
+    'settings' => 'Settings',
 ];

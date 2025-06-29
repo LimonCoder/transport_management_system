@@ -15,7 +15,7 @@ function driver_list() {
             { data: 'name', name: 'name' },
             { data: 'license_number', name: 'license_number' },
             { data: 'mobile_number', name: 'mobile_number' },
-            { data: 'user.username', name: 'user.username' },
+            { data: 'username', name: 'username' },
             {
                 data: 'id',
                 name: 'id',
@@ -95,7 +95,7 @@ function driver_edit(row_index) {
 
     $("#driver_id").val(driver_data.id);
     $("#name").val(driver_data.name);
-    $("#username").val(driver_data.user.username); // If user relation exists
+    $("#username").val(driver_data.username); // If user relation exists
     $("#mobile_number").val(driver_data.mobile_number);
     $("#license_number").val(driver_data.license_number);
     $("#date_of_joining").val(driver_data.date_of_joining);
@@ -168,6 +168,18 @@ function driver_delete(row_index) {
                 success: function (response) {
                     Swal.fire(response.title, response.message, response.status);
                     $("#driver_table").DataTable().draw(true);
+                },
+                error: function (xhr, status, error) {
+                    let responseJSON = xhr.responseJSON;
+                    let title = "Error";
+                    let message = "Something went wrong!";
+                    let icon = "error";
+
+                    if (responseJSON && responseJSON.message) {
+                        message = responseJSON.message;
+                    }
+
+                    Swal.fire(title, message, icon);
                 }
             });
         }

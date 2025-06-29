@@ -23,7 +23,6 @@ class DriverRepository implements DriverRepositoryInterface
     public function find($id)
     {
         return Driver::where('org_code', Auth::user()->org_code)
-            ->where('created_by', Auth::id())
             ->findOrFail($id);
     }
 
@@ -86,12 +85,9 @@ class DriverRepository implements DriverRepositoryInterface
 
     public function listDataForDataTable()
     {
-        $data = Driver::with('user')
-            ->whereHas('user', function ($query) {
-                $query->where('org_code', Auth::user()->org_code);
-            })
-            ->where('created_by', Auth::id())
-            ->select('drivers.*');
+        $data = Driver::join('users','users.id','=','drivers.user_id')
+            ->where('drivers.org_code', Auth::user()->org_code)
+            ->select('drivers.*','users.username');
         return DataTables::of($data)
             ->addIndexColumn()
             ->make(true);
@@ -100,7 +96,6 @@ class DriverRepository implements DriverRepositoryInterface
     public function getActiveDrivers()
     {
         return Driver::where('org_code', Auth::user()->org_code)
-        ->where('created_by', Auth::id())
             ->select('id', 'name')
             ->get();
     }

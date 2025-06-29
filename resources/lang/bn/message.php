@@ -147,4 +147,5 @@ return [
     'started_trips' => 'শুরু করা ট্রিপ',
     'completed_trips' => 'সম্পন্ন ট্রিপ',
     'cancelled_trips' => 'বাতিল ট্রিপ',
+    'settings' => 'সেটিং',
 ];

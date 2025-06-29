@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Repositories\DriverRepositoryInterface;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 use Exception;
 
 class DriverController extends Controller
@@ -104,6 +105,18 @@ class DriverController extends Controller
         }
 
         try {
+            // Check ownership for operators
+            $driver = $this->driverRepo->find($request->driver_id);
+            $user = Auth::user();
+            
+            if ($user->user_type === 'operator' && $driver->created_by !== $user->id) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'Unauthorized',
+                    'message' => 'আপনি শুধুমাত্র আপনার তৈরি করা ড্রাইভার সম্পাদনা করতে পারেন।',
+                ], 403);
+            }
+
             $this->driverRepo->update($request->driver_id, $request->all());
 
             return response()->json([
@@ -126,6 +139,18 @@ class DriverController extends Controller
     public function destroy(Request $request): JsonResponse
     {
         try {
+            // Check ownership for operators
+            $driver = $this->driverRepo->find($request->driver_id);
+            $user = Auth::user();
+
+            if ($user->user_type === 'operator' && $driver->created_by !== $user->id) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'Unauthorized',
+                    'message' => 'আপনি শুধুমাত্র আপনার তৈরি করা ড্রাইভার মুছতে পারবেন।',
+                ], 403);
+            }
+
             $this->driverRepo->delete($request->driver_id);
             return response()->json([
                 'status' => 'success',
@@ -136,7 +161,7 @@ class DriverController extends Controller
             return response()->json([
                 'status' => 'error',
                 'title' => 'Error',
-                'message' => $e->getMessage(),
+                'message' => 'Something went wrong',
             ]);
         }
     }

@@ -30,12 +30,13 @@ class VehicleController extends Controller
     // Data for DataTables
     public function list_data()
     {
-        $orgCode = Auth::user()->org_code;
-        $vehicles = VehicleSetup::leftJoin('fuel_type', 'vehicles.fuel_type_id', '=', 'fuel_type.id')
+        $user = Auth::user();
+        $query = VehicleSetup::leftJoin('fuel_type', 'vehicles.fuel_type_id', '=', 'fuel_type.id')
             ->select('vehicles.*', 'fuel_type.name as fuel_type_name')
-            ->where('vehicles.org_code', $orgCode)
-            ->whereNull('vehicles.deleted_at')
-            ->get();
+            ->where('vehicles.org_code', $user->org_code)
+            ->whereNull('vehicles.deleted_at');
+
+        $vehicles = $query->get();
         return DataTables::of($vehicles)
             ->addIndexColumn()
             ->make(true);
@@ -117,6 +118,16 @@ class VehicleController extends Controller
         ]);
 
         $vehicle = VehicleSetup::findOrFail($request->id);
+        
+        // Check ownership for operators
+        $user = Auth::user();
+        if ($user->user_type === 'operator' && $vehicle->created_by !== $user->id) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Unauthorized',
+                'message' => 'আপনি শুধুমাত্র নিজের তৈরি করা গাড়ির তথ্য পরিবর্তন করতে পারেন।'
+            ], 403);
+        }
 
         // Handle image upload
         if ($request->hasFile('images')) {
@@ -160,7 +171,27 @@ class VehicleController extends Controller
     // Delete a vehicle
     public function destroy(Request $request)
     {
-        $isDelete = VehicleSetup::find($request->row_id)->delete();
+        $vehicle = VehicleSetup::find($request->row_id);
+        
+        if (!$vehicle) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Error',
+                'message' => 'Vehicle not found'
+            ], 404);
+        }
+        
+        // Check ownership for operators
+        $user = Auth::user();
+        if ($user->user_type === 'operator' && $vehicle->created_by !== $user->id) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Unauthorized',
+                'message' => 'আপনি শুধুমাত্র নিজের তৈরি করা গাড়ি মুছতে পারেন।'
+            ], 403);
+        }
+        
+        $isDelete = $vehicle->delete();
         return response()->json([
             'status' => $isDelete ? 'success' : 'error',
             'title' => $isDelete ? 'Success' : 'error',
