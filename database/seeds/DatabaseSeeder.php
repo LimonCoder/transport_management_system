@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use seeds\DesignationTableSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,11 +17,13 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             OperatorsTableSeeder::class,
             DriversTableSeeder::class,
+            DesignationTableSeeder::class,
             OrganizationsTableSeeder::class,
             FuelTypeTableSeeder::class,
             VehiclesTableSeeder::class,
             TripsTableSeeder::class,
-            RoutesTableSeeder::class
+            RoutesTableSeeder::class,
+            NoticeSeeder::class
         ]);
     }
 }

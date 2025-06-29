@@ -18,10 +18,11 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->tinyInteger('role_id')->unsigned();
             $table->mediumInteger('org_code')->unsigned()->nullable(); 
-            $table->string('username', 15)->unique();
+            $table->string('username', 50)->unique();
             $table->string('password', 255);
             $table->enum('user_type', ['system-admin', 'operator', 'driver']);
             $table->integer('version')->default(1);
+            $table->tinyInteger('is_special_user')->default(0);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by')->nullable();
             $table->timestamps();

@@ -11,8 +11,10 @@
 |
 */
 
+use Illuminate\Support\Facades\App;
 use \Illuminate\Support\Facades\Route;
 use \Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 Route::get('/', function () {
     return view('welcome');
@@ -22,7 +24,15 @@ Auth::routes(['register' => false]);
 
 
 // all admin route
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'auth', 'namespace' => 'V1'], function () {
+
+    Route::get('lang/{locale}', function ($locale) {
+        if (!in_array($locale, ['en', 'bn'])) {
+            abort(400);
+        }
+        session(['locale' => $locale]);
+        return redirect()->back();
+    });
 
     Route::get('/home', 'HomeController@index')->name('home');
 
@@ -45,14 +55,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/delete', 'OrganizationInfoController@destroy')->name('delete');
     });
 
-    // designation
-    Route::prefix('/designation')->name('designation.')->group(function () {
-        Route::get('/', 'DesignationController@index')->name('index');
-        Route::post('/store', 'DesignationController@store')->name('store');
-        Route::get('/list_data', 'DesignationController@list_data')->name('list_data');
-        Route::post('/delete', 'DesignationController@destroy')->name('delete');
-    });
-
     // employee
     Route::prefix('/employee')->name('employee.')->group(function () {
         Route::get('/', 'EmployeeController@index')->name('index');
@@ -72,15 +74,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     // vehicle
     Route::prefix('/vehicle')->name('vehicle.')->group(function () {
-        Route::get('/', 'VehicleSetupController@index')->name('index');
-        Route::post('/store', 'VehicleSetupController@store')->name('store');
-        Route::get('/list_data', 'VehicleSetupController@list_data')->name('list_data');
-        Route::post('/update', 'VehicleSetupController@update')->name('update');
-        Route::post('/delete', 'VehicleSetupController@destroy')->name('delete');
+        Route::get('/', 'VehicleController@index')->name('index');
+        Route::post('/store', 'VehicleController@store')->name('store');
+        Route::get('/list_data', 'VehicleController@list_data')->name('list_data');
+        Route::post('/update', 'VehicleController@update')->name('update');
+        Route::post('/delete', 'VehicleController@destroy')->name('delete');
         // useless vehicle module
-        Route::get('/useless', 'VehicleSetupController@uselessVehicle')->name('useless');
-        Route::post('/uselessVehicleStore', 'VehicleSetupController@uselessVehicleStore')->name('uselessVehicle.store');
-        Route::get('/uselessVehicleList', 'VehicleSetupController@uselessVehicleList')->name('useless.list_data');
+        Route::get('/useless', 'VehicleController@uselessVehicle')->name('useless');
+        Route::post('/uselessVehicleStore', 'VehicleController@uselessVehicleStore')->name('uselessVehicle.store');
+        Route::get('/uselessVehicleList', 'VehicleController@uselessVehicleList')->name('useless.list_data');
     });
 
 
@@ -123,6 +125,9 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::group(['middleware' => 'auth', 'namespace' => 'v2'], function () {
+
+});
 
 //========================== reports================================
 //    employee_reports
