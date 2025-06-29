@@ -25,7 +25,7 @@ class HomeController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'data get successfully',
+            'message' => __('message.data_get_successfully'),
             'data'    => $routes,
         ]);
     }
@@ -37,7 +37,7 @@ class HomeController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'data get successfully',
+            'message' => __('message.data_get_successfully'),
             'data'    => $trips,
         ]);
     }
@@ -48,7 +48,7 @@ class HomeController extends Controller
 
         return response()->json([
             'status'  => 'success',
-            'message' => 'data get successfully',
+            'message' => __('message.data_get_successfully'),
             'data'    => $org,
         ]);
     }
