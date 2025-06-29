@@ -150,4 +150,94 @@ return [
     'completed_trips' => 'Completed Trips',
     'cancelled_trips' => 'Cancelled Trips',
     'settings' => 'Settings',
+
+    // Common Messages
+    'success' => 'Success',
+    'error' => 'Error',
+    'failed' => 'Failed',
+    'updated' => 'Updated',
+    'deleted' => 'Deleted',
+    'created' => 'Created',
+    'unauthorized' => 'Unauthorized',
+    'validation_error' => 'Validation Error',
+    'something_went_wrong' => 'Something went wrong',
+    'data_get_successfully' => 'Data retrieved successfully',
+    'please_fix_errors' => 'Please fix the errors below.',
+    'operation_successful' => 'Operation completed successfully',
+    'operation_failed' => 'Operation failed',
+    'not_found' => 'Not found',
+    'required_field' => 'This field is required',
+    'id_required' => 'ID is required',
+
+    // Designation Controller Messages
+    'designation_required' => 'Please provide designation',
+    'designation_add_success' => 'Designation added successfully',
+    'designation_update_success' => 'Designation updated successfully',
+    'designation_delete_success' => 'Designation deleted successfully',
+    'designation_in_use' => 'This designation is already being used',
+
+    // Driver Controller Messages
+    'driver_error_retrieving' => 'An unexpected error occurred while retrieving drivers',
+    'driver_created_successfully' => 'Driver created successfully!',
+    'driver_updated_successfully' => 'Driver updated successfully!',
+    'driver_deleted_successfully' => 'Driver deleted successfully!',
+    'driver_edit_own_only' => 'You can only edit drivers you created.',
+    'driver_delete_own_only' => 'You can only delete drivers you created.',
+
+    // Notification Controller Messages
+    'notification_marked_read' => 'Notification marked as read',
+    'all_notifications_marked_read' => 'All notifications marked as read',
+    'only_drivers_access_stream' => 'Only drivers can access notification stream',
+    'driver_not_found' => 'Driver not found',
+
+    // Operator Controller Messages
+    'operator_no_permission' => 'You do not have permission to perform this operation.',
+    'operator_created_successfully' => 'Operator created successfully.',
+    'operator_updated_successfully' => 'Operator updated successfully.',
+    'operator_deleted_successfully' => 'Operator deleted successfully.',
+    'operator_update_failed' => 'Update Failed!',
+    'operator_delete_failed' => 'Delete Failed!',
+
+    // Organization Controller Messages
+    'organization_error_retrieving_data' => 'An unexpected error occurred while retrieving organizations data',
+    'organization_error_retrieving' => 'An unexpected error occurred while retrieving organizations',
+    'organization_error_creating' => 'An unexpected error occurred while creating organization',
+    'organization_error_retrieving_single' => 'An unexpected error occurred while retrieving organization',
+    'organization_error_updating' => 'An unexpected error occurred while updating organization',
+    'organization_id_required' => 'Organization ID is required',
+    'organization_delete_failed' => 'Delete Failed!',
+    'user_id_required' => 'User ID is required',
+    'user_not_found' => 'User not found',
+
+    // Route Controller Messages
+    'route_error_retrieving_data' => 'An unexpected error occurred while retrieving routes data',
+    'route_error_retrieving' => 'An unexpected error occurred while retrieving routes',
+    'route_error_creating' => 'An unexpected error occurred while creating route',
+    'route_error_retrieving_single' => 'An unexpected error occurred while retrieving route',
+    'route_error_updating' => 'An unexpected error occurred while updating route',
+    'route_id_required' => 'Route ID is required',
+    'route_deleted_successfully' => 'Route deleted successfully.',
+    'route_delete_failed' => 'Delete Failed!',
+
+    // Trip Controller Messages
+    'trip_already_exists' => 'Trip Already Exists',
+    'trip_already_initiated_on' => 'A trip has already been initiated on',
+    'trip_choose_different_date' => 'Please choose a different date.',
+    'trip_created_successfully' => 'Trip created successfully.',
+    'trip_updated_successfully' => 'Trip updated successfully.',
+    'trip_deleted_successfully' => 'Trip deleted successfully.',
+    'trip_another_initiated_on' => 'Another trip has already been initiated on',
+    'trip_edit_own_only' => 'You can only modify trips you created.',
+    'trip_delete_own_only' => 'You can only delete trips you created.',
+    'trip_update_failed' => 'Update Failed!',
+
+    // Vehicle Controller Messages
+    'vehicle_error_retrieving' => 'An unexpected error occurred while retrieving vehicles',
+    'vehicle_added_successfully' => 'Vehicle Added Successfully!',
+    'vehicle_updated_successfully' => 'Vehicle updated successfully!',
+    'vehicle_deleted_successfully' => 'Vehicle Deleted successfully!',
+    'vehicle_delete_failed' => 'Vehicle Deleted Field',
+    'vehicle_not_found' => 'Vehicle not found',
+    'vehicle_edit_own_only' => 'You can only modify vehicles you created.',
+    'vehicle_delete_own_only' => 'You can only delete vehicles you created.',
 ];
