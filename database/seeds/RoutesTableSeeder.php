@@ -13,7 +13,7 @@ class RoutesTableSeeder extends Seeder
     {
         DB::table('routes')->insert([
             [
-                'org_code' => 101,
+                'org_code' => 1001,
                 'title' => 'Route A',
                 'details' => 'Details of Route A',
                 'status' => 'active',
@@ -22,7 +22,7 @@ class RoutesTableSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'org_code' => 102,
+                'org_code' => 1001,
                 'title' => 'Route B',
                 'details' => 'Details of Route B',
                 'status' => 'inactive',

@@ -9,9 +9,12 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5|^8.0",
+        "barryvdh/laravel-cors": "^0.11.0",
+        "barryvdh/laravel-dompdf": "^0.8.6",
         "fideloper/proxy": "^4.4",
         "laravel/framework": "^6.20",
         "laravel/tinker": "^2.5",
+        "pusher/pusher-php-server": "^7.2",
         "rakibhstu/number-to-bangla": "^1.5",
         "yajra/laravel-datatables-oracle": "~9.0"
     },

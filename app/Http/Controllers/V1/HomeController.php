@@ -43,6 +43,6 @@ class HomeController extends Controller
 
 
 
-        return view('deshboard', $data);
+        return view('v1.deshboard', $data);
     }
 }

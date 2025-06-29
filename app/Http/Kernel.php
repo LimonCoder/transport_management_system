@@ -37,12 +37,14 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\SetLocale::class,
         ],
 
         'api' => [
-            'throttle:60,1',
+            // 'throttle:60,1',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            \App\Http\Middleware\ApiAuth::class
+            // \App\Http\Middleware\ApiAuth::class
+            \Barryvdh\Cors\HandleCors::class,
         ],
     ];
 
@@ -64,7 +66,9 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'Api.Admin.Auth' => \App\Http\Middleware\ApiAdminAuth::class
+        'Api.Admin.Auth' => \App\Http\Middleware\ApiAdminAuth::class,
+        'role' => \App\Http\Middleware\CheckUserRole::class,
+        'ownership' => \App\Http\Middleware\CheckOwnership::class
     ];
 
     /**
