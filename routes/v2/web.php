@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\V2\HomeController;
+use App\Http\Controllers\V2\DashboardController;
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [DashboardController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
+    Route::get('/home', 'DashboardController@index')->name('dashboard');
     Route::prefix('/operator')->name('operator.')->group(function () {
         Route::get('/', 'OperatorController@index')->name('index');
         Route::get('/list_data', 'OperatorController@listData')->name('list_data');

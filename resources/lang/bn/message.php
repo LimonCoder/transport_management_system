@@ -130,7 +130,7 @@ return [
     'trip_cancelled_message' => ':route_name এ আপনার ট্রিপ বাতিল করা হয়েছে',
 
     // Organization 
-    'organization' => 'প্রতিষ্ঠান',
+    'organisation' => 'প্রতিষ্ঠান',
     'organization-list' => 'প্রতিষ্ঠানের তালিকা',
     'add-org' => 'প্রতিষ্ঠান যোগ করুন',
     'switch-account' => 'মূল অ্যাকাউন্টে ফিরে যান',
