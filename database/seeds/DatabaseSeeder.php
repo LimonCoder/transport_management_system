@@ -22,7 +22,8 @@ class DatabaseSeeder extends Seeder
             FuelTypeTableSeeder::class,
             VehiclesTableSeeder::class,
             TripsTableSeeder::class,
-            RoutesTableSeeder::class
+            RoutesTableSeeder::class,
+            NoticeSeeder::class
         ]);
     }
 }

@@ -60,6 +60,15 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::post('/delete', 'VehicleController@destroy')->name('delete');
     });
 
+    // Vehicle Management - System Admin and Operators
+    Route::prefix('/notice')->name('notice.')->middleware('role:operator')->group(function () {
+        Route::get('/', 'NoticeController@index')->name('index');
+        Route::post('/store', 'NoticeController@store')->name('store');
+        Route::get('/list_data', 'NoticeController@list_data')->name('list_data');
+        Route::post('/update', 'NoticeController@update')->name('update');
+        Route::post('/delete', 'NoticeController@destroy')->name('delete');
+    });
+
     // Routes API endpoints
     Route::prefix('/routes')->name('routes.')->middleware('role:operator')->group(function () {
         Route::get('/', 'RouteController@index')->name('index');
@@ -103,6 +112,8 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::get('/list_data', 'DesignationController@list_data')->name('list_data');
         Route::post('/delete', 'DesignationController@destroy')->name('delete');
     });
+
+    
 
     // Notification endpoints  
     Route::get('/notifications', 'NotificationController@index')->name('notifications.index');

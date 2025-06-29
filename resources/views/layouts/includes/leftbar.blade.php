@@ -47,6 +47,13 @@
                                 @lang('message.operator-list')
                             </a>
                         </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ route('notice.index')  }}">
+                                <i class="fas fa-user-plus"></i>
+                                @lang('message.notice-list')
+                            </a>
+                        </li>
                     @endif
 
                     <li class="nav-item">
