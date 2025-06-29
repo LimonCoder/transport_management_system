@@ -10,9 +10,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="float-left">Route List</h4>
+                            <h4 class="float-left">@lang('message.route-list')</h4>
                             <a href="javascript:void(0)" onclick="add_route()" class="btn btn-primary btn-xs float-right">
-                                <i class="fas fa-plus"></i> Add Route
+                                <i class="fas fa-plus"></i> @lang('message.add')
                             </a>
                         </div>
 
@@ -21,12 +21,12 @@
                                 <table class="table table-bordered" id="route_table">
                                     <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Title</th>
-                                        <th>Details</th>
-                                        <th>Status</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
+                                        <th>@lang('message.no')</th>
+                                        <th>@lang('message.title')</th>
+                                        <th>@lang('message.details')</th>
+                                        <th>@lang('message.status')</th>
+                                        <th>@lang('message.created-At')</th>
+                                        <th>@lang('message.action')</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -48,7 +48,7 @@
                 <div class="modal-content">
                     <form id="route_form" method="post" enctype="multipart/form-data">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="routeModalLabel">Add Route</h5>
+                            <h5 class="modal-title" id="routeModalLabel">@lang('message.add-route')</h5>
                             <button type="button" class="close" data-dismiss="modal">
                                 <span>&times;</span>
                             </button>
@@ -58,7 +58,7 @@
                             <!-- Title -->
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="title">Route Title <span class="text-danger">*</span></label>
+                                    <label for="title">@lang('message.route-title')<span class="text-danger">*</span></label>
                                     <input type="text" name="title" id="title" class="form-control form-control-sm" required maxlength="150" placeholder="Enter route title">
                                 </div>
                             </div>
@@ -66,7 +66,7 @@
                             <!-- Details -->
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="details">Route Details <span class="text-danger">*</span></label>
+                                    <label for="details">@lang('message.details')<span class="text-danger">*</span></label>
                                     <textarea name="details" id="details" class="form-control form-control-sm" required rows="4" placeholder="Enter route details"></textarea>
                                 </div>
                             </div>
@@ -80,8 +80,8 @@
 
                         <div class="modal-footer">
                             <input type="hidden" name="route_id" id="route_id">
-                            <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-success btn-xs">Save</button>
+                            <button type="button" class="btn btn-secondary btn-xs" data-dismiss="modal">@lang('message.close')</button>
+                            <button type="submit" class="btn btn-success btn-xs">@lang('message.save')</button>
                         </div>
                     </form>
                 </div>

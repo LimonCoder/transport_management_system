@@ -10,13 +10,13 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="float-left">Organization List</h4>
+                            <h4 class="float-left">@lang('message.organization-list')</h4>
                             <a href="javascript:void(0)" onclick="add_organization()" class="btn btn-primary btn-xs float-right">
-                                <i class="fas fa-plus"></i> Add Organization
+                                <i class="fas fa-plus"></i> @lang('message.add-org')
                             </a>
                             @if(session('original_user_id'))
                                 <button type="button" onclick="switch_back()" class="btn btn-info btn-xs float-right mr-2">
-                                    <i class="fas fa-user-check"></i> Switch Back to Original Account
+                                    <i class="fas fa-user-check"></i> @lang('message.switch-account') 
                                 </button>
                             @endif
                         </div>
@@ -26,14 +26,14 @@
                                 <table class="table table-bordered" id="organization_table">
                                     <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Org Code</th>
-                                        <th>Name</th>
-                                        <th>Address</th>
-                                        <th>Type</th>
-                                        <th>Operator</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
+                                        <th>@lang('message.no')</th>
+                                        <th>@lang('message.org-code')</th>
+                                        <th>@lang('message.name')</th>
+                                        <th>@lang('message.address')</th>
+                                        <th>@lang('message.type')</th>
+                                        <th>@lang('message.operator')</th>
+                                        <th>@lang('message.created-At')</th>
+                                        <th>@lang('message.action')</th>
                                     </tr>
                                     </thead>
                                     <tbody>

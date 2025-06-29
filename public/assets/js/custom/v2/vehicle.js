@@ -17,18 +17,24 @@ function vehicle_list() {
                 data: 'images',
                 name: 'images',
                 render: function (data, type, row, meta) {
+                    let imageUrl = '';
                     if (row.images) {
-                        return '<img src="' + url + '/' + row.images + '" width="80" height="80">';
+                        if (row.images.startsWith('http') || row.images.startsWith('/')) {
+                            imageUrl = row.images;
+                        } else {
+                            imageUrl = url + '/' + row.images.replace(/^\/+/, '');
+                        }
                     } else {
-                        return '<img src="' + url + '/storage/vehicles/default.png" width="80" height="80">';
+                        imageUrl = url + '/assets/images/bus.jpg';
                     }
+                    return '<img src="' + imageUrl + '" width="80" height="80">';
                 }
             },
             {data: 'org_code', name: 'org_code'},
             {data: 'registration_number', name: 'registration_number'},
             {data: 'model', name: 'model'},
             {data: 'capacity', name: 'capacity'},
-            {data: 'fuel_type_id', name: 'fuel_type_id'}, // পরিবর্তন করা হয়েছে
+            {data: 'fuel_type_name', name: 'fuel_type_name'}, // পরিবর্তন করা হয়েছে
             {data: 'status', name: 'status'},
             {
                 data: 'id',
