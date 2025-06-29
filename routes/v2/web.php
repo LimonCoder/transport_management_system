@@ -82,6 +82,14 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::post('/switch-back', 'OrganizationController@switchBack')->name('switch-back');
     });
 
+    // designation
+    Route::prefix('/designation')->name('designation.')->group(function () {
+        Route::get('/', 'DesignationController@index')->name('index');
+        Route::post('/store', 'DesignationController@store')->name('store');
+        Route::get('/list_data', 'DesignationController@list_data')->name('list_data');
+        Route::post('/delete', 'DesignationController@destroy')->name('delete');
+    });
+
     // Notification endpoints  
     Route::get('/notifications', 'NotificationController@index')->name('notifications.index');
     Route::get('/notifications/unread-count', 'NotificationController@getUnreadCount')->name('notifications.unread-count');

@@ -16,10 +16,9 @@
 
                 </li>
 
-                @if(\Illuminate\Support\Facades\Auth::user()->user_type == "system-admin")
+                @if(Auth::user()->user_type == "system-admin")
 
                     <li class="nav-item ">
-
                         <a class="nav-link" href="{{ route('organizations.index')  }}">
                             <i class="fas fa-building"></i>
                             @lang('message.organisation')
@@ -29,17 +28,18 @@
 
                     <li class="nav-item ">
 
-                        <a class="nav-link" href="{{ route('organization.index')  }}">
+                        <a class="nav-link" href="{{ route('operator.index')  }}">
                             <i class="fas fa-user-plus"></i>
                             @lang('message.operator-list')
                         </a>
 
                     </li>
-                    <!-- <li class="nav-item ">
-                        <a class="nav-link" href="{{ route('designation.index')  }}"><i class="far fa-grin"></i>পদবী
+                     <li class="nav-item ">
+                        <a class="nav-link" href="{{ route('designation.index')  }}"><i class="far fa-grin"></i>
+                            @lang('message.designation')
                         </a>
 
-                    </li> -->
+                    </li>
                     <li class="nav-item ">
                         <a class="nav-link" href="javascript:void(0)">
                             <i class="fas fa-key"></i>

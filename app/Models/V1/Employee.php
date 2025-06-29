@@ -3,6 +3,7 @@
 namespace App\Models\V1;
 
 use App\helpers\GlobalHelper;
+use App\Models\V2\Designation;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\DB;

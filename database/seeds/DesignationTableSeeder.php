@@ -1,6 +1,8 @@
 <?php
 
-use App\Models\V1\Designation;
+namespace seeds;
+
+use App\Models\V2\Designation;
 use Illuminate\Database\Seeder;
 
 class DesignationTableSeeder extends Seeder
@@ -14,11 +16,13 @@ class DesignationTableSeeder extends Seeder
     {
         // row 1
         Designation::create([
-            "name" => "জেলা প্রশাসক",
+            "name" => "Operator",
         ]);
         // row 2
         Designation::create([
-            "name" => "উপজেলা নির্বাহী অফিসার",
+            "name" => "Assistance Operator",
         ]);
+
+
     }
 }

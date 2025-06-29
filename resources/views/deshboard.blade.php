@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title','Deshboard')
+@section('title', __('message.dashboard'))
 
 @section('main-content')
     <div class="content">
@@ -16,7 +16,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-4">মোট অফিস</h4>
+                            <h4 class="header-title mt-0 mb-4">{{ __('message.total_offices') }}</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-detail-1 text-right">
                                     <h2 class="font-weight-normal pt-2 mb-1"> {{ $bnConverter->bnNum($total_organizations) }} </h2>
@@ -39,7 +39,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-4">মোট ড্রাইভার</h4>
+                            <h4 class="header-title mt-0 mb-4">{{ __('message.total_drivers') }}</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-detail-1 text-right">
                                     <h2 class="font-weight-normal pt-2 mb-1"> {{ $bnConverter->bnNum($total_drivers) }} </h2>
@@ -62,7 +62,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-4">মোট অপারেটর</h4>
+                            <h4 class="header-title mt-0 mb-4">{{ __('message.total_operators') }}</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-detail-1 text-right">
                                     <h2 class="font-weight-normal pt-2 mb-1"> {{ $bnConverter->bnNum($total_operators) }} </h2>
@@ -85,7 +85,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-4">মোট গাড়ি</h4>
+                            <h4 class="header-title mt-0 mb-4">{{ __('message.total_vehicles') }}</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-detail-1 text-right">
                                     <h2 class="font-weight-normal pt-2 mb-1"> {{ $bnConverter->bnNum($total_vehicles) }} </h2>
@@ -110,7 +110,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-3">মোট ড্রাইভার</h4>
+                            <h4 class="header-title mt-0 mb-3">{{ __('message.total_drivers') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
                                     <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_drivers_in_org) }} </h2>
@@ -133,7 +133,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-3">মোট গাড়ি</h4>
+                            <h4 class="header-title mt-0 mb-3">{{ __('message.total_vehicles') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
                                     <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_vehicles_in_org) }} </h2>
@@ -156,7 +156,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-3">মেইনটেনেন্স গাড়ি</h4>
+                            <h4 class="header-title mt-0 mb-3">{{ __('message.maintenance_vehicles') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
                                     <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_maintenance_vehicles_in_org) }} </h2>
@@ -181,7 +181,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-3">মোট ট্রিপ</h4>
+                            <h4 class="header-title mt-0 mb-3">{{ __('message.total_trips') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
                                     <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_trips) }} </h2>
@@ -204,7 +204,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-3">শুরু করা ট্রিপ</h4>
+                            <h4 class="header-title mt-0 mb-3">{{ __('message.started_trips') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
                                     <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_initiate_trips) }} </h2>
@@ -227,7 +227,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-3">সম্পন্ন ট্রিপ</h4>
+                            <h4 class="header-title mt-0 mb-3">{{ __('message.completed_trips') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
                                     <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_completed_trips) }} </h2>
@@ -250,7 +250,7 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
                             </div>
-                            <h4 class="header-title mt-0 mb-3">বাতিল ট্রিপ</h4>
+                            <h4 class="header-title mt-0 mb-3">{{ __('message.cancelled_trips') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
                                     <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_rejected_trips) }} </h2>

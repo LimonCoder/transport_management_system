@@ -137,4 +137,14 @@ return [
     'type' => 'ধরণ',
     'operator' => 'অপারেটর',
 
+    // Dashboard
+    'total_offices' => 'মোট অফিস',
+    'total_drivers' => 'মোট ড্রাইভার',
+    'total_operators' => 'মোট অপারেটর',
+    'total_vehicles' => 'মোট গাড়ি',
+    'total_trips' => 'মোট ট্রিপ',
+    'maintenance_vehicles' => 'মেইনটেনেন্স গাড়ি',
+    'started_trips' => 'শুরু করা ট্রিপ',
+    'completed_trips' => 'সম্পন্ন ট্রিপ',
+    'cancelled_trips' => 'বাতিল ট্রিপ',
 ];

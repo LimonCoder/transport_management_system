@@ -138,4 +138,15 @@ return [
     'switch-account' => 'Return to Main Account',
     'type' => 'Type',
     'operator' => 'Operator',
+
+    // Dashboard
+    'total_offices' => 'Total Offices',
+    'total_drivers' => 'Total Drivers',
+    'total_operators' => 'Total Operators',
+    'total_vehicles' => 'Total Vehicles',
+    'total_trips' => 'Total Trips',
+    'maintenance_vehicles' => 'Maintenance Vehicles',
+    'started_trips' => 'Started Trips',
+    'completed_trips' => 'Completed Trips',
+    'cancelled_trips' => 'Cancelled Trips',
 ];
