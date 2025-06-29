@@ -82,6 +82,40 @@ return [
     'no_trip_data' => 'কোনো ট্রিপ পাওয়া যায়নি',
     'print' => 'প্রিন্ট',
 
+    //Route
+    'route-management' => 'রুট ব্যবস্থাপনা',
+    'add-route' => 'রুট যোগ করুন',
+    'route-list' => 'রুট তালিকা',
+    'details' => 'বিস্তারিত',
+    'created-At' => 'তৈরির তারিখ',
+    'route-title' => 'রুটের শিরোনাম',
+    'enter-route-title' => 'রুটের শিরোনাম লিখুন',
+    'route-Details' => 'রুটের বিস্তারিত',
+    'enter-route-details' => 'রুটের বিস্তারিত লিখুন',
+
+    //Trip
+    'select-vehicle' => 'সিলেক্ট-যানবাহন',
+    'select-driver' => 'সিলেক্ট-ড্রাইভার',
+    'driver' => 'ড্রাইভার',
+    'add-trip' => 'ট্রিপ যোগ',
+    'route-name' => 'রুটের নাম',
+    'driver-name' => 'ড্রাইভারের নাম',
+    'vehicle-number' => 'গাড়ির নম্বর',
+    'trip-initiate-date' => 'ট্রিপ-ইনিশিয়েট-তারিখ',
+    'is_locked' => 'লক',
+
+    //Trip Details
+    'trip-details-list' => 'ট্রিপের বিস্তারিত তালিকা',
+    'trip-date' => 'ট্রিপ তারিখ',
+    'start-location' => 'শুরুর স্থান',
+    'destination' => 'গন্তব্য',
+    'start-time' => 'শুরুর সময়',
+    'end-time' => 'শেষ সময়',
+    'distance' => 'দূরত্ব (কিমি)',
+    'purpose' => 'উদ্দেশ্য',
+    'fuel-cost' => 'জ্বালানির খরচ',
+    'total-cost' => 'মোট খরচ',
+
     // Notifications
     'notifications' => 'বিজ্ঞপ্তি',
     'clear_all' => 'সব মুছুন',
@@ -94,4 +128,13 @@ return [
     'trip_completed_message' => ':route_name এ আপনার ট্রিপ সম্পন্ন হয়েছে',
     'trip_cancelled' => 'ট্রিপ বাতিল',
     'trip_cancelled_message' => ':route_name এ আপনার ট্রিপ বাতিল করা হয়েছে',
+
+    // Organization 
+    'organization' => 'প্রতিষ্ঠান',
+    'organization-list' => 'প্রতিষ্ঠানের তালিকা',
+    'add-org' => 'প্রতিষ্ঠান যোগ করুন',
+    'switch-account' => 'মূল অ্যাকাউন্টে ফিরে যান',
+    'type' => 'ধরণ',
+    'operator' => 'অপারেটর',
+
 ];

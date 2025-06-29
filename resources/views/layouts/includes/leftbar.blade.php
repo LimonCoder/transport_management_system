@@ -22,7 +22,7 @@
 
                         <a class="nav-link" href="{{ route('organizations.index')  }}">
                             <i class="fas fa-building"></i>
-                            Organizations
+                            @lang('message.organisation')
                         </a>
 
                     </li>

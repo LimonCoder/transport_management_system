@@ -9,28 +9,28 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4 class="float-left">Trip Details List</h4>
+                            <h4 class="float-left">@lang('message.trip-details-list')</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="trip_details_table">
                                     <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Route Name</th>
-                                        <th>Driver Name</th>
-                                        <th>Vehicle Number</th>
-                                        <th>Trip Date</th>
-                                        <th>Start Location</th>
-                                        <th>Destination</th>
-                                        <th>Start Time</th>
-                                        <th>End Time</th>
-                                        <th>Distance (km)</th>
-                                        <th>Purpose</th>
-                                        <th>Fuel Cost</th>
-                                        <th>Total Cost</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th>@lang('message.no')</th>
+                                        <th>@lang('message.route-name')</th>
+                                        <th>@lang('message.driver-name')</th>
+                                        <th>@lang('message.vehicle-number')</th>
+                                        <th>@lang('message.trip-date')</th>
+                                        <th>@lang('message.start-location')</th>
+                                        <th>@lang('message.destination')</th>
+                                        <th>@lang('message.start-time')</th>
+                                        <th>@lang('message.end-time')</th>
+                                        <th>@lang('message.distance')</th>
+                                        <th>@lang('message.purpose')</th>
+                                        <th>@lang('message.fuel-cost')</th>
+                                        <th>@lang('message.total-cost')</th>
+                                        <th>@lang('message.status')</th>
+                                        <th>@lang('message.action')</th>
                                     </tr>
                                     </thead>
                                     <tbody></tbody>

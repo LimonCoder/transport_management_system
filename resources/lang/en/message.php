@@ -81,6 +81,43 @@ return [
     'no_trip_data' => 'No Trip Data',
     'print' => 'Print',
 
+    // Route
+    'route-management' => 'Route Management',
+    'add-route' => 'Add Route',
+    'route-list' => 'Route List',
+    'details' => 'Details',
+    'created-At' => 'Created At',
+    'route-title' => 'Route Title',
+    'enter-route-title' => 'Enter route title',
+    'route-Details' => 'Route Details',
+    'enter-route-details' => 'Enter route details',
+
+    // Trip
+    'select-vehicle' => 'Select Vehicle',
+    'select-driver' => 'Select Driver',
+    'driver' => 'Driver',
+    'add-trip' => 'Add Trip',
+    'route-name' => 'Route Name',
+    'driver-name' => 'Driver Name',
+    'vehicle-number' => 'Vehicle Number',
+    'trip-initiate-date' => 'Trip Initiate Date',
+    'is_locked' => 'Locked',
+
+
+    //Trip Details
+    'trip-details-list' => 'Trip Details List',
+    'trip-date' => 'Trip Date',
+    'start-location' => 'Start Location',
+    'destination' => 'Destination',
+    'start-time' => 'Start Time',
+    'end-time' => 'End Time',
+    'distance' => 'Distance (km)',
+    'purpose' => 'Purpose',
+    'fuel-cost' => 'Fuel Cost',
+    'total-cost' => 'Total Cost',
+    'status' => 'Status',
+    'action' => 'Action',
+
     // Notifications
     'notifications' => 'Notifications',
     'clear_all' => 'Clear All',
@@ -93,4 +130,12 @@ return [
     'trip_completed_message' => 'Your trip to :route_name has been completed',
     'trip_cancelled' => 'Trip Cancelled',
     'trip_cancelled_message' => 'Your trip to :route_name has been cancelled',
+
+    // Organization 
+    'organisation' => 'Organizations',
+    'organisation-list' => 'Organization List',
+    'add-org' => 'Add Organization',
+    'switch-account' => 'Return to Main Account',
+    'type' => 'Type',
+    'operator' => 'Operator',
 ];
