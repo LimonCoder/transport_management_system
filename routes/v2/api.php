@@ -22,6 +22,7 @@ Route::group([
     Route::get('/routes', 'HomeController@getRoutes');
     Route::get('/trips', 'HomeController@getTrips');
     Route::get('/organizations', 'HomeController@getOrganizations');
+    Route::get('/notices', 'HomeController@getNotices');
 });
 
 

@@ -93,6 +93,15 @@ return [
     'route-Details' => 'রুটের বিস্তারিত',
     'enter-route-details' => 'রুটের বিস্তারিত লিখুন',
 
+    //Notice
+    'notice-management' => 'নোটিশ ব্যবস্থাপনা',
+    'add-notice' => 'নোটিশ যোগ করুন',
+    'notice-list' => 'নোটিশ',
+    'notice-title' => 'নোটিশের শিরোনাম',
+    'enter-notice-title' => 'নোটিশের শিরোনাম লিখুন',
+    'notice-Details' => 'নোটিশের বিস্তারিত',
+    'enter-notice-details' => 'নোটিশের বিস্তারিত লিখুন',
+
     //Trip
     'select-vehicle' => 'সিলেক্ট-যানবাহন',
     'select-driver' => 'সিলেক্ট-ড্রাইভার',

@@ -92,6 +92,16 @@ return [
     'route-Details' => 'Route Details',
     'enter-route-details' => 'Enter route details',
 
+
+    //Notice
+    'notice-management' => 'Notice Management',
+    'add-notice' => 'Add Notice',
+    'notice-list' => 'Notice',
+    'notice-title' => 'Notice Title',
+    'enter-notice-title' => 'Enter Notice Title',
+    'notice-Details' => 'Notice Details',
+    'enter-notice-details' => 'Enter Notice Details',
+
     // Trip
     'select-vehicle' => 'Select Vehicle',
     'select-driver' => 'Select Driver',
