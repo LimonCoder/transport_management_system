@@ -23,6 +23,8 @@ Route::group([
     Route::get('/trips', 'HomeController@getTrips');
     Route::get('/organizations', 'HomeController@getOrganizations');
     Route::get('/notices', 'HomeController@getNotices');
+    
+    Route::post('/contacts', 'ContactController@store');
 });
 
 
