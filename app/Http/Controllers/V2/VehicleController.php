@@ -101,7 +101,7 @@ class VehicleController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Vehicle Added Successfully!'
+            'message' => __('message.vehicle_added_successfully')
         ]);
     }
 
@@ -164,7 +164,7 @@ class VehicleController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Vehicle updated successfully!'
+            'message' => __('message.vehicle_updated_successfully')
         ]);
     }
 
@@ -176,8 +176,8 @@ class VehicleController extends Controller
         if (!$vehicle) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Error',
-                'message' => 'Vehicle not found'
+                'title' => __('message.error'),
+                'message' => __('message.vehicle_not_found')
             ], 404);
         }
         
@@ -194,8 +194,8 @@ class VehicleController extends Controller
         $isDelete = $vehicle->delete();
         return response()->json([
             'status' => $isDelete ? 'success' : 'error',
-            'title' => $isDelete ? 'Success' : 'error',
-            'message' => $isDelete ? 'Vehicle Deleted successfully!' : 'Vehicle Deleted Field'
+            'title' => $isDelete ? __('message.success') : __('message.error'),
+            'message' => $isDelete ? __('message.vehicle_deleted_successfully') : __('message.vehicle_delete_failed')
         ]);
     }
 

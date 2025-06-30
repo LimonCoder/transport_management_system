@@ -250,6 +250,7 @@ return [
     'trip_edit_own_only' => 'আপনি শুধুমাত্র আপনার তৈরি করা ট্রিপ পরিবর্তন করতে পারেন।',
     'trip_delete_own_only' => 'আপনি শুধুমাত্র আপনার তৈরি করা ট্রিপ মুছতে পারেন।',
     'trip_update_failed' => 'আপডেট ব্যর্থ হয়েছে!',
+    'trip_edit_assigned_only' => 'আপনি শুধুমাত্র আপনার কাছে বরাদ্দকৃত ট্রিপের তথ্য পরিবর্তন করতে পারেন।',
 
     // Vehicle Controller Messages
     'vehicle_error_retrieving' => 'যানবাহন পেতে অপ্রত্যাশিত ত্রুটি ঘটেছে',

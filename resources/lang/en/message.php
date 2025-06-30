@@ -252,6 +252,7 @@ return [
     'trip_edit_own_only' => 'You can only modify trips you created.',
     'trip_delete_own_only' => 'You can only delete trips you created.',
     'trip_update_failed' => 'Update Failed!',
+    'trip_edit_assigned_only' => 'You can only modify trips assigned to you.',
 
     // Vehicle Controller Messages
     'vehicle_error_retrieving' => 'An unexpected error occurred while retrieving vehicles',

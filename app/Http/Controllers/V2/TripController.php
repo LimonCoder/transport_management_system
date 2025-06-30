@@ -66,8 +66,8 @@ class TripController extends Controller
             if ($this->tripRepo->checkTripExistsByDate($validated['trip_initiate_date'])) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Trip Already Exists',
-                    'message' => 'A trip has already been initiated on ' . $validated['trip_initiate_date'] . '. Please choose a different date.'
+                    'title' => __('message.trip_already_exists'),
+                    'message' => __('message.trip_already_initiated_on') . ' ' . $validated['trip_initiate_date'] . '. ' . __('message.trip_choose_different_date')
                 ], 422);
             }
 
@@ -81,14 +81,14 @@ class TripController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                "title" => "Success",
-                'message' => 'Trip created successfully.'
+                "title" => __('message.success'),
+                'message' => __('message.trip_created_successfully')
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Error',
-                'message' => 'Something went wrong',
+                'title' => __('message.error'),
+                'message' => __('message.something_went_wrong'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -140,8 +140,8 @@ class TripController extends Controller
             if ($user->user_type === 'operator' && $trip->created_by !== $user->id) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Unauthorized',
-                    'message' => 'আপনি শুধুমাত্র আপনার তৈরি করা ট্রিপ পরিবর্তন করতে পারেন।'
+                    'title' => __('message.unauthorized'),
+                    'message' => __('message.trip_edit_own_only')
                 ], 403);
             }
         
@@ -149,8 +149,8 @@ class TripController extends Controller
             if ($this->tripRepo->checkTripExistsByDate($validated['trip_initiate_date'], $request->trip_id)) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Trip Already Exists',
-                    'message' => 'Another trip has already been initiated on ' . $validated['trip_initiate_date'] . '. Please choose a different date.'
+                    'title' => __('message.trip_already_exists'),
+                    'message' => __('message.trip_another_initiated_on') . ' ' . $validated['trip_initiate_date'] . '. ' . __('message.trip_choose_different_date')
                 ], 422);
             }
 
@@ -158,13 +158,13 @@ class TripController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' => 'Updated!',
-                'message' => 'Trip updated successfully.'
+                'title' => __('message.updated'),
+                'message' => __('message.trip_updated_successfully')
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Update Failed!',
+                'title' => __('message.trip_update_failed'),
                 'message' => $e->getMessage()
             ], 500);
         }
@@ -187,8 +187,8 @@ class TripController extends Controller
             if ($user->user_type === 'operator' && $trip->created_by !== $user->id) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Unauthorized',
-                    'message' => 'আপনি শুধুমাত্র আপনার তৈরি করা ট্রিপ মুছতে পারেন।'
+                    'title' => __('message.unauthorized'),
+                    'message' => __('message.trip_delete_own_only')
                 ], 403);
             }
             
@@ -196,8 +196,8 @@ class TripController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' => 'Deleted!',
-                'message' => 'Trip deleted successfully.'
+                'title' => __('message.deleted'),
+                'message' => __('message.trip_deleted_successfully')
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -334,7 +334,7 @@ class TripController extends Controller
                 return response()->json([
                     'status' => 'error',
                     'title' => 'Unauthorized',
-                    'message' => 'আপনি শুধুমাত্র আপনার কাছে বরাদ্দকৃত ট্রিপের তথ্য পরিবর্তন করতে পারেন।'
+                    'message' => __('message.trip_edit_assigned_only')
                 ], 403);
             }
 
