@@ -50,7 +50,7 @@
 
                         <li class="nav-item ">
                             <a class="nav-link" href="{{ route('notice.index')  }}">
-                                <i class="fas fa-user-plus"></i>
+                                <i class="fas fa-bell"></i>
                                 @lang('message.notice-list')
                             </a>
                         </li>
@@ -66,7 +66,7 @@
                     <li class="nav-item ">
 
                         <a class="nav-link" href="{{ route('trip.index') }}">
-                            <i class="fas fa-car-side"></i>
+                            <i class="fas fa-shuttle-van"></i>
                             @lang('message.trip')
                         </a>
 
@@ -74,7 +74,7 @@
                     <li class="nav-item ">
 
                         <a class="nav-link" href="{{ route('vehicle.index') }}">
-                            <i class="fas fa-car-side"></i>
+                            <i class="fas fa-bus"></i>
                             @lang('message.vehicle')
                         </a>
 
@@ -82,7 +82,7 @@
                     <li class="nav-item ">
 
                         <a class="nav-link" href="{{ route('routes.index') }}">
-                            <i class="fas fa-car-side"></i>
+                            <i class="fas fa-road"></i>
                             @lang('message.route')
                         </a>
 
@@ -90,7 +90,7 @@
                     <li class="nav-item ">
 
                         <a class="nav-link" href="{{ route('trip.report') }}">
-                            <i class="fas fa-car-side"></i>
+                            <i class="fas fa-file-alt"></i>
                             @lang('message.trip-report')
                         </a>
 
