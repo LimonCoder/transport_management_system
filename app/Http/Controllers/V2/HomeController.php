@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V2;
 
 use App\Http\Controllers\Controller;
 use App\Models\V2\Route;
+use App\Models\V2\Notice;
 use App\Models\V2\Trip;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -50,6 +51,17 @@ class HomeController extends Controller
             'status'  => 'success',
             'message' => 'data get successfully',
             'data'    => $org,
+        ]);
+    }
+
+    public function getNotices()
+    {
+        $notices = Notice::all();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'data get successfully',
+            'data'    => $notices,
         ]);
     }
 }

@@ -7,7 +7,10 @@ use App\Repositories\TripRepositoryInterface;
 use App\Services\NotificationService;
 use App\Events\TripCreated;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Log;
 
 class TripController extends Controller
 {
@@ -120,7 +123,7 @@ class TripController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request): \Illuminate\Http\Response
     {
         $validated = $request->validate([
             'route_id'           => 'required|integer|exists:routes,id',
@@ -130,6 +133,18 @@ class TripController extends Controller
         ]);
 
         try {
+            // Check ownership for operators
+            $trip = $this->tripRepo->find($request->trip_id);
+            $user = Auth::user();
+            
+            if ($user->user_type === 'operator' && $trip->created_by !== $user->id) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'Unauthorized',
+                    'message' => 'আপনি শুধুমাত্র আপনার তৈরি করা ট্রিপ পরিবর্তন করতে পারেন।'
+                ], 403);
+            }
+        
             // Check if a trip already exists on the specified date (excluding current trip)
             if ($this->tripRepo->checkTripExistsByDate($validated['trip_initiate_date'], $request->trip_id)) {
                 return response()->json([
@@ -160,11 +175,23 @@ class TripController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function destroy(Request $request)
     {
         try {
+            // Check ownership for operators
+            $trip = $this->tripRepo->find($request->trip_id);
+            $user = Auth::user();
+            
+            if ($user->user_type === 'operator' && $trip->created_by !== $user->id) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'Unauthorized',
+                    'message' => 'আপনি শুধুমাত্র আপনার তৈরি করা ট্রিপ মুছতে পারেন।'
+                ], 403);
+            }
+            
             $this->tripRepo->delete($request->trip_id);
 
             return response()->json([
@@ -279,9 +306,9 @@ class TripController extends Controller
      * Update trip details
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function updateDetails(Request $request)
+    public function updateDetails(Request $request): \Illuminate\Http\JsonResponse
     {
         $validated = $request->validate([
             'trip_id'         => 'required|integer|exists:trips,id',
@@ -298,6 +325,19 @@ class TripController extends Controller
         ]);
 
         try {
+            // Check access permissions
+            $trip = $this->tripRepo->find($validated['trip_id']);
+            $user = Auth::user();
+
+            $driver = DB::table('drivers')->where('user_id', $user->id)->first();
+            if (!$driver || $trip->driver_id !== $driver->id) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'Unauthorized',
+                    'message' => 'আপনি শুধুমাত্র আপনার কাছে বরাদ্দকৃত ট্রিপের তথ্য পরিবর্তন করতে পারেন।'
+                ], 403);
+            }
+
             $this->tripRepo->updateTripDetails($validated['trip_id'], $validated);
 
             return response()->json([
@@ -331,8 +371,7 @@ class TripController extends Controller
 
             $this->notificationService->createTripNotification($notificationData);
         } catch (\Exception $e) {
-            // Log error but don't fail the trip creation
-            \Log::error('Failed to send trip notification: ' . $e->getMessage());
+            Log::error('Failed to send trip notification: ' . $e->getMessage());
         }
     }
 

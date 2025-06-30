@@ -93,6 +93,15 @@ return [
     'route-Details' => 'রুটের বিস্তারিত',
     'enter-route-details' => 'রুটের বিস্তারিত লিখুন',
 
+    //Notice
+    'notice-management' => 'নোটিশ ব্যবস্থাপনা',
+    'add-notice' => 'নোটিশ যোগ করুন',
+    'notice-list' => 'নোটিশ',
+    'notice-title' => 'নোটিশের শিরোনাম',
+    'enter-notice-title' => 'নোটিশের শিরোনাম লিখুন',
+    'notice-Details' => 'নোটিশের বিস্তারিত',
+    'enter-notice-details' => 'নোটিশের বিস্তারিত লিখুন',
+
     //Trip
     'select-vehicle' => 'সিলেক্ট-যানবাহন',
     'select-driver' => 'সিলেক্ট-ড্রাইভার',
@@ -130,11 +139,22 @@ return [
     'trip_cancelled_message' => ':route_name এ আপনার ট্রিপ বাতিল করা হয়েছে',
 
     // Organization 
-    'organization' => 'প্রতিষ্ঠান',
+    'organisation' => 'প্রতিষ্ঠান',
     'organization-list' => 'প্রতিষ্ঠানের তালিকা',
     'add-org' => 'প্রতিষ্ঠান যোগ করুন',
     'switch-account' => 'মূল অ্যাকাউন্টে ফিরে যান',
     'type' => 'ধরণ',
     'operator' => 'অপারেটর',
 
+    // Dashboard
+    'total_offices' => 'মোট অফিস',
+    'total_drivers' => 'মোট ড্রাইভার',
+    'total_operators' => 'মোট অপারেটর',
+    'total_vehicles' => 'মোট গাড়ি',
+    'total_trips' => 'মোট ট্রিপ',
+    'maintenance_vehicles' => 'মেইনটেনেন্স গাড়ি',
+    'started_trips' => 'শুরু করা ট্রিপ',
+    'completed_trips' => 'সম্পন্ন ট্রিপ',
+    'cancelled_trips' => 'বাতিল ট্রিপ',
+    'settings' => 'সেটিং',
 ];

@@ -4,7 +4,6 @@ namespace App\Models\V2;
 
 use App\Models\V1\User;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Driver extends Model
@@ -17,13 +16,6 @@ class Driver extends Model
 
     protected $guarded = ["id", "created_at", "updated_at"];
 
-    // protected $fillable = [
-    //     'user_id',
-    //     'org_code',
-    //     'name',
-    //     'mobile_no',
-    //     'image'
-    // ];
 
     public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

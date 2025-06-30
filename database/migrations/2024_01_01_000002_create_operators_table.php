@@ -19,7 +19,7 @@ class CreateOperatorsTable extends Migration
             $table->bigInteger('user_id')->unique();
             $table->mediumInteger('org_code')->unsigned();
             $table->string('name', 200);
-            $table->string('designation', 150);
+            $table->integer('designation_id')->nullable();
             $table->date('date_of_joining')->nullable();
             $table->string('mobile_number', 15)->unique();
             $table->string('address', 200)->nullable();

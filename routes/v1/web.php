@@ -55,14 +55,6 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V1'], function () {
         Route::post('/delete', 'OrganizationInfoController@destroy')->name('delete');
     });
 
-    // designation
-    Route::prefix('/designation')->name('designation.')->group(function () {
-        Route::get('/', 'DesignationController@index')->name('index');
-        Route::post('/store', 'DesignationController@store')->name('store');
-        Route::get('/list_data', 'DesignationController@list_data')->name('list_data');
-        Route::post('/delete', 'DesignationController@destroy')->name('delete');
-    });
-
     // employee
     Route::prefix('/employee')->name('employee.')->group(function () {
         Route::get('/', 'EmployeeController@index')->name('index');

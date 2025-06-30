@@ -1,16 +1,16 @@
 // Get base URL from meta tag
 var url = $('meta[name="path"]').attr('content');
 
-var route_table;
-function route_list() {
-    route_table = $("#route_table").DataTable({
+var notice_table;
+function notice_list() {
+    notice_table = $("#notice_table").DataTable({
         scrollCollapse: true,
         autoWidth: false,
         responsive: true,
         processing: true,
         serverSide: true,
         ajax: {
-            url: url + "/routes/list_data",
+            url: url + "/notice/list_data",
             type: "GET",
             dataType: "JSON",
             error: function(xhr, error, thrown) {
@@ -19,7 +19,7 @@ function route_list() {
                 console.error('Status:', xhr.status);
                 
                 // Try to parse response for better error message
-                let errorMessage = 'Unable to load route data. Please refresh the page and try again.';
+                let errorMessage = 'Unable to load notice data. Please refresh the page and try again.';
                 try {
                     let response = JSON.parse(xhr.responseText);
                     if (response.error) {
@@ -75,9 +75,9 @@ function route_list() {
                     let html = '';
                     html =
                         "<a href='javascript:void(0)' class='btn btn-warning btn-xs m-1'" +
-                        " onclick='route_edit(" + meta.row + ")'><i class='fa fa-edit'></i> " + message_edit + "</a>" +
+                        " onclick='notice_edit(" + meta.row + ")'><i class='fa fa-edit'></i> " + message_edit + "</a>" +
                         " <a href='javascript:void(0)' class='btn btn-danger btn-xs'" +
-                        " onclick='route_delete(" + meta.row + ")'><i class='fa fa-trash'></i> " + message_delete  + " </a>";
+                        " onclick='notice_delete(" + meta.row + ")'><i class='fa fa-trash'></i> " + message_delete  + " </a>";
 
                     return html;
                 }
@@ -86,39 +86,39 @@ function route_list() {
     });
 }
 
-function add_route() {
-    $("#route_form")[0].reset();
-    $("#route_id").val(''); // Clear route_id for new route
-    parslyInit("route_form");
+function add_notice() {
+    $("#notice_form")[0].reset();
+    $("#notice_id").val(''); // Clear notice_id for new notice
+    parslyInit("notice_form");
 
-    $("#routeModalLabel").text("Add Route");
-    $("#route_modal").modal('show');
+    $("#noticeModalLabel").text("Add Notice");
+    $("#notice_modal").modal('show');
 }
 
-function route_save() {
-    let route_data = new FormData($("#route_form")[0]);
+function notice_save() {
+    let notice_data = new FormData($("#notice_form")[0]);
 
-    if (parslyValid("route_form")) {
+    if (parslyValid("notice_form")) {
         $.ajax({
-            url: url + '/routes/store',
+            url: url + '/notice/store',
             type: 'POST',
-            data: route_data,
+            data: notice_data,
             processData: false,
             contentType: false,
             dataType: 'JSON',
             success: function (response) {
-                if (response.status === "success") {
-                    $("#route_modal").modal('hide');
+                if (response.success) {
+                    $("#notice_modal").modal('hide');
                 }
 
                 Swal.fire({
-                    title: response.title,
+                    title: response.title || 'Success!',
                     text: response.message,
-                    icon: response.status,
+                    icon: response.success ? 'success' : 'error',
                     buttons: false
                 });
 
-                $("#route_table").DataTable().draw(true);
+                $("#notice_table").DataTable().draw(true);
             },
             error: function(xhr, status, error) {
                 console.error('Error:', xhr.responseText);
@@ -131,7 +131,6 @@ function route_save() {
                         message: 'Something went wrong'
                     };
                 }
-                
                 Swal.fire({
                     title: response.title || 'Error',
                     text: response.message || 'Something went wrong',
@@ -143,44 +142,44 @@ function route_save() {
     }
 }
 
-function route_edit(row_index) {
-    $("#route_form")[0].reset();
+function notice_edit(row_index) {
+    $("#notice_form")[0].reset();
 
-    let route_data = route_table.row(row_index).data();
+    let notice_data = notice_table.row(row_index).data();
 
     // Populate form fields (org_code and status are now handled automatically)
-    $("#title").val(route_data.title);
-    $("#details").val(route_data.details);
-    $("#route_id").val(route_data.id);
+    $("#title").val(notice_data.title);
+    $("#details").val(notice_data.details);
+    $("#notice_id").val(notice_data.id);
     
-    $("#routeModalLabel").text("Edit Route");
-    $("#route_modal").modal('show');
+    $("#noticeModalLabel").text("Edit Notice");
+    $("#notice_modal").modal('show');
 }
 
-function route_update() {
-    let route_data = new FormData($("#route_form")[0]);
+function notice_update() {
+    let notice_data = new FormData($("#notice_form")[0]);
 
-    if (parslyValid("route_form")) {
+    if (parslyValid("notice_form")) {
         $.ajax({
-            url: url + '/routes/update',
+            url: url + '/notice/update',
             type: 'POST',
-            data: route_data,
+            data: notice_data,
             processData: false,
             contentType: false,
             dataType: 'JSON',
             success: function (response) {
-                if (response.status === "success") {
-                    $("#route_modal").modal('hide');
+                if (response.success) {
+                    $("#notice_modal").modal('hide');
                 }
 
                 Swal.fire({
-                    title: response.title,
+                    title: response.title || 'Success!',
                     text: response.message,
-                    icon: response.status,
+                    icon: response.success ? 'success' : 'error',
                     buttons: false
                 });
 
-                $("#route_table").DataTable().draw(true);
+                $("#notice_table").DataTable().draw(true);
             },
             error: function(xhr, status, error) {
                 console.error('Error:', xhr.responseText);
@@ -193,7 +192,6 @@ function route_update() {
                         message: 'Something went wrong'
                     };
                 }
-                
                 Swal.fire({
                     title: response.title || 'Error',
                     text: response.message || 'Something went wrong',
@@ -205,12 +203,12 @@ function route_update() {
     }
 }
 
-function route_delete(row_index) {
-    let route_data = route_table.row(row_index).data();
+function notice_delete(row_index) {
+    let notice_data = notice_table.row(row_index).data();
 
     Swal.fire({
         title: "Confirm Delete",
-        text: "Are you sure you want to delete this route?",
+        text: "Are you sure you want to delete this notice?",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -220,15 +218,15 @@ function route_delete(row_index) {
     }).then(function (result) {
         if (result.value) {
             $.ajax({
-                url: url + '/route/destroy',
+                url: url + '/notice/destroy',
                 type: 'POST',
                 data: {
-                    'route_id': route_data.id,
+                    'notice_id': notice_data.id,
                 },
                 dataType: 'JSON',
                 success: function (response) {
                     Swal.fire(response.title, response.message, response.status);
-                    $("#route_table").DataTable().draw(true);
+                    $("#notice_table").DataTable().draw(true);
                 },
                 error: function(xhr, status, error) {
                     console.error('Error:', xhr.responseText);

@@ -2,9 +2,8 @@
 
 namespace App\Services;
 
-use App\Models\Notification;
 use App\Models\V2\Driver;
-use App\Events\TripCreated;
+use App\Models\V2\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
 

@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\V1;
+namespace App\Http\Controllers\V2;
 
 use App\helpers\GlobalHelper;
 use App\Http\Controllers\Controller;
-use App\Models\V1\Designation;
 use App\Models\V1\Employee;
+use App\Models\V2\Designation;
+use App\Models\V2\Operator;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,13 +18,13 @@ class DesignationController extends Controller
 
     public function index()
     {
-        return view('designation');
+        return view('v2.designation.index');
     }
 
 
     public function list_data()
     {
-        $data = Designation::where('org_code',GlobalHelper::getOrganizationCode())->whereNull('deleted_at')->get();
+        $data = Designation::whereNull('deleted_at')->get();
         return DataTables::of($data)
             ->addIndexColumn()
             ->make(true);
@@ -44,7 +45,6 @@ class DesignationController extends Controller
             $designation_data = [];
 
             $designation_data = [
-                "org_code" => GlobalHelper::getOrganizationCode(),
                 "name" => $request->name,
             ];
 
@@ -81,7 +81,7 @@ class DesignationController extends Controller
     public function destroy(Request $request)
     {
         // check designation exists employee table
-        $isExists = DB::table((new Employee())->getTable())->where('designation_id', $request->row_id)->whereNull('deleted_at')->count() ?? 0;
+        $isExists = DB::table((new Operator())->getTable())->where('designation_id', $request->row_id)->whereNull('deleted_at')->count() ?? 0;
 
         if ($isExists > 0) {
             return response()->json([

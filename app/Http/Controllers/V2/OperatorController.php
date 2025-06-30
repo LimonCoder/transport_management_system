@@ -5,6 +5,7 @@ namespace App\Http\Controllers\V2;
 use App\Http\Controllers\Controller;
 use App\Repositories\OperatorRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OperatorController extends Controller
 {
@@ -42,7 +43,7 @@ class OperatorController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(Request $request)
     {
@@ -56,6 +57,15 @@ class OperatorController extends Controller
         ]);
 
         try {
+            $user = Auth::user();
+            if ($user->user_type === 'operator' && $user->special_user != 1) {
+                return response()->json([
+                    'status' => 'error',
+                    'title' => 'Unauthorized',
+                    'message' => 'আপনার এই অপারেশন সম্পাদনের অনুমতি নেই।',
+                ], 403);
+            }
+
             $this->operatorRepo->createWithUser($validated);
 
             return response()->json([

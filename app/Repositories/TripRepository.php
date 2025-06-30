@@ -239,7 +239,7 @@ class TripRepository implements TripRepositoryInterface
             
             $data = Trip::where('trips.org_code', Auth::user()->org_code)
                 ->select(
-                    'trips.*',
+                    'trips.*'
                 );
 
             return DataTables::of($data)

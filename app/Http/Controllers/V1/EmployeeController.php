@@ -4,10 +4,10 @@ namespace App\Http\Controllers\V1;
 
 use App\helpers\GlobalHelper;
 use App\Http\Controllers\Controller;
-use App\Models\V1\Designation;
 use App\Models\V1\Employee;
 use App\Models\V1\User;
 use App\Models\V1\VehicleSetup;
+use App\Models\V2\Designation;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

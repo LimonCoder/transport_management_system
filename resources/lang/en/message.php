@@ -92,6 +92,16 @@ return [
     'route-Details' => 'Route Details',
     'enter-route-details' => 'Enter route details',
 
+
+    //Notice
+    'notice-management' => 'Notice Management',
+    'add-notice' => 'Add Notice',
+    'notice-list' => 'Notice',
+    'notice-title' => 'Notice Title',
+    'enter-notice-title' => 'Enter Notice Title',
+    'notice-Details' => 'Notice Details',
+    'enter-notice-details' => 'Enter Notice Details',
+
     // Trip
     'select-vehicle' => 'Select Vehicle',
     'select-driver' => 'Select Driver',
@@ -138,4 +148,16 @@ return [
     'switch-account' => 'Return to Main Account',
     'type' => 'Type',
     'operator' => 'Operator',
+
+    // Dashboard
+    'total_offices' => 'Total Offices',
+    'total_drivers' => 'Total Drivers',
+    'total_operators' => 'Total Operators',
+    'total_vehicles' => 'Total Vehicles',
+    'total_trips' => 'Total Trips',
+    'maintenance_vehicles' => 'Maintenance Vehicles',
+    'started_trips' => 'Started Trips',
+    'completed_trips' => 'Completed Trips',
+    'cancelled_trips' => 'Cancelled Trips',
+    'settings' => 'Settings',
 ];
