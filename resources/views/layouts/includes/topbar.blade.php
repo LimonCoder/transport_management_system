@@ -82,7 +82,7 @@
     <div class="logo-box">
         <a href="javescript:void(0)" class="logo logo-dark text-center">
             <span class="logo-lg">
-                <img src="{{ asset('/assets/images/logo.png') }}" alt="" height="16" style="width: 53%;height: 71%;">
+                <img src="{{ asset('/assets/images/logo.png') }}" alt="" height="16" style="width: 80%;height: 71%;">
             </span>
             <span class="logo-sm">
                 <img src="{{ asset('/assets/images/logo.png') }}" alt="" height="24">
