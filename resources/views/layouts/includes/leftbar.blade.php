@@ -57,7 +57,7 @@
 
                         <li class="nav-item ">
                             <a class="nav-link" href="{{ route('contact.index')  }}">
-                                <i class="fas fa-bell"></i>
+                                <i class="fas fa-envelope-open"></i>
                                 @lang('message.contact')
                             </a>
                         </li>
