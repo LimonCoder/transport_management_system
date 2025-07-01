@@ -47,7 +47,7 @@ class OperatorsTableSeeder extends Seeder
                 'org_code' => '1002',
                 'name' => 'Sarah Johnson',
                 'designation_id' => 1,
-                'date_of_joining' => '2023-03-20',
+                'date_of_joining' => now()->format('Y-m-d'),
                 'mobile_number' => '01812345679',
                 'address' => '456 Oak Avenue, Chittagong, Bangladesh',
                 'created_by' => 2,
