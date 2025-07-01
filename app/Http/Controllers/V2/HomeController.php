@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V2;
 
 use App\Http\Controllers\Controller;
 use App\Models\V2\Route;
+use App\Models\V2\VehicleSetup;
 use App\Models\V2\Notice;
 use App\Models\V2\Trip;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,17 @@ class HomeController extends Controller
         $trips = Trip::whereDate('trip_initiate_date', $today)->get();
         $orgs = DB::table('organizations')->first();
         return view('welcome', compact('routes', 'trips', 'orgs'));
+    }
+
+    public function getVehicles()
+    {
+        $routes = VehicleSetup::all();
+
+        return response()->json([
+            'status'  => 'success',
+            'message' => 'data get successfully',
+            'data'    => $routes,
+        ]);
     }
 
     public function getRoutes()

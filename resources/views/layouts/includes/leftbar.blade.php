@@ -54,6 +54,13 @@
                                 @lang('message.notice-list')
                             </a>
                         </li>
+
+                        <li class="nav-item ">
+                            <a class="nav-link" href="{{ route('contact.index')  }}">
+                                <i class="fas fa-bell"></i>
+                                @lang('message.contact')
+                            </a>
+                        </li>
                     @endif
 
                     <li class="nav-item">
