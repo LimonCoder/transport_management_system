@@ -163,4 +163,6 @@ return [
     'completed_trips' => 'সম্পন্ন ট্রিপ',
     'cancelled_trips' => 'বাতিল ট্রিপ',
     'settings' => 'সেটিং',
+    'operator1' => 'অপারেটর প্যানেল',
+    'driver1' => 'ড্রাইভার প্যানেল',
 ];

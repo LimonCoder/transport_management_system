@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'admin' => 'Admin',
+    'admin' => 'Admin Panel',
     'dashboard' => 'Dashboard',
     'profile' => 'Profile',
     'logout' => 'Logout',
@@ -166,4 +166,6 @@ return [
     'completed_trips' => 'Completed Trips',
     'cancelled_trips' => 'Cancelled Trips',
     'settings' => 'Settings',
+    'operator1' => 'Operator Panel',
+    'driver1' => 'Driver Panel',
 ];
