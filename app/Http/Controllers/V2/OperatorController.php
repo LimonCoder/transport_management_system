@@ -61,7 +61,8 @@ class OperatorController extends Controller
 
         try {
             $user = Auth::user();
-            if ($user->user_type === 'operator' && $user->special_user != 1) {
+            // dd($user);
+            if ($user->user_type === 'operator' && $user->is_special_user != 1) {
                 return response()->json([
                     'status' => 'error',
                     'title' => 'Unauthorized',

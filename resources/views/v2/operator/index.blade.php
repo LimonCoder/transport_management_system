@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', __('message.operator_title'))
+@section('title','Operator Management')
 
 @section('main-content')
     <div class="content">
