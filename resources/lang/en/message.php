@@ -168,4 +168,6 @@ return [
     'settings' => 'Settings',
     'operator1' => 'Operator Panel',
     'driver1' => 'Driver Panel',
+
+    'select_designation' => 'Select Designation',
 ];

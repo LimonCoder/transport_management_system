@@ -4,7 +4,7 @@ use App\Models\V2\Contact;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V2\DashboardController;
 
-Route::get('/', [DashboardController::class, 'index'])->name('home');
+Route::get('/', 'Auth\\LoginController@showLoginForm')->name('home');
 
 
 Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {

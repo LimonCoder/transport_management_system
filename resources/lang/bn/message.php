@@ -152,6 +152,7 @@ return [
     'type' => 'ধরণ',
     'operator' => 'অপারেটর',
 
+
     // Dashboard
     'total_offices' => 'মোট অফিস',
     'total_drivers' => 'মোট ড্রাইভার',
@@ -165,4 +166,6 @@ return [
     'settings' => 'সেটিং',
     'operator1' => 'অপারেটর প্যানেল',
     'driver1' => 'ড্রাইভার প্যানেল',
+    'select_designation' => 'পদবী নির্বাচন করুন',
+
 ];

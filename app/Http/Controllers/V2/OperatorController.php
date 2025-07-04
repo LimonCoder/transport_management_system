@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Repositories\OperatorRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\V2\Designation;
 
 class OperatorController extends Controller
 {
@@ -22,7 +23,8 @@ class OperatorController extends Controller
      */
     public function index()
     {
-        return view('v2.operator.index');
+        $designations = Designation::all();
+        return view('v2.operator.index', compact('designations'));
     }
 
     public function listData(){
@@ -50,9 +52,10 @@ class OperatorController extends Controller
         $validated = $request->validate([
             'name'            => 'required|string|max:255',
             'username'        => 'required|string|max:255|unique:users,username',
-            'designation'     => 'required|string|max:255',
+            'designation_id'  => 'required|exists:designation,id',
             'date_of_joining' => 'required|date',
-            'mobile_number'   => 'required|unique:operators,mobile_number|string|regex:/^(?:\+88)?01[0-9]{9}$/',            'password'        => 'required|string|min:6',
+            'mobile_number'   => 'required|unique:operators,mobile_number|string|regex:/^(?:\+88)?01[0-9]{9}$/',
+            'password'        => 'required|string|min:6',
             'address'         => 'required|string',
         ]);
 
@@ -116,7 +119,7 @@ class OperatorController extends Controller
     {
         $validated = $request->validate([
             'name'            => 'required|string|max:255',
-            'designation'     => 'nullable|string|max:255',
+            'designation_id'  => 'required|exists:designation,id',
             'date_of_joining' => 'nullable|date',
             'mobile_number'   => 'required|string|regex:/^(?:\+88)?01[0-9]{9}$/',
             'address'         => 'nullable|string',

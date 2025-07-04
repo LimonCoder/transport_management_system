@@ -77,9 +77,14 @@
                             <!-- Designation -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="designation">@lang('message.designation')</label>
-                                    <input type="text" name="designation" id="designation" class="form-control form-control-sm">
-                                    <small id="designation_error" class="text-danger"></small>
+                                    <label for="designation_id">@lang('message.designation')</label>
+                                    <select name="designation_id" id="designation_id" class="form-control form-control-sm">
+                                        <option value="">@lang('message.select_designation')</option>
+                                        @foreach($designations as $designation)
+                                            <option value="{{ $designation->id }}">{{ $designation->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    <small id="designation_id_error" class="text-danger"></small>
                                 </div>
                             </div>
 

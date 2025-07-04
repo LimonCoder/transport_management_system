@@ -42,7 +42,7 @@ class OperatorRepository implements OperatorRepositoryInterface
                 return Operator::create([
                     'org_code'         => Auth::user()->org_code,
                     'name'             => $data['name'],
-                    'designation'      => $data['designation'] ?? 1,
+                    'designation_id'   => $data['designation_id'] ?? null,
                     'date_of_joining'  => $data['date_of_joining'] ?? null,
                     'mobile_number'    => $data['mobile_number'] ?? null,
                     'address'          => $data['address'] ?? null,
@@ -58,7 +58,13 @@ class OperatorRepository implements OperatorRepositoryInterface
     public function update($id, array $data)
     {
         $operator = Operator::findOrFail($id);
-        $operator->update($data);
+        $operator->update([
+            'name' => $data['name'],
+            'designation_id' => $data['designation_id'] ?? null,
+            'date_of_joining' => $data['date_of_joining'] ?? null,
+            'mobile_number' => $data['mobile_number'] ?? null,
+            'address' => $data['address'] ?? null,
+        ]);
         return $operator;
     }
 
@@ -83,12 +89,13 @@ class OperatorRepository implements OperatorRepositoryInterface
     public function listDataForDataTable()
     {
         $orgCode = Auth::user()->org_code;
-        $data = Operator::with('user')
-            ->join('designation','designation.id','=','operators.designation_id')
+        $data = Operator::with(['user', 'designation'])
             ->where('org_code', $orgCode)
-            ->where('created_by', Auth::id())
-            ->select('operators.*','designation.name as designation');
+            ->where('created_by', Auth::id());
         return DataTables::of($data)
+            ->addColumn('designation', function($row) {
+                return $row->designation ? $row->designation->name : '';
+            })
             ->addIndexColumn()
             ->make(true);
     }
