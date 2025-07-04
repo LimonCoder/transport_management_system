@@ -65,8 +65,8 @@ class OperatorController extends Controller
             if ($user->user_type === 'operator' && $user->is_special_user != 1) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Unauthorized',
-                    'message' => 'আপনার এই অপারেশন সম্পাদনের অনুমতি নেই।',
+                    'title' => __('message.unauthorized'),
+                    'message' => __('message.operator_no_permission'),
                 ], 403);
             }
 
@@ -74,14 +74,14 @@ class OperatorController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                "title" => "Success",
-                'message' => 'Operator created successfully.'
+                "title" => __('message.success'),
+                'message' => __('message.operator_created_successfully')
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Error',
-                'message' => 'Something went wrong',
+                'title' => __('message.error'),
+                'message' => __('message.something_went_wrong'),
                 'error' => $e->getMessage()
             ], 500);
         }
@@ -131,13 +131,13 @@ class OperatorController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' => 'Updated!',
-                'message' => 'Operator updated successfully.'
+                'title' => __('message.updated'),
+                'message' => __('message.operator_updated_successfully')
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Update Failed!',
+                'title' => __('message.operator_update_failed'),
                 'message' => $e->getMessage()
             ], 500);
         }
@@ -157,13 +157,13 @@ class OperatorController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' => 'Deleted!',
-                'message' => 'Operator deleted successfully.'
+                'title' => __('message.deleted'),
+                'message' => __('message.operator_deleted_successfully')
             ]);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Delete Failed!',
+                'title' => __('message.operator_delete_failed'),
                 'message' => $e->getMessage()
             ], 500);
         }

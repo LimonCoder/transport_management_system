@@ -6,7 +6,7 @@ return [
     'profile' => 'প্রোফাইল',
     'logout' => 'লগআউট',
     'operator-list' => "অপারেটর তালিকা",
-    'change-password' => "পাসওয়ার্ড পরির্বতন",
+    'change-password' => "পাসওয়ার্ড পরির্বতন",
     'trip' => "ট্রিপ",
     'trip-list' => "ট্রিপের তালিকা",
     'vehicle' => "যানবাহন",
@@ -29,13 +29,13 @@ return [
     'edit' => 'এডিট',
     'delete' => 'ডিলিট',
     'confirm_delete' => 'আপনি কি নিশ্চিত?',
-    'no_data' => 'কোন অপারেটর পাওয়া যায়নি',
+    'no_data' => 'কোন অপারেটর পাওয়া যায়নি',
     'close' => 'বন্ধ করুন',
     'save' => 'সংরক্ষণ করুন',
     'date_of_joining' => 'যোগদানের তারিখ',
     'address' => 'ঠিকানা',
     'username' => 'ইউজারনেম',
-    'password' => 'পাসওয়ার্ড',
+    'password' => 'পাসওয়ার্ড',
     'add_operator' => "নতুন অপারেটর যোগ করুন",
 
     //driver
@@ -60,8 +60,8 @@ return [
     'diesel' => 'ডিজেল',
     'cng' => 'সিএনজি',
     'electric' => 'ইলেকট্রিক',
-    'active' => 'সক্রিয়',
-    'inactive' => 'নিষ্ক্রিয়',
+    'active' => 'সক্রিয়',
+    'inactive' => 'নিষ্ক্রিয়',
     'maintenance' => 'রক্ষণাবেক্ষণাধীন',
 
 
@@ -164,8 +164,101 @@ return [
     'completed_trips' => 'সম্পন্ন ট্রিপ',
     'cancelled_trips' => 'বাতিল ট্রিপ',
     'settings' => 'সেটিং',
+<<<<<<< HEAD
     'operator1' => 'অপারেটর প্যানেল',
     'driver1' => 'ড্রাইভার প্যানেল',
     'select_designation' => 'পদবী নির্বাচন করুন',
 
+=======
+
+    // Common Messages
+    'success' => 'সফল',
+    'error' => 'ত্রুটি',
+    'failed' => 'ব্যর্থ',
+    'updated' => 'আপডেট',
+    'deleted' => 'মুছে ফেলা',
+    'created' => 'তৈরি',
+    'unauthorized' => 'অনুমতি নেই',
+    'validation_error' => 'বৈধতা ত্রুটি',
+    'something_went_wrong' => 'কিছু ভুল হয়েছে',
+    'data_get_successfully' => 'তথ্য সফলভাবে পাওয়া গেছে',
+    'please_fix_errors' => 'অনুগ্রহ করে নিচের ত্রুটিগুলি ঠিক করুন।',
+    'operation_successful' => 'অপারেশন সফলভাবে সম্পন্ন হয়েছে',
+    'operation_failed' => 'অপারেশন ব্যর্থ হয়েছে',
+    'not_found' => 'পাওয়া যায়নি',
+    'required_field' => 'এই ফিল্ডটি প্রয়োজনীয়',
+    'id_required' => 'আইডি প্রয়োজন',
+
+    // Designation Controller Messages
+    'designation_required' => 'পদবী প্রদান করুন',
+    'designation_add_success' => 'সফলভাবে যোগ হয়েছে',
+    'designation_update_success' => 'সফলভাবে আপডেট হয়েছে',
+    'designation_delete_success' => 'সফলভাবে মুছে ফেলা হয়েছে',
+    'designation_in_use' => 'ইতিমধ্যে আপনি এই পদবী ব্যবহার করেছেন',
+
+    // Driver Controller Messages
+    'driver_error_retrieving' => 'ড্রাইভার তথ্য পেতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'driver_created_successfully' => 'ড্রাইভার সফলভাবে তৈরি হয়েছে!',
+    'driver_updated_successfully' => 'ড্রাইভার সফলভাবে আপডেট হয়েছে!',
+    'driver_deleted_successfully' => 'ড্রাইভার সফলভাবে মুছে ফেলা হয়েছে!',
+    'driver_edit_own_only' => 'আপনি শুধুমাত্র আপনার তৈরি করা ড্রাইভার সম্পাদনা করতে পারেন।',
+    'driver_delete_own_only' => 'আপনি শুধুমাত্র আপনার তৈরি করা ড্রাইভার মুছতে পারবেন।',
+
+    // Notification Controller Messages
+    'notification_marked_read' => 'বিজ্ঞপ্তি পড়া হয়েছে হিসেবে চিহ্নিত',
+    'all_notifications_marked_read' => 'সব বিজ্ঞপ্তি পড়া হয়েছে হিসেবে চিহ্নিত',
+    'only_drivers_access_stream' => 'শুধুমাত্র ড্রাইভাররা বিজ্ঞপ্তি স্ট্রিম অ্যাক্সেস করতে পারেন',
+    'driver_not_found' => 'ড্রাইভার পাওয়া যায়নি',
+
+    // Operator Controller Messages
+    'operator_no_permission' => 'আপনার এই অপারেশন সম্পাদনের অনুমতি নেই।',
+    'operator_created_successfully' => 'অপারেটর সফলভাবে তৈরি হয়েছে।',
+    'operator_updated_successfully' => 'অপারেটর সফলভাবে আপডেট হয়েছে।',
+    'operator_deleted_successfully' => 'অপারেটর সফলভাবে মুছে ফেলা হয়েছে।',
+    'operator_update_failed' => 'আপডেট ব্যর্থ হয়েছে!',
+    'operator_delete_failed' => 'মুছে ফেলা ব্যর্থ হয়েছে!',
+
+    // Organization Controller Messages
+    'organization_error_retrieving_data' => 'প্রতিষ্ঠানের তথ্য পেতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'organization_error_retrieving' => 'প্রতিষ্ঠান পেতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'organization_error_creating' => 'প্রতিষ্ঠান তৈরি করতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'organization_error_retrieving_single' => 'প্রতিষ্ঠান পেতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'organization_error_updating' => 'প্রতিষ্ঠান আপডেট করতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'organization_id_required' => 'প্রতিষ্ঠানের আইডি প্রয়োজন',
+    'organization_delete_failed' => 'মুছে ফেলা ব্যর্থ হয়েছে!',
+    'user_id_required' => 'ইউজার আইডি প্রয়োজন',
+    'user_not_found' => 'ইউজার পাওয়া যায়নি',
+
+    // Route Controller Messages
+    'route_error_retrieving_data' => 'রুট তথ্য পেতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'route_error_retrieving' => 'রুট পেতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'route_error_creating' => 'রুট তৈরি করতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'route_error_retrieving_single' => 'রুট পেতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'route_error_updating' => 'রুট আপডেট করতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'route_id_required' => 'রুট আইডি প্রয়োজন',
+    'route_deleted_successfully' => 'রুট সফলভাবে মুছে ফেলা হয়েছে।',
+    'route_delete_failed' => 'মুছে ফেলা ব্যর্থ হয়েছে!',
+
+    // Trip Controller Messages
+    'trip_already_exists' => 'ট্রিপ ইতিমধ্যে আছে',
+    'trip_already_initiated_on' => 'এই তারিখে ইতিমধ্যে একটি ট্রিপ শুরু হয়েছে',
+    'trip_choose_different_date' => 'অনুগ্রহ করে ভিন্ন তারিখ নির্বাচন করুন।',
+    'trip_created_successfully' => 'ট্রিপ সফলভাবে তৈরি হয়েছে।',
+    'trip_updated_successfully' => 'ট্রিপ সফলভাবে আপডেট হয়েছে।',
+    'trip_deleted_successfully' => 'ট্রিপ সফলভাবে মুছে ফেলা হয়েছে।',
+    'trip_another_initiated_on' => 'এই তারিখে অন্য একটি ট্রিপ ইতিমধ্যে শুরু হয়েছে',
+    'trip_edit_own_only' => 'আপনি শুধুমাত্র আপনার তৈরি করা ট্রিপ পরিবর্তন করতে পারেন।',
+    'trip_delete_own_only' => 'আপনি শুধুমাত্র আপনার তৈরি করা ট্রিপ মুছতে পারেন।',
+    'trip_update_failed' => 'আপডেট ব্যর্থ হয়েছে!',
+
+    // Vehicle Controller Messages
+    'vehicle_error_retrieving' => 'যানবাহন পেতে অপ্রত্যাশিত ত্রুটি ঘটেছে',
+    'vehicle_added_successfully' => 'যানবাহন সফলভাবে যোগ করা হয়েছে!',
+    'vehicle_updated_successfully' => 'যানবাহন সফলভাবে আপডেট হয়েছে!',
+    'vehicle_deleted_successfully' => 'যানবাহন সফলভাবে মুছে ফেলা হয়েছে!',
+    'vehicle_delete_failed' => 'যানবাহন মুছে ফেলা ব্যর্থ হয়েছে',
+    'vehicle_not_found' => 'যানবাহন পাওয়া যায়নি',
+    'vehicle_edit_own_only' => 'আপনি শুধুমাত্র নিজের তৈরি করা গাড়ির তথ্য পরিবর্তন করতে পারেন।',
+    'vehicle_delete_own_only' => 'আপনি শুধুমাত্র নিজের তৈরি করা গাড়ি মুছতে পারেন।',
+>>>>>>> bab073c (Hardcoded text move to lang/bn or en)
 ];
