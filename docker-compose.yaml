@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-  # PHP Application Server with Apache
   app:
     build:
       context: .
@@ -10,8 +9,6 @@ services:
     restart: unless-stopped
     ports:
       - "8080:80"
-    volumes:
-      - ./:/var/www/html:cached
     networks:
       - transport-network
     depends_on:
@@ -26,7 +23,6 @@ services:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
 
-  # MySQL Database Server
   database:
     image: mysql:8.0
     container_name: transport-database
@@ -44,7 +40,6 @@ services:
       - transport-network
     command: --default-authentication-plugin=mysql_native_password
 
-  # Redis Cache Server
   redis:
     image: redis:7-alpine
     container_name: transport-redis
@@ -57,7 +52,6 @@ services:
       - transport-network
     command: redis-server --appendonly yes
 
-  # PHPMyAdmin (Optional - for database management)
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: transport-phpmyadmin

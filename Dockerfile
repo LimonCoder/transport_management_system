@@ -1,13 +1,10 @@
-# Use the official PHP 8.2 image with Apache
 FROM php:7.4-apache
 
-# Set environment variables
+# Set Apache document root
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 
-# Install system dependencies and clean up
-RUN apt-get update && \
-    apt-get install -y \
-    curl \
+# System dependencies
+RUN apt-get update && apt-get install -y \
     git \
     unzip \
     libpng-dev \
@@ -17,52 +14,46 @@ RUN apt-get update && \
     libicu-dev \
     libonig-dev \
     libxml2-dev \
-    && rm -rf /var/lib/apt/lists/*
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install \
+        pdo_mysql \
+        mbstring \
+        zip \
+        exif \
+        bcmath \
+        opcache \
+        intl \
+        gd \
+    && pecl install redis && docker-php-ext-enable redis \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Configure and install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install -j$(nproc) \
-    gd \
-    pdo_mysql \
-    zip \
-    intl \
-    mbstring \
-    exif \
-    bcmath \
-    opcache
-
-# Install Redis extension
-RUN pecl install redis && docker-php-ext-enable redis
-
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
-
-# Enable Apache modules
+# Enable Apache rewrite
 RUN a2enmod rewrite
 
-# Configure Apache for Laravel
-RUN sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf && \
-    sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-# Create a simple Apache vhost for Laravel
-RUN echo '<VirtualHost *:80>\n\
-    DocumentRoot ${APACHE_DOCUMENT_ROOT}\n\
-    <Directory ${APACHE_DOCUMENT_ROOT}>\n\
-        AllowOverride All\n\
-        Require all granted\n\
-    </Directory>\n\
-    ErrorLog ${APACHE_LOG_DIR}/error.log\n\
-    CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+# Copy Composer from official image
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
 # Set working directory
 WORKDIR /var/www/html
 
-# Set permissions for development
-RUN chown -R www-data:www-data /var/www/html
+# Copy project files into container
+COPY . /var/www/html
 
-# Expose port
+# Set permissions
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+
+# Install PHP dependencies
+RUN composer install --no-dev --optimize-autoloader
+
+# Laravel caches (faster startup)
+RUN php artisan config:cache && \
+    php artisan view:cache
+
+# Final Apache config update
+RUN sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" \
+    /etc/apache2/sites-available/000-default.conf && \
+    sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" \
+    /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+
 EXPOSE 80
-
-# Start Apache in foreground
 CMD ["apache2-foreground"]
