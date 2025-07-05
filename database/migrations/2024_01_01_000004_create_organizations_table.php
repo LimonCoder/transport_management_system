@@ -19,6 +19,8 @@ class CreateOrganizationsTable extends Migration
             $table->string('name', 100); 
             $table->string('address', 200)->nullable(); 
             $table->enum('org_type', ['university', 'college'])->default('university'); 
+            $table->mediumInteger('created_by')->nullable();
+            $table->mediumInteger('updated_by')->nullable();
             $table->timestamps(); 
             $table->softDeletes(); 
             $table->index('org_code');

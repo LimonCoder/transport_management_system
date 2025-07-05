@@ -101,22 +101,14 @@ function organization_save() {
             contentType: false,
             dataType: 'JSON',
             success: function (response) {
-                if (response.status === "success") {
                     $("#organization_modal").modal('hide');
                     $("#organization_form")[0].reset();
 
                     Swal.fire({
-                        title: response.title,
+                        title: 'success',
                         text: response.message,
                         icon: 'success'
                     });
-                } else {
-                    Swal.fire({
-                        title: response.title || "Error",
-                        text: response.message || "Something went wrong.",
-                        icon: "error",
-                    });
-                }
 
                 $("#organization_table").DataTable().draw(true);
             },

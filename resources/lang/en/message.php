@@ -150,10 +150,17 @@ return [
     // Organization 
     'organisation' => 'Organizations',
     'organisation-list' => 'Organization List',
+    'organization-list' => 'Organization List',
     'add-org' => 'Add Organization',
     'switch-account' => 'Return to Main Account',
     'type' => 'Type',
     'operator' => 'Operator',
+    'organization_name' => 'Organization name',
+    'organization_address' => 'Organization address',
+    'organization_type' => 'Organization type',
+    'select_type' => 'Select type',
+    'university' => 'University',
+    'college' => 'College',
 
     // Dashboard
     'total_offices' => 'Total Offices',
