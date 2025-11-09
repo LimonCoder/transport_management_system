@@ -1,68 +1,52 @@
-# Use the official PHP 8.2 image with Apache
+# PHP 7.4 + Apache
 FROM php:7.4-apache
 
-# Set environment variables
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 
-# Install system dependencies and clean up
-RUN apt-get update && \
-    apt-get install -y \
-    curl \
-    git \
-    unzip \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libzip-dev \
-    libicu-dev \
-    libonig-dev \
-    libxml2-dev \
-    && rm -rf /var/lib/apt/lists/*
+# System deps
+RUN apt-get update && apt-get install -y \
+    curl git unzip \
+    libpng-dev libjpeg-dev libfreetype6-dev \
+    libzip-dev libicu-dev libonig-dev libxml2-dev \
+ && rm -rf /var/lib/apt/lists/* \
+ && rm -f /etc/init.d/avahi-daemon 2>/dev/null || true
 
-# Configure and install PHP extensions
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install -j$(nproc) \
-    gd \
-    pdo_mysql \
-    zip \
-    intl \
-    mbstring \
-    exif \
-    bcmath \
-    opcache
+# PHP extensions
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg \
+ && docker-php-ext-install -j"$(nproc)" gd pdo_mysql zip intl mbstring exif bcmath opcache
 
-# Install Redis extension
+# Redis ext
 RUN pecl install redis && docker-php-ext-enable redis
 
-# Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Enable Apache modules
-RUN a2enmod rewrite
+# Apache: enable rewrite and set ServerName
+RUN a2enmod rewrite \
+ && printf "ServerName localhost\n" > /etc/apache2/conf-available/servername.conf \
+ && a2enconf servername
 
-# Configure Apache for Laravel
-RUN sed -ri -e "s!/var/www/html!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/*.conf && \
-    sed -ri -e "s!/var/www/!${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Point Apache configs to /var/www/html/public
+RUN sed -ri "s!DocumentRoot /var/www/html!DocumentRoot ${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/000-default.conf \
+ && sed -ri "s!<Directory /var/www/>!<Directory ${APACHE_DOCUMENT_ROOT}/>!g" /etc/apache2/apache2.conf \
+ && sed -ri "s!DocumentRoot /var/www/html!DocumentRoot ${APACHE_DOCUMENT_ROOT}!g" /etc/apache2/sites-available/000-default.conf
 
-# Create a simple Apache vhost for Laravel
-RUN echo '<VirtualHost *:80>\n\
-    DocumentRoot ${APACHE_DOCUMENT_ROOT}\n\
-    <Directory ${APACHE_DOCUMENT_ROOT}>\n\
-        AllowOverride All\n\
-        Require all granted\n\
-    </Directory>\n\
-    ErrorLog ${APACHE_LOG_DIR}/error.log\n\
-    CustomLog ${APACHE_LOG_DIR}/access.log combined\n\
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
+# Write an explicit vhost with a HARD path (no env var placeholders)
+RUN echo '<VirtualHost *:80>' > /etc/apache2/sites-available/000-default.conf && \
+    echo '    DocumentRoot /var/www/html/public' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    <Directory /var/www/html/public>' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '        AllowOverride All' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '        Require all granted' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '        Options FollowSymLinks' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    </Directory>' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    ErrorLog ${APACHE_LOG_DIR}/error.log' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '    CustomLog ${APACHE_LOG_DIR}/access.log combined' >> /etc/apache2/sites-available/000-default.conf && \
+    echo '</VirtualHost>' >> /etc/apache2/sites-available/000-default.conf
 
-# Set working directory
+# Ensure the document root exists even before code is copied/mounted
+RUN mkdir -p /var/www/html/public \
+ && printf "<?php echo 'OK';" > /var/www/html/public/index.php
+
 WORKDIR /var/www/html
-
-# Set permissions for development
-RUN chown -R www-data:www-data /var/www/html
-
-# Expose port
 EXPOSE 80
-
-# Start Apache in foreground
 CMD ["apache2-foreground"]
