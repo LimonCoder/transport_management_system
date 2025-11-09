@@ -1,7 +1,6 @@
 version: "3.8"
 
 services:
-  # PHP Application Server with Apache
   app:
     build:
       context: .
@@ -11,7 +10,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./:/var/www/html:cached
+      - .:/var/www/html
     networks:
       - transport-network
     depends_on:
@@ -22,29 +21,27 @@ services:
       - DB_PORT=3306
       - DB_DATABASE=transport_ms
       - DB_USERNAME=transport_user
-      - DB_PASSWORD=transport_pass
+      - DB_PASSWORD=OMF7JObOnSeFLwz
       - REDIS_HOST=redis
       - REDIS_PORT=6379
 
-  # MySQL Database Server
   database:
     image: mysql:8.0
     container_name: transport-database
     restart: unless-stopped
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
       - MYSQL_DATABASE=transport_ms
       - MYSQL_USER=transport_user
-      - MYSQL_PASSWORD=transport_pass
+      - MYSQL_PASSWORD=OMF7JObOnSeFLwz
       - MYSQL_ROOT_PASSWORD=root_password
     networks:
       - transport-network
     command: --default-authentication-plugin=mysql_native_password
 
-  # Redis Cache Server
   redis:
     image: redis:7-alpine
     container_name: transport-redis
@@ -57,7 +54,19 @@ services:
       - transport-network
     command: redis-server --appendonly yes
 
-  # PHPMyAdmin (Optional - for database management)
+  redisinsight:
+    image: redislabs/redisinsight:latest
+    container_name: transport-redisinsight
+    restart: unless-stopped
+    ports:
+      - "8005:5540"
+    volumes:
+      - redisinsight-data:/db
+    networks:
+      - transport-network
+    depends_on:
+      - redis
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     container_name: transport-phpmyadmin
@@ -81,3 +90,4 @@ networks:
 volumes:
   mysql-data:
   redis-data:
+  redisinsight-data:
