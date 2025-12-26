@@ -36,7 +36,7 @@ class DesignationController extends Controller
         $validate = Validator::make($request->all(), [
             'name' => 'required'
         ], [
-            "name.required" => "পদবী প্রদান করুন",
+            "name.required" => __('message.designation_required'),
         ]);
 
         if (!$validate->fails()) {
@@ -49,20 +49,20 @@ class DesignationController extends Controller
             ];
 
             if (!empty($request->row_id)) {
-                $operation = 'আপডেট';
+                $operation = __('message.updated');
                 $designation_data['updated_at'] = Carbon::now();
 
                 $response = Designation::where('id', $request->row_id)->update($designation_data);
 
             } else {
-                $operation = 'যোগ';
+                $operation = __('message.add');
                 $designation_data['created_at'] = Carbon::now();
                 $response = Designation::create($designation_data);
             }
 
             return response()->json([
                 "status" => $response ? "success" : "error",
-                "title" => $response ? "সফল" : "ব্যর্থ",
+                "title" => $response ? __('message.success') : __('message.failed'),
                 "message" => $response ? "সফলভাবে $operation হয়েছে" : "ব্যর্থ হয়েছেন"
             ]);
         } else {

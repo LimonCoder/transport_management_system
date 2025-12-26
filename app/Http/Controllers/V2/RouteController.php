@@ -44,7 +44,7 @@ class RouteController extends Controller
         } catch (\Throwable $throwable) {
             Log::error("RouteController@listData", ['error' => $throwable]);
             return response()->json([
-                'error' => 'An unexpected error occurred while retrieving routes data'
+                'error' => __('message.route_error_retrieving_data')
             ], 500);
         }
     }
@@ -66,7 +66,7 @@ class RouteController extends Controller
             return ApiResponse::customResponse($result);
         } catch (\Throwable $throwable) {
             Log::error("RouteController@list", ['error' => $throwable]);
-            return ApiResponse::errorResponse('An unexpected error occurred while retrieving routes', 500);
+            return ApiResponse::errorResponse(__('message.route_error_retrieving'), 500);
         }
     }
 
@@ -86,7 +86,7 @@ class RouteController extends Controller
             return ApiResponse::customResponse($result);
         } catch (\Throwable $throwable) {
             Log::error("RouteController@store", ['error' => $throwable]);
-            return ApiResponse::errorResponse('An unexpected error occurred while creating route', 500);
+            return ApiResponse::errorResponse(__('message.route_error_creating'), 500);
         }
     }
 
@@ -104,7 +104,7 @@ class RouteController extends Controller
             return ApiResponse::customResponse($result);
         } catch (\Throwable $throwable) {
             Log::error("RouteController@show", ['error' => $throwable]);
-            return ApiResponse::errorResponse('An unexpected error occurred while retrieving route', 500);
+            return ApiResponse::errorResponse(__('message.route_error_retrieving_single'), 500);
         }
     }
 
@@ -132,7 +132,7 @@ class RouteController extends Controller
             return ApiResponse::customResponse($result);
         } catch (\Throwable $throwable) {
             Log::error("RouteController@update", ['error' => $throwable]);
-            return ApiResponse::errorResponse('An unexpected error occurred while updating route', 500);
+            return ApiResponse::errorResponse(__('message.route_error_updating'), 500);
         }
     }
 
@@ -150,8 +150,8 @@ class RouteController extends Controller
             if (!$routeId) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Error',
-                    'message' => 'Route ID is required'
+                    'title' => __('message.error'),
+                    'message' => __('message.route_id_required')
                 ], 400);
             }
 
@@ -159,14 +159,14 @@ class RouteController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' => 'Deleted!',
-                'message' => 'Route deleted successfully.'
+                'title' => __('message.deleted'),
+                'message' => __('message.route_deleted_successfully')
             ]);
         } catch (\Exception $e) {
             Log::error("RouteController@destroy", ['error' => $e]);
             return response()->json([
                 'status' => 'error',
-                'title' => 'Delete Failed!',
+                'title' => __('message.route_delete_failed'),
                 'message' => $e->getMessage()
             ], 500);
         }

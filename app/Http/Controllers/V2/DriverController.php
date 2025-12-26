@@ -70,14 +70,14 @@ class DriverController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' => 'Success',
-                'message' => 'Driver created successfully!',
+                'title' => __('message.success'),
+                'message' => __('message.driver_created_successfully'),
             ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Error',
-                'message' => 'Something went wrong',
+                'title' => __('message.error'),
+                'message' => __('message.something_went_wrong'),
                 'error' => $e->getMessage()
             ]);
         }
@@ -98,8 +98,8 @@ class DriverController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Validation Error',
-                'message' => 'Please fix the errors below.',
+                'title' => __('message.validation_error'),
+                'message' => __('message.please_fix_errors'),
                 'errors' => $validator->errors(),
             ]);
         }
@@ -112,8 +112,8 @@ class DriverController extends Controller
             if ($user->user_type === 'operator' && $driver->created_by !== $user->id) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Unauthorized',
-                    'message' => 'আপনি শুধুমাত্র আপনার তৈরি করা ড্রাইভার সম্পাদনা করতে পারেন।',
+                    'title' => __('message.unauthorized'),
+                    'message' => __('message.driver_edit_own_only'),
                 ], 403);
             }
 
@@ -121,13 +121,13 @@ class DriverController extends Controller
 
             return response()->json([
                 'status' => 'success',
-                'title' => 'Updated',
-                'message' => 'Driver updated successfully!',
+                'title' => __('message.updated'),
+                'message' => __('message.driver_updated_successfully'),
             ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Error',
+                'title' => __('message.error'),
                 'message' => $e->getMessage(),
             ]);
         }
@@ -146,22 +146,22 @@ class DriverController extends Controller
             if ($user->user_type === 'operator' && $driver->created_by !== $user->id) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Unauthorized',
-                    'message' => 'আপনি শুধুমাত্র আপনার তৈরি করা ড্রাইভার মুছতে পারবেন।',
+                    'title' => __('message.unauthorized'),
+                    'message' => __('message.driver_delete_own_only'),
                 ], 403);
             }
 
             $this->driverRepo->delete($request->driver_id);
             return response()->json([
                 'status' => 'success',
-                'title' => 'Deleted',
-                'message' => 'Driver deleted successfully!',
+                'title' => __('message.deleted'),
+                'message' => __('message.driver_deleted_successfully'),
             ]);
         } catch (Exception $e) {
             return response()->json([
                 'status' => 'error',
-                'title' => 'Error',
-                'message' => 'Something went wrong',
+                'title' => __('message.error'),
+                'message' => __('message.something_went_wrong'),
             ]);
         }
     }

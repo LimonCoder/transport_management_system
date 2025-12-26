@@ -96,7 +96,7 @@ class NotificationController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Notification marked as read'
+            'message' => __('message.notification_marked_read')
         ]);
     }
 
@@ -116,7 +116,7 @@ class NotificationController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'All notifications marked as read'
+            'message' => __('message.all_notifications_marked_read')
         ]);
     }
 
@@ -128,12 +128,12 @@ class NotificationController extends Controller
         $user = Auth::user();
         
         if ($user->user_type !== 'driver') {
-            return response()->json(['error' => 'Only drivers can access notification stream'], 403);
+            return response()->json(['error' => __('message.only_drivers_access_stream')], 403);
         }
 
         $driverInfo = $this->notificationService->getDriverByUserId($user->id);
         if (!$driverInfo) {
-            return response()->json(['error' => 'Driver not found'], 404);
+            return response()->json(['error' => __('message.driver_not_found')], 404);
         }
 
         $driverId = $driverInfo['driver_id'];
