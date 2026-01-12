@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\V2\Contact;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\V2\DashboardController;
 
@@ -67,6 +68,12 @@ Route::group(['middleware' => 'auth', 'namespace' => 'V2'], function () {
         Route::get('/list_data', 'NoticeController@list_data')->name('list_data');
         Route::post('/update', 'NoticeController@update')->name('update');
         Route::post('/delete', 'NoticeController@destroy')->name('delete');
+    });
+
+    // Contact
+    Route::prefix('/contact')->name('contact.')->middleware('role:operator')->group(function () {
+        Route::get('/', 'ContactController@index')->name('index');
+        Route::get('/list_data', 'ContactController@list_data')->name('list_data');
     });
 
     // Routes API endpoints

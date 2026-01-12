@@ -15,7 +15,7 @@ class OrganizationsTableSeeder extends Seeder
         DB::table('organizations')->insert([
             [
                 'org_code' => 1001,
-                'name' => 'Main Campus',
+                'name' => 'ইস্টার্ন ইউনিভার্সিটি',
                 'address' => 'University Main Campus, Academic Building',
                 'org_type' => 'university',
                 'created_at' => now(),

@@ -19,10 +19,13 @@ Route::group([
     'namespace' => 'V2',
     'middleware' => ['throttle:200,1'] // allow 200 requests per minute
 ], function () {
+    Route::get('/vehicles', 'HomeController@getVehicles');
     Route::get('/routes', 'HomeController@getRoutes');
     Route::get('/trips', 'HomeController@getTrips');
     Route::get('/organizations', 'HomeController@getOrganizations');
     Route::get('/notices', 'HomeController@getNotices');
+    
+    Route::post('/contacts', 'ContactController@store');
 });
 
 

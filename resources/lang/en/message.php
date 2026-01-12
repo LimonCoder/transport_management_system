@@ -102,6 +102,12 @@ return [
     'notice-Details' => 'Notice Details',
     'enter-notice-details' => 'Enter Notice Details',
 
+    //Contact
+    'contact-list' => 'Contact',
+    'contact' => 'Contact',
+    'message' => 'Message',
+    'org_code' => 'Org_code',
+
     // Trip
     'select-vehicle' => 'Select Vehicle',
     'select-driver' => 'Select Driver',

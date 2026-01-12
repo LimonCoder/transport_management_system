@@ -102,6 +102,12 @@ return [
     'notice-Details' => 'নোটিশের বিস্তারিত',
     'enter-notice-details' => 'নোটিশের বিস্তারিত লিখুন',
 
+    //Contact
+    'contact-list' => 'যোগাযোগ তালিকা',
+    'contact' => 'যোগাযোগ',
+    'message' => 'বার্তা',
+    'org_code' => 'প্রতিষ্ঠানের কোড',
+
     //Trip
     'select-vehicle' => 'সিলেক্ট-যানবাহন',
     'select-driver' => 'সিলেক্ট-ড্রাইভার',
