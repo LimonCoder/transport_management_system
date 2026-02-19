@@ -19,7 +19,7 @@
                             <h4 class="header-title mt-0 mb-4">{{ __('message.total_offices') }}</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-detail-1 text-right">
-                                    <h2 class="font-weight-normal pt-2 mb-1"> {{ $bnConverter->bnNum($total_organizations) }} </h2>
+                                    <h2 class="font-weight-normal pt-2 mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_organizations) : $total_organizations }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-success progress-sm">
                                     <div class="progress-bar bg-success" role="progressbar"
@@ -42,7 +42,7 @@
                             <h4 class="header-title mt-0 mb-4">{{ __('message.total_drivers') }}</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-detail-1 text-right">
-                                    <h2 class="font-weight-normal pt-2 mb-1"> {{ $bnConverter->bnNum($total_drivers) }} </h2>
+                                    <h2 class="font-weight-normal pt-2 mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_drivers) : $total_drivers }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-info progress-sm">
                                     <div class="progress-bar bg-info" role="progressbar"
@@ -65,7 +65,7 @@
                             <h4 class="header-title mt-0 mb-4">{{ __('message.total_operators') }}</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-detail-1 text-right">
-                                    <h2 class="font-weight-normal pt-2 mb-1"> {{ $bnConverter->bnNum($total_operators) }} </h2>
+                                    <h2 class="font-weight-normal pt-2 mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_operators) : $total_operators }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-pink progress-sm">
                                     <div class="progress-bar bg-pink" role="progressbar"
@@ -88,7 +88,7 @@
                             <h4 class="header-title mt-0 mb-4">{{ __('message.total_vehicles') }}</h4>
                             <div class="widget-chart-1">
                                 <div class="widget-detail-1 text-right">
-                                    <h2 class="font-weight-normal pt-2 mb-1"> {{ $bnConverter->bnNum($total_vehicles) }} </h2>
+                                    <h2 class="font-weight-normal pt-2 mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_vehicles) : $total_vehicles }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-warning progress-sm">
                                     <div class="progress-bar bg-warning" role="progressbar"
@@ -113,7 +113,7 @@
                             <h4 class="header-title mt-0 mb-3">{{ __('message.total_drivers') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
-                                    <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_drivers_in_org) }} </h2>
+                                    <h2 class="font-weight-normal mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_drivers_in_org) : $total_drivers_in_org }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-success progress-sm">
                                     <div class="progress-bar bg-success" role="progressbar"
@@ -136,7 +136,7 @@
                             <h4 class="header-title mt-0 mb-3">{{ __('message.total_vehicles') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
-                                    <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_vehicles_in_org) }} </h2>
+                                    <h2 class="font-weight-normal mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_vehicles_in_org) : $total_vehicles_in_org }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-info progress-sm">
                                     <div class="progress-bar bg-info" role="progressbar"
@@ -159,7 +159,7 @@
                             <h4 class="header-title mt-0 mb-3">{{ __('message.maintenance_vehicles') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
-                                    <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_maintenance_vehicles_in_org) }} </h2>
+                                    <h2 class="font-weight-normal mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_maintenance_vehicles_in_org) : $total_maintenance_vehicles_in_org }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-warning progress-sm">
                                     <div class="progress-bar bg-warning" role="progressbar"
@@ -184,7 +184,7 @@
                             <h4 class="header-title mt-0 mb-3">{{ __('message.total_trips') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
-                                    <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_trips) }} </h2>
+                                    <h2 class="font-weight-normal mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_trips) : $total_trips }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-success progress-sm">
                                     <div class="progress-bar bg-success" role="progressbar"
@@ -207,7 +207,7 @@
                             <h4 class="header-title mt-0 mb-3">{{ __('message.started_trips') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
-                                    <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_initiate_trips) }} </h2>
+                                    <h2 class="font-weight-normal mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_initiate_trips) : $total_initiate_trips }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-info progress-sm">
                                     <div class="progress-bar bg-info" role="progressbar"
@@ -230,7 +230,7 @@
                             <h4 class="header-title mt-0 mb-3">{{ __('message.completed_trips') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
-                                    <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_completed_trips) }} </h2>
+                                    <h2 class="font-weight-normal mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_completed_trips) : $total_completed_trips }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-success progress-sm">
                                     <div class="progress-bar bg-success" role="progressbar"
@@ -253,7 +253,7 @@
                             <h4 class="header-title mt-0 mb-3">{{ __('message.cancelled_trips') }}</h4>
                             <div class="widget-box-2">
                                 <div class="widget-detail-2 text-right">
-                                    <h2 class="font-weight-normal mb-1"> {{ $bnConverter->bnNum($total_rejected_trips) }} </h2>
+                                    <h2 class="font-weight-normal mb-1"> {{ app()->getLocale() == 'bn' ? $bnConverter->bnNum($total_rejected_trips) : $total_rejected_trips }} </h2>
                                 </div>
                                 <div class="progress progress-bar-alt-danger progress-sm">
                                     <div class="progress-bar bg-danger" role="progressbar"

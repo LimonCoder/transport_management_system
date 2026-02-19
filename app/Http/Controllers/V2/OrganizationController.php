@@ -67,7 +67,7 @@ class OrganizationController extends Controller
             return ApiResponse::customResponse($result);
         } catch (\Throwable $throwable) {
             Log::error("OrganizationController@list", ['error' => $throwable]);
-            return ApiResponse::errorResponse('An unexpected error occurred while retrieving organizations', 500);
+            return ApiResponse::errorResponse(__('message.organization_error_retrieving'), 500);
         }
     }
 
@@ -86,7 +86,7 @@ class OrganizationController extends Controller
             return ApiResponse::customResponse($result);
         } catch (\Throwable $throwable) {
             Log::error("OrganizationController@store", ['error' => $throwable]);
-            return ApiResponse::errorResponse('An unexpected error occurred while creating organization', 500);
+            return ApiResponse::errorResponse(__('message.organization_error_creating'), 500);
         }
     }
 
@@ -104,7 +104,7 @@ class OrganizationController extends Controller
             return ApiResponse::customResponse($result);
         } catch (\Throwable $throwable) {
             Log::error("OrganizationController@show", ['error' => $throwable]);
-            return ApiResponse::errorResponse('An unexpected error occurred while retrieving organization', 500);
+            return ApiResponse::errorResponse(__('message.organization_error_retrieving_single'), 500);
         }
     }
 
@@ -132,7 +132,7 @@ class OrganizationController extends Controller
             return ApiResponse::customResponse($result);
         } catch (\Throwable $throwable) {
             Log::error("OrganizationController@update", ['error' => $throwable]);
-            return ApiResponse::errorResponse('An unexpected error occurred while updating organization', 500);
+            return ApiResponse::errorResponse(__('message.organization_error_updating'), 500);
         }
     }
 
@@ -150,8 +150,8 @@ class OrganizationController extends Controller
             if (!$organizationId) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Error',
-                    'message' => 'Organization ID is required'
+                    'title' => __('message.error'),
+                    'message' => __('message.organization_id_required')
                 ], 400);
             }
 
@@ -182,8 +182,8 @@ class OrganizationController extends Controller
             if (!$userId) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Error',
-                    'message' => 'User ID is required'
+                    'title' => __('message.error'),
+                    'message' => __('message.user_id_required')
                 ], 400);
             }
 
@@ -192,8 +192,8 @@ class OrganizationController extends Controller
             if (!$user) {
                 return response()->json([
                     'status' => 'error',
-                    'title' => 'Error',
-                    'message' => 'User not found'
+                    'title' => __('message.error'),
+                    'message' => __('message.user_not_found')
                 ], 404);
             }
 

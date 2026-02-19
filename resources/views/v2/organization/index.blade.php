@@ -65,7 +65,7 @@
                             <!-- Organization Code -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="organization_code">Organization Code <span class="text-danger">*</span></label>
+                                    <label for="organization_code">@lang('message.org-code') <span class="text-danger">*</span></label>
                                     <input type="text" name="organization_code" id="organization_code" class="form-control form-control-sm" required maxlength="50" placeholder="Enter organization code">
                                     <small id="organization_code_error" class="text-danger"></small>
                                 </div>
@@ -74,7 +74,7 @@
                             <!-- Name -->
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="name">Organization Name <span class="text-danger">*</span></label>
+                                    <label for="name">@lang('message.organization_name') <span class="text-danger">*</span></label>
                                     <input type="text" name="name" id="name" class="form-control form-control-sm" required maxlength="100" placeholder="Enter organization name">
                                     <small id="name_error" class="text-danger"></small>
                                 </div>
@@ -83,7 +83,7 @@
                             <!-- Address -->
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="address">Organization Address</label>
+                                    <label for="address">@lang('message.organization_address')</label>
                                     <input type="text" name="address" id="address" class="form-control form-control-sm" maxlength="200" placeholder="Enter organization address">
                                     <small id="address_error" class="text-danger"></small>
                                 </div>
@@ -92,11 +92,11 @@
                             <!-- Organization Type -->
                             <div class="col-sm-12">
                                 <div class="form-group">
-                                    <label for="org_type">Organization Type <span class="text-danger">*</span></label>
+                                    <label for="org_type">@lang('message.organization_type') <span class="text-danger">*</span></label>
                                     <select name="org_type" id="org_type" class="form-control form-control-sm" required>
-                                        <option value="">Select Type</option>
-                                        <option value="university">University</option>
-                                        <option value="college">College</option>
+                                        <option value="">@lang('message.select_type')</option>
+                                        <option value="university">@lang('message.university')</option>
+                                        <option value="college">@lang('message.college')</option>
                                     </select>
                                     <small id="org_type_error" class="text-danger"></small>
                                 </div>
@@ -122,7 +122,7 @@
 @endsection
 
 @section('js')
-    <script src="{{ asset('/assets/js/custom/v1/custom.js') }}"></script>
+    {{-- <script src="{{ asset('/assets/js/custom/v1/custom.js') }}"></script> --}}
     <script src="{{ asset('/assets/js/custom/v2/organization.js') }}"></script>
     <script>
         const message_edit = "Edit";
@@ -151,4 +151,4 @@
         });
 
     </script>
-@endsection 
+@endsection

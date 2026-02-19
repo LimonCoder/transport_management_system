@@ -37,11 +37,11 @@ function add_operator() {
     $("#operator_form").attr('onsubmit', 'operator_save()');
     $("#operator_form")[0].reset();
     parslyInit("operator_form");
-
+    // Reset designation dropdown
+    $("#designation_id").val("");
     // Show username and password fields
     $("#userName").show();
     $("#passwordHide").show();
-
     $("#operator_modal").modal('show');
 }
 
@@ -101,7 +101,7 @@ function operator_edit(row_index) {
     let operator_data = operator_table.row(row_index).data();
 
     $("#name").val(operator_data.name);
-    $("#designation").val(operator_data.designation);
+    $("#designation_id").val(operator_data.designation_id);
     $("#mobile_number").val(operator_data.mobile_number);
     $("#operator_id").val(operator_data.id);
     $("#date_of_joining").val(operator_data.date_of_joining);

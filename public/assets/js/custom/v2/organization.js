@@ -305,7 +305,8 @@ function impersonate_login(user_id) {
         cancelButtonColor: '#d33',
         confirmButtonText: 'Yes, impersonate!'
     }).then((result) => {
-        if (result.isConfirmed) {
+        
+        if (result.value) {
             $.ajax({
                 url: url + '/organizations/impersonate',
                 type: 'POST',
